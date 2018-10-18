@@ -83,6 +83,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 // 商城首页资源管理器
 Route::resource('/','Home\IndexController');
+Route::resource('/home','Home\IndexController');
 // 商品详情页资源管理器
 Route::resource('/homepage','Home\PageController');
 // 用户收货地址资源管理器
@@ -138,6 +139,13 @@ Route::post('/CarDel',"Home\CarController@CarDel");
 //购物车批量删除	
 Route::get('/CarDelall',"Home\CarController@CarDelall");
 
+
+// 提交订单
+Route::resource('/homeorders','Home\OrdersController');
+// 地址遍历
+Route::get('/address','Home\OrdersController@address');
+// 添加新地址
+Route::post('/doaddress','Home\OrdersController@doaddress');
 
 
 

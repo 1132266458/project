@@ -103,7 +103,7 @@
          </ul> 
          <div class="btn"> 
           <!-- 马上付款 -->
-          <a class="cartsubmit" href="/order"></a> 
+          <a class="cartsubmit" href="/homeorders"></a> 
           <!-- 继续购物 -->
           <a class="continueFind" href="/"></a> 
          </div> 

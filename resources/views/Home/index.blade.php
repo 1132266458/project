@@ -66,8 +66,8 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-              @if(session()->has('username'))
-                <li><a href="#" style="float:left;">{{session('username')}}</a> <a href="#" style="float:left;">退出</a> </li>
+              @if(session()->has('user_name'))
+                <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="#" style="float:left;">退出</a> </li>
               @else
                 <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
                 <li class="headerul">|</li>
