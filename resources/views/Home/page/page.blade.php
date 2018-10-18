@@ -255,7 +255,7 @@
                                 <div class="pc-version">数量</div>
                                 <div class="pc-adults clearfix">
                                     <div class="pc-adults-p clearfix fl">
-                                        <input type="" id="subnum" placeholder="1" name="num">
+                                        <input type="" id="subnum" placeholder="1" name="num" value="1">
                                         <a href="javascript:void(0);" class="amount1"><img src="/theme/icon/pro_left.png" alt=""></a>
                                         <a href="javascript:void(0);" class="amount2"><img src="/theme/icon/pro_down.png" alt=""></a>    
                                     </div>
@@ -267,7 +267,8 @@
                         </div>
                         <div class="pc-emption">
                             <a href="#">立即购买</a>
-                            <a href="#" class="join">加入购物车</a>
+                            <a href="#" class="join" id="addcar">加入购物车</a>
+                            <input type="hidden" name="id" value="{{$data->goods_id}}">
                         </div>
                     </div>
                     <div class="pc-product-s">
@@ -614,4 +615,14 @@
 </div>
 <!-- footer End -->
 </body>
+<script>
+ $("#addcar").click(function(){
+  //获取对应的商品id
+  var id=$("input[name=id]").val();
+  //获取商品详情页选择的数量
+  var num=$("#subnum").val();
+  //加入购物车，并把相应的数据传递过去
+  window.location.href="/addcar?id="+id+"&num="+num;
+ });
+</script>
 </html>

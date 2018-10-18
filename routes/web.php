@@ -82,7 +82,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 });
 
 // 商城首页资源管理器
-Route::resource('/home','Home\IndexController');
+Route::resource('/','Home\IndexController');
 // 商品详情页资源管理器
 Route::resource('/homepage','Home\PageController');
 // 用户收货地址资源管理器
@@ -125,6 +125,18 @@ Route::get('/homeregCode','Home\RegController@checkcode');
 //公告管理控制器路由
 Route::resource("/adminarticles","Admin\ArticleController");
 
+// 购物车页面
+Route::get("/car","Home\CarController@index");
+//加入购物车
+Route::get("/addcar","Home\CarController@addcar");
+//购物车加操作
+Route::post('/CarAdd',"Home\CarController@CarAdd");	
+//购物车减操作
+Route::post('/CarJian',"Home\CarController@CarJian");
+//购物车单个删除	
+Route::post('/CarDel',"Home\CarController@CarDel");
+//购物车批量删除	
+Route::get('/CarDelall',"Home\CarController@CarDelall");
 
 
 

@@ -120,7 +120,7 @@ class TypesController extends Controller
 			if($request->ajax()){
 			// echo $page;exit;
 			//加载一个独立的模板界面
-			return view("Home.typespage",['goods'=>$goods]);
+			return view("Home.type.typespage",['goods'=>$goods]);
 			}
 	    //引入分类的页面,并且把分类id，商品信息，分类名，分类数据
 	    return view("Home.type.types",['goods'=>$goods,'name'=>$type->name,'type'=>$typeall,'pp'=>$pp,'cate_id'=>$id]);
