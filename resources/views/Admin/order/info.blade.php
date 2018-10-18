@@ -34,8 +34,8 @@
        <ul>
        <li><label class="title_name">收货人姓名：</label><span>{{$address->name}}</span></li>
        <li><label class="title_name">收人人电话：</label><span>{{$address->address_phone}}</span></li>
-       <li><label class="title_name">地址邮编：</label><span>{{$address->address_code==0?'未知':'$address->address_code'}}</span></li>
-       <li><label class="title_name">备&nbsp;&nbsp;&nbsp;&nbsp;注：</label><span>随机</span></li>
+       <li><label class="title_name">地址邮编：</label><span>{{$address->address_code==0?'未知':$address->address_code}}</span></li>
+       <li><label class="title_name">备&nbsp;&nbsp;&nbsp;&nbsp;注：</label><span>{{$order->order_messeges==null?'无备注':$order->order_messeges}}</span></li>
        <li class="address"><label class="title_name">收货地址：</label><span>{{$address->address}}</span></li>     
        </ul>
      </div>
@@ -92,63 +92,63 @@
 </div>
 <div class="logistics_info" id="logistics_info" style="display:none">
   <div class="track-rcol">
-			<div class="track-list">
-				<ul>
-					<li class="first">
-						<i class="node-icon"></i>
-						<span class="time">2016-03-10 18:07:15</span>
-						<span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-					</li>
-					<li>
-						<i class="node-icon"></i>
-						<span class="time">2016-03-10 18:07:15</span>
-						<span class="txt">【京东到家】京东配送员【申国龙】已出发，联系电话【18410106883，感谢您的耐心等待，参加评价还能赢取京豆呦】</span>
-					</li>
-					<li>
-						<i class="node-icon"></i>
-						<span class="time">2016-03-10 18:07:15</span>
-						<span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-					</li>
-					<li>
-						<i class="node-icon"></i>
-						<span class="time">2016-03-10 18:07:15</span>
-						<span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-					</li>
-					<li>
-						<i class="node-icon"></i>
-						<span class="time">2016-03-10 18:07:15</span>
-						<span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-					</li>
-					<li>
-						<i class="node-icon"></i>
-						<span class="time">2016-03-10 18:07:15</span>
-						<span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-					</li>
-				</ul>
-			</div>
-		</div>
+            <div class="track-list">
+                <ul>
+                    <li class="first">
+                        <i class="node-icon"></i>
+                        <span class="time">2016-03-10 18:07:15</span>
+                        <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
+                    </li>
+                    <li>
+                        <i class="node-icon"></i>
+                        <span class="time">2016-03-10 18:07:15</span>
+                        <span class="txt">【京东到家】京东配送员【申国龙】已出发，联系电话【18410106883，感谢您的耐心等待，参加评价还能赢取京豆呦】</span>
+                    </li>
+                    <li>
+                        <i class="node-icon"></i>
+                        <span class="time">2016-03-10 18:07:15</span>
+                        <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
+                    </li>
+                    <li>
+                        <i class="node-icon"></i>
+                        <span class="time">2016-03-10 18:07:15</span>
+                        <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
+                    </li>
+                    <li>
+                        <i class="node-icon"></i>
+                        <span class="time">2016-03-10 18:07:15</span>
+                        <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
+                    </li>
+                    <li>
+                        <i class="node-icon"></i>
+                        <span class="time">2016-03-10 18:07:15</span>
+                        <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
 </div>
 </body>
 </html>
 <script>
 /***********图片查看**********/
 function logistics_info(){
-	 layer.open({
+     layer.open({
         type: 1,
         title: '物流信息',
-		maxmin: true, 
-		shadeClose:false, //点击遮罩关闭层
+        maxmin: true, 
+        shadeClose:false, //点击遮罩关闭层
         area : ['600px' , '400px'],
         content:$('#logistics_info'),
-	 });
-	}
+     });
+    }
 /*******滚动条*******/
 $("body").niceScroll({  
-	cursorcolor:"#888888",  
-	cursoropacitymax:1,  
-	touchbehavior:false,  
-	cursorwidth:"5px",  
-	cursorborder:"0",  
-	cursorborderradius:"5px"  
+    cursorcolor:"#888888",  
+    cursoropacitymax:1,  
+    touchbehavior:false,  
+    cursorwidth:"5px",  
+    cursorborder:"0",  
+    cursorborderradius:"5px"  
 });
 </script>

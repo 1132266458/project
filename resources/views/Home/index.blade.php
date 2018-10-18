@@ -67,7 +67,7 @@
         <div class="yNavIndex">
             <ul class="BHeaderl">
               @if(session()->has('user_name'))
-                <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="#" style="float:left;">退出</a> </li>
+                <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
               @else
                 <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
                 <li class="headerul">|</li>
@@ -80,10 +80,10 @@
                 <li class="headerul">|</li>
                 <li id="pc-nav" class="menu"><a href="my-user.html" class="tit">我的商城</a>
                     <div class="subnav">
-                        <a href="my-d.html">我的订单</a>
+                        <a href="/homeorder">我的订单</a>
                         <a href="my-s.html">我的收藏</a>
                         <a href="my-user.html">账户安全</a>
-                        <a href="my-add.html">地址管理</a>
+                        <a href="/homeaddress">地址管理</a>
                         <a href="my-p.html">我要评价</a>
                     </div>
                 </li>
@@ -97,7 +97,7 @@
         </div>
     </div>
     <div class="container clearfix">
-        <div class="header-logo fl"><h1><a href="首页.html"><img src="/theme/icon/logo.png"></a> </h1></div>
+        <div class="header-logo fl"><h1><a href="/"><img src="/theme/icon/logo.png"></a> </h1></div>
         <div class="head-form fl">
             <!-- 搜索 -->
             <form class="clearfix">
@@ -203,16 +203,16 @@
         <div class="pc-info-mess  clearfix" style="position: relative;">
             <h2 class="fl" style="margin-right:20px;">商城快讯</h2>
             <div id="MarqueeDiv" class="MarqueeDiv">
-            	<a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
-            	<a href="new.html">[特惠]洗护节 跨品牌满199减100</a>
-            	<a href="new.html">[特惠]仁怀政府开启“仁怀酱香酒馆”</a>
-            	<a href="new.html">[特惠]洗护节 跨品牌满199减100</a>
-            	<a href="new.html">逛商城赚话费，商城通信51城全线抢购 </a>
-            	<a href="new.html">文艺蓝牙音箱 火热众筹中 </a>
-            	<a href="new.html">[公告]第1000家商城帮服务店落户遵义</a>
-            	<a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
-            	<a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
-            	<a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
+              <a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
+              <a href="new.html">[特惠]洗护节 跨品牌满199减100</a>
+              <a href="new.html">[特惠]仁怀政府开启“仁怀酱香酒馆”</a>
+              <a href="new.html">[特惠]洗护节 跨品牌满199减100</a>
+              <a href="new.html">逛商城赚话费，商城通信51城全线抢购 </a>
+              <a href="new.html">文艺蓝牙音箱 火热众筹中 </a>
+              <a href="new.html">[公告]第1000家商城帮服务店落户遵义</a>
+              <a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
+              <a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
+              <a href="new.html">[特惠]新一代Moto 360智能手表登陆</a>
             </div>
             <a href="new.html" style="position: absolute;right: 15px;top: 0;"> 更多资讯</a>
         </div>
@@ -237,7 +237,7 @@
         <div class="time-border">
             <div class="yScrollList">
                 <div class="yScrollListIn">
-                	<a class="yScrollListbtn yScrollListbtnl" id="prev-01"></a>
+                  <a class="yScrollListbtn yScrollListbtnl" id="prev-01"></a>
                     <div class="yScrollListInList yScrollListInList1 jCarouselLite" style="display:block;margin-left: 20px;" id="demo-01">
                         <ul>
                             <li>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
-class OrderController extends Controller
+
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,18 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $data=DB::table('shop_order')->get();
-        return view('admin.order.list',['data'=>$data]);
-    }
-
-    public function getup($id){
-        // echo 1;
-        $data=DB::table('shop_order')->where('order_id','=',$id)->update(['order_state'=>3]);
-        if($data){
-            echo 1;
-        }else{
-            echo 0;
-        }
+        //
     }
 
     /**
@@ -55,22 +44,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // 订单详情信息 获取订单id
     public function show($id)
     {
-        $info=DB::table('order_info')->where('order_id','=',$id)->get();
-        $go=[];
-        $order=DB::table('shop_order')->where('order_id','=',$id)->first();
-        $address=DB::table('shop_address')->where('address_id','=',$order->address_id)->first();
-        foreach($info as $k=>$v){
-            // var_dump($v->goods_id);
-            $goods=DB::table('shop_goods')->where('goods_id','=',$v->goods_id)->first();
-            // var_dump($goods);
-            $go[]=$goods;
-            $go[$k]->num=$v->num;
-        }
-        // var_dump($go);
-        return view('admin.order.info',['info'=>$info,'go'=>$go,'address'=>$address,'order'=>$order]);
+        //
     }
 
     /**

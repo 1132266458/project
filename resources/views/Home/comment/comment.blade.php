@@ -1,26 +1,19 @@
 <!doctype html>
 <html>
  <head>
-    <meta charset="UTF-8">
-    <meta name="Generator" content="EditPlus®">
-    <meta name="Author" content="">
-    <meta name="Keywords" content="">
-    <meta name="Description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
-    <meta name="renderer" content="webkit">
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
+	<meta name="renderer" content="webkit">
     <meta content="歪秀购物, 购物, 大家电, 手机" name="keywords">
     <meta content="歪秀购物，购物商城。" name="description">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>会员系统地址管理</title>
+	<title>会员系统我的评价</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/theme/css/base.css">
-    <link rel="stylesheet" type="text/css" href="/theme/css/base.css">
-    <link rel="stylesheet" type="text/css" href="/theme/css/member.css">
-  
-  <script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
-  <script type="text/javascript" src="/shops/static/h-ui.admin/js/H-ui.admin.js"></script>
-
+	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/theme/css/member.css">
  </head>
  <body>
 
@@ -29,11 +22,7 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-            @if(session()->has('user_name'))
-                <li><a href="#">{{session('user_name')}}</a></li>
-            @else
-                <li><a href="/homelogin">登录</a> </li>
-            @endif
+                <li><a href="#">登录</a> </li>
                 <li class="headerul">|</li>
                 <li><a href="#">订单查询</a> </li>
                 <li class="headerul">|</li>
@@ -69,32 +58,22 @@
                 <a href="#">服装城</a>
             </div>
         </div>
-        <div class="header-cart fr"><a href="#"><img src="/theme/icon/car.png"></a> <i class="head-amount">0</i></div>
+        <div class="header-cart fr"><a href="#"><img src="/theme/icon/car.png"></a> <i class="head-amount">99</i></div>
     </div>
 </header>
 <!-- header End -->
 
-<div class="containers"><div class="pc-nav-item"><a href="/">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
+<div class="containers"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 
 <!-- 商城快讯 begin -->
 <section id="member">
     <div class="member-center clearfix">
         <div class="member-left fl">
             <div class="member-apart clearfix">
-                <div class="fl"><a href="#">
-                @if(count($info))
-                <img src="{{$info->userinfo_pic==null?'/theme/img/bg/mem.png':'/$info->userinfo_pic'}}">
-                @else
-                <img src="/theme/img/bg/mem.png">
-                @endif
-                </a></div>
+                <div class="fl"><a href="#"><img src="/theme/img/bg/mem.png"></a></div>
                 <div class="fl">
                     <p>用户名：</p>
-                    @if(count($info))
-                        <p><a href="#">{{$info->userinfo_pname}}</a></p>
-                    @else
-                        <p><a href="#">未知</a></p>
-                    @endif
+                    <p><a href="#">亚里士多德</a></p>
                     <p>搜悦号：</p>
                     <p>389323080</p>
                 </div>
@@ -105,8 +84,8 @@
                     <dd><a href="#">我的订单</a></dd>
                     <dd><a href="#">我的收藏</a></dd>
                     <dd><a href="#">账户安全</a></dd>
-                    <dd><a href="#">我的评价</a></dd>
-                    <dd class="cur"><a href="#">地址管理</a></dd>
+                    <dd class="cur"><a href="#">我的评价</a></dd>
+                    <dd><a href="#">地址管理</a></dd>
                 </dl>
                 <dl>
                     <dt>客户服务</dt>
@@ -122,60 +101,97 @@
         </div>
         <div class="member-right fr">
             <div class="member-head">
-                <div class="member-heels fl"><h2>地址管理</h2></div>
+                <div class="member-heels fl"><h2>我的评价</h2></div>
             </div>
             <div class="member-border">
-                <div class="member-newly"><b onclick="add('新增收货地址','/homeaddress/create','700','400')">新增收货地址</b>您已经创建了<i class="reds">{{$num}}</i>个收货地址了，最多可创建<i class="reds">20</i>个</div>
-                <div class="member-sites">
-                    <ul>
-                      @foreach($data as $v)
-                        <li class="clearfix">
-                            <div class="default fl">@if($v->address_statue==1)<a href="javascript:void(0);">默认地址 </a> @endif</div>
-                            
-                            <div class="user-info1 fl clearfix">
-                                <div class="user-info">
-                                    <span class="info1">收货人：</span>
-                                    <span class="info2">{{$v->name}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">所在地区：</span>
-                                    <span class="info2">北京市海淀区三环到四环之间</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">地址：</span>
-                                    <span class="info2">{{$v->address}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">手机：</span>
-                                    <span class="info2">{{$v->address_phone}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">电子邮箱：</span>
-                                    <span class="info2">{{$v->address_mail==null?'未知':"$v->address_mail"}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">邮政编码：</span>
-                                    <span class="info2">{{$v->address_code==0?'未知':"$v->address_code"}}</span>
-                                </div>
-                            </div>
+               <div class="member-column clearfix">
+                   <span class="co1">商品信息</span>
+                   <span class="co2">购买时间</span>
+                   <span class="co3">评价状态</span>
+               </div>
+               <div class="member-class clearfix">
+                   <ul>
+                       <li class="clearfix">
+                           <div class="sp1">
+                               <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/theme/img/pd/m1.png"></a></span>
+                               <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
+                               <span class="gr3">X1</span>
+                           </div>
+                           <div class="sp2">2015 - 09 -  02</div>
+                           <div class="sp3"><a href="#">发表评价</a> </div>
+                       </li>
+                   </ul>
+               </div>
+               <div class="member-setup clearfix">
+                   <ul>
+                       <li class="clearfix">
+                           <div class="member-score fl"><i class="reds">*</i>评分：</div>
+                           <div class="member-star fl">
+                               <ul>
+                                   <li class="on"></li>
+                                   <li class="on"></li>
+                                   <li></li>
+                                   <li></li>
+                                   <li></li>
+                               </ul>
+                           </div>
+                           <div class="member-judge fr"><input type="checkbox"> 匿名评价</div>
+                       </li>
 
-                            <div class="pc-event">
-                                @if($v->address_statue==0)
-                                <a href="/addressstart/{{$v->address_id}}" class="pc-event-d">设为默认地址</a>
-                                @else
-                                <a href="javascript:void(0);" class="pc-event-d">设为默认地址</a>
-                                @endif
-                                <a href="javascript:void(0);" onclick="edit('收货地址编辑','/homeaddress/{{$v->address_id}}/edit','700','400')" class="haha">编辑 </a>
-                                <a href="javascript:;" onclick="del(this,{{$v->address_id}})">删除</a>
+                       <li class="clearfix">
+                           <div class="member-score fl"><i class="reds">*</i>商品评价：</div>
+                           <div class="member-star fl">
+                               <textarea maxlength="200"></textarea>
+                           </div>
+                       </li>
+                       <li class="clearfix">
+                           <div class="member-score fl">晒单：</div>
+                           <div class="member-star fl">
+                               <a href="#"><img src="/theme/img/pd/m2.png"></a>
+                               <a href="#"><img src="/theme/img/pd/m2.png"></a>
+                               <a href="#"><img src="/theme/img/pd/m2.png"></a>
+                           </div>
+                       </li>
+                       <li class="clearfix">
+                           <div style="padding-left:85px;">最多可以增加<i class="reds">10</i>张</div>
+                       </li>
+                   </ul>
+               </div>
+               <div class="member-class clearfix">
+                    <ul>
+                        <li class="clearfix">
+                            <div class="sp1">
+                                <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/theme/img/pd/m1.png"></a></span>
+                                <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
+                                <span class="gr3">X1</span>
                             </div>
+                            <div class="sp2">2015 - 09 -  02</div>
+                            <div class="sp3"><a href="#">发表评价</a> </div>
                         </li>
-                      @endforeach
+                        <li class="clearfix">
+                            <div class="sp1">
+                                <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/theme/img/pd/m1.png"></a></span>
+                                <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
+                                <span class="gr3">X1</span>
+                            </div>
+                            <div class="sp2">2015 - 09 -  02</div>
+                            <div class="sp3"><a href="#">发表评价</a> </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="sp1">
+                                <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/theme/img/pd/m1.png"></a></span>
+                                <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
+                                <span class="gr3">X1</span>
+                            </div>
+                            <div class="sp2">2015 - 09 -  02</div>
+                            <div class="sp3"><a href="#">发表评价</a> </div>
+                        </li>
                     </ul>
                 </div>
                 <div class="member-pages clearfix">
                     <div class="fr pc-search-g">
-                        <a href="#" class="fl pc-search-f">上一页</a>
-                        <a class="current" href="#">1</a>
+                        <a class="fl pc-search-f" href="#">上一页</a>
+                        <a href="#" class="current">1</a>
                         <a href="javascript:;">2</a>
                         <a href="javascript:;">3</a>
                         <a href="javascript:;">4</a>
@@ -183,16 +199,17 @@
                         <a href="javascript:;">6</a>
                         <a href="javascript:;">7</a>
                         <span class="pc-search-di">…</span>
-                        <a onClick="SEARCH.page(3, true)" href="javascript:;" class="pc-search-n" title="使用方向键右键也可翻到下一页哦！">下一页</a>
+                        <a title="使用方向键右键也可翻到下一页哦！" class="pc-search-n" href="javascript:;" onClick="SEARCH.page(3, true)">下一页</a>
                     <span class="pc-search-y">
                         <em>  共20页    到第</em>
-                        <input type="text" placeholder="1" class="pc-search-j">
+                        <input type="text" class="pc-search-j" placeholder="1">
                         <em>页</em>
-                        <a class="confirm" href="#">确定</a>
+                        <a href="#" class="confirm">确定</a>
                     </span>
 
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -304,40 +321,5 @@
     </div>
 </div>
 <!-- footer End -->
-<script type="text/javascript">
-$.ajaxSetup({
-headers: {
-'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-}
-});
-  function del(obj,id){
-    // alert(obj);
-    layer.confirm('确认要删除吗？',function(index){
-      $.ajax({
-        type: 'DELETE',
-        url: '/homeaddress/'+id,
-        dataType: 'json',
-        success: function(data){
-          $(obj).parents("li").remove();
-          layer.msg('已删除!',{icon:1,time:1000});
-        },
-        error:function(data) {
-          layer.msg('删除失败!',{icon: 2,time:1000});
-        },
-      }); 
-    });
-  }
-
-  function edit(title,url,w,h){
-    layer_show(title,url,w,h);
-  }
-
-  function add(title,url,w,h){
-    // alert(id);
-    layer_show(title,url,w,h);
-
-  }
-
-</script>
 </body>
 </html>

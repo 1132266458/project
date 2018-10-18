@@ -79,6 +79,8 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 	// 订单资源控制器
 	Route::resource('/admin/adminorder','Admin\OrderController');
+	// 发货
+	Route::post('/admin/admingetup/{id}','Admin\OrderController@getup');
 });
 
 // 商城首页资源管理器
@@ -146,6 +148,13 @@ Route::resource('/homeorders','Home\OrdersController');
 Route::get('/address','Home\OrdersController@address');
 // 添加新地址
 Route::post('/doaddress','Home\OrdersController@doaddress');
+
+// 订单资源控制器
+Route::resource('/homeorder','Home\OrderController');
+// 取消订单
+Route::post('/ordercancel/{id}','Home\OrderController@cancel');
+// 确认收货
+Route::post('/ordergetup/{id}','Home\OrderController@getup');
 
 
 

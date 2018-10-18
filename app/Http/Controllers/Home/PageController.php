@@ -47,8 +47,11 @@ class PageController extends Controller
     public function show($id)
     {
         $data=DB::table('shop_goods')->where('goods_id','=',$id)->first();
+        $cate=DB::table('shop_cates')->where('id','=',$data->type_id)->first();
+        $cates=DB::table('shop_cates')->where('id','=',$cate->pid)->first();
+        $catess=DB::table('shop_cates')->where('id','=',$cates->pid)->first();
         $pic=DB::table('goods_pics')->where('goods_id','=',$id)->get();
-        return view('Home.page.page',['data'=>$data,'pic'=>$pic]);
+        return view('Home.page.page',['data'=>$data,'pic'=>$pic,'cate'=>$cate,'cates'=>$cates,'catess'=>$catess]);
     }
 
     /**

@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,admin-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="Bookmark" href="/shops/favicon.ico" >
 <link rel="Shortcut Icon" href="/shops/favicon.ico" />
@@ -56,16 +55,27 @@
         <td>{{$v->order_sn}}</td>
 				<td>{{$v->user_id}}</td>
 				<td>{{$v->order_amount}}</td>
-        <td>{{$v->order_addtime}}</td>
+        <td>{{date('Y-m-d h:m:s',$v->order_addtime)}}</td>
         <td>{{$v->order_payment}}</td>
-        <td class="td-status"><span class="label label-success radius">启用</span></td>
-			 <td class="td-status"><span class="label label-success radius">启用</span></td>
+        <td class="td-status getup{{$v->order_id}}">
+        	@if($v->order_state==0)
+        	已取消
+        	@elseif($v->order_state==1)
+        	等待付款
+        	@elseif($v->order_state==2)
+        	已付款，请发货
+        	@elseif($v->order_state==3)
+        	等待收货
+        	@else
+        	已收货
+        	@endif
+        </td>
+			 <td class="td-status">@if($v->order_evaluation==0)<span class="label label-info radius">未评论</span> @else <span class="label label-success radius">已评论</span> @endif</td>
 				<td class="td-manage">
-			        <a onclick="status(this,,1)" href="javascript:;" title="禁用"  style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a> 
-			   
+				@if($v->order_state==2)
+			   <a onclick="getup(this,{{$v->order_id}})" href="javascript:;" title="发货" class="btn btn-success radius size-S oo{{$v->order_id}}" style="text-decoration:none">确认发货</a> 
+			  @endif
          <a title="编辑" href="javascript:;" onclick="admin_edit('订单信息','/admin/adminorder/{{$v->order_id}}')" class="btn btn-secondary radius size-S" style="text-decoration:none">订单信息</a>
-
-				 <!-- <a title="删除" href="javascript:;" onclick="admin_del(this,{{$v->order_id}})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td> -->
 			</tr>
 		@endforeach
 		</tbody>
@@ -97,37 +107,12 @@ headers: {
 	w		弹出层宽度（缺省调默认值）
 	h		弹出层高度（缺省调默认值）
 */
-/*订单-增加*/
-function admin_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
+
 // 订单信息
 function admin_info(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 
-/*订单-删除*/
-
-function admin_del(obj,id){
-	if(id==1){
-		layer.msg('不能删除超级订单!',{icon:2,time:1000});
-	}else{
-		layer.confirm('确认要删除吗？',function(index){
-			$.ajax({
-				type: 'DELETE',
-				url: '/admin/adminlist/'+id,
-				dataType: 'json',
-				success: function(data){
-					$(obj).parents("tr").remove();
-					layer.msg('已删除!',{icon:1,time:1000});
-				},
-				error:function(data) {
-					layer.msg('权限不足,删除失败!',{icon: 2,time:1000});
-				},
-			});		
-		});
-	}
-}
 
 /*订单-查看*/
 function admin_edit(title,url){
@@ -138,41 +123,31 @@ function admin_edit(title,url){
   });
   layer.full(index);
 }
-/*收货地址-查看*/
-function admin_address(title,url){
-  var index = layer.open({
-    type: 2,
-    title: title,
-    content: url
-  });
-  layer.full(index);
-}
 
 
-// 订单-启用与禁用
-function status(obj,id,sta){
-  a=$(obj).parent();
-  layer.confirm('确认要禁用吗?',function(index){
-    $.get('/admin/adminstatus',{id:id,sta:sta},function(data){
-      // console.log(data);
-      if(data==1){
-        layer.msg('已禁用!',{icon:5,time:1000});
-        $(obj).parent().prev().html('<span class="label label-defaunt radius">已停用</span>');
-        obj.remove();
-        a.prepend('<a style="text-decoration:none" onclick="status(this,'+id+',0)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>');
-      }else if(data==0){
-        layer.msg('已启用!',{icon:6,time:1000});
-        $(obj).parent().prev().html('<span class="label label-success radius">已启用</span>');
-        obj.remove();
-        a.prepend('<a onclick="status(this,'+id+',1)" href="javascript:;" title="禁用"  style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-      }else if(data==2){
-      	layer.msg('权限不足,禁用失败!',{icon:5,time:1000});
-      }else{
-      	layer.msg('权限不足,启用失败!',{icon:5,time:1000});
-      }
-    });
-  });  
+
+// 发货
+function getup(obj,id){
+	// alert(id);
+	layer.confirm('确认发货吗？',function(index){
+			$.ajax({
+				type: 'post',
+				url: '/admin/admingetup/'+id,
+				dataType: 'json',
+				success: function(data){
+					// $(obj).parents("tr").remove();
+					
+					$('.getup'+id).html('等待收货');
+					$('.oo'+id).remove();
+					layer.msg('已发货!',{icon:1,time:1000});
+				},
+				error:function(data) {
+					layer.msg('权限不足,删除失败!',{icon: 2,time:1000});
+				},
+			});		
+		});
 }
+
 
 
 </script>

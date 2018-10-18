@@ -15,10 +15,18 @@ class AddressController extends Controller
      */
     public function index(Request $request)
     {
-        $data=DB::table('shop_address')->where('user_id','=',session('user_id'))->orderBy('address_statue','desc')->get();
-        $info=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
-        $num=count($data);
-        return view('Home.address.list',['data'=>$data,'info'=>$info,'num'=>$num]);
+        if(session()->has('user_name') && session()->has('user_id')){
+            $data=DB::table('shop_address')->where('user_id','=',session('user_id'))->orderBy('address_statue','desc')->get();
+            $info=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
+            $num=count($data);
+            if($info){
+                return view('Home.address.list',['data'=>$data,'info'=>$info,'num'=>$num]);
+            }else{
+                return view('Home.address.list',['data'=>$data,'info'=>[],'num'=>$num]);
+            }
+        }else{
+            return redirect('/homelogin');
+        }
     }
 
     // 默认为收货地址
@@ -137,6 +145,7 @@ class AddressController extends Controller
         //
         $s=DB::table('shop_address')->where('address_id','=',$id)->delete();
         if($s){
+            
             echo 1;
         }else{
             echo 0;
