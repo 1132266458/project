@@ -107,13 +107,16 @@
         <div class="pc-order-title"><h3>您的订单已提交成功!</h3></div>
         <div class="pc-border">
             <div class="pc-order-text">
-                <p>订单提交成功，请您尽快付款！   订单号 ：<em>1234567890</em></p>
+                <p>订单提交成功，请您尽快付款！   订单号 ：<em>{{$info['order_sn']}}</em></p>
                 <p class="reds">请您在提交订单后24小时内完成付款，否则订单自动取消。</em></p>
             </div>
             <div class="pc-line"></div>
             <div class="pc-order-text">
-                <p>商品名称：KOSE高丝药用雪肌精化妆水200ml(进口），KOSE高丝药用雪肌精乳液140ml，BELLE/百丽夏季黑灰亮片布/黑色小牛皮女皮凉鞋3ZFB3BL4 黑色 ...    </p>
-                <p>收货地址：北京海淀区三环到四环之间学院路51号首享科技大厦9层中搜网络科技 收货人：刘杰 186****4832</p>
+                @foreach($list as $v)
+                <span><p>商品名称: {{$v['goodsinfo']->goods_name}}</p><p>商品详情: {{$v['goodsinfo']->goods_describe}}</p><span>
+                @endforeach
+                <p>收货地址：{{$address->address_location}} {{$address->address}} 
+                </p><p>收货人：{{$address->name}} {{$address->address_phone}}</p>
             </div>
         </div>
     </div>
@@ -128,82 +131,22 @@
                 <li><a href="javascript:void(0);">储蓄卡</a></li>
                 <li><a href="javascript:void(0);">信用卡</a></li>
             </ul>
-            <span class="pc-order-price">总价：￥689.00</span>
+            <span class="pc-order-price">总价：{{session('sum')}}</span>
         </div>
         <div class="time-border time-border-h clearfix">
             <div class="time-border-list pc-shop-clear pc-order-clear H-over clearfix">
                 <ul class="pc-order-list clearfix">
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    <li><a href="#"><img src="theme/bank/1.png"></a> </li>
+                    <li><a href="#"><img src="/theme/img/pay.jpeg" style="width:208px;height:60px;"></a> </li>
                 </ul>
             </div>
             <div style="display:none;" class="time-border-list  pc-shop-clear pc-order-clear H-over clearfix">
                 <ul class="pc-order-list">
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                </ul>
+           
             </div>
             <div style="display:none;" class="time-border-list  pc-shop-clear pc-order-clear H-over clearfix">
-                <ul class="pc-order-list">
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                </ul>
+                
             </div>
-            <div class="pc-order-go"><a href="#">去网银支付</a></div>
+            <div class="pc-order-go"><a href="/pays">去支付</a></div>
         </div>
     </div>
 </div>
@@ -314,4 +257,12 @@
 </div>
 <!-- footer End -->
 </body>
+<!-- <script>
+    function pay(){
+        // alert(1);
+        $.get('/pays',function(data){
+
+        });
+    }
+</script> -->
 </html>

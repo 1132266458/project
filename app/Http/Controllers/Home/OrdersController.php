@@ -15,11 +15,13 @@ class OrdersController extends Controller
     public function index(Request $request)
     {   
         $data = $request->session()->all();
-        var_dump($data);
+        // var_dump($data);
+        $data = session('shop');
+        $user_id = session('user_id');
         // 根据session 的用户id 查找用户 地址数据
-        $info = DB::table('shop_address')->join('shop_user','shop_address.user_id','=','shop_user.user_id')->select('shop_address.*')->get();
+        $info = DB::table('shop_address')->where('user_id','=',$user_id)->get();
         // var_dump($info);
-        return view('Home.orders.order',['info'=>$info]);
+        return view('Home.orders.order',['info'=>$info,'data'=>$data]);
     }
     // 地址遍历
     public function address(Request $request){
@@ -55,7 +57,17 @@ class OrdersController extends Controller
                 echo "<script>alert('添加收货地址失败!');location='/homeorder';</script>";
             }
     }   
-
+    public function sum(Request $request){
+        // var_dump($request->all());
+        $sum = $request->input('sum');
+        // echo $sum;
+        $res = session(['sum'=>$sum]);
+        if($sum){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -74,7 +86,34 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump($request->all());
+        $list = session('shop');
+        // 用户id
+        $info['user_id'] = session('user_id');
+        // 地址id
+        $info['address_id'] = $_POST['address_id'];
+        // 订单号
+        $info['order_sn'] = rand(10,9999999999);
+        // 支付单号
+        $info['order_pay'] = rand(1,9999999);
+        // 订单事件
+        $info['order_addtime'] = time();
+        // 支付方式
+        $info['order_payment'] = '支付宝';
+        // 订单总计
+        $info['order_amount'] = session('sum');
+        // 评论状态 默认0
+        $info['order_evaluation'] = 0;
+        // 支付状态 默认 1 (未支付)
+        $info['order_state'] = 1;
+        // 订单留言
+        $info['order_messeges'] = $_POST['order_messeges'];
+        // 根据地址id查询收货人详情
+        $address = DB::table('shop_address')->where('address_id','=',$info['address_id'])->first();
+        // var_dump($address);
+        if(DB::table('shop_order')->insert($info)){
+            // echo "<script>alert('提交订单成功!');</script>";
+            return view('Home.orders.success',['info'=>$info,'list'=>$list,'address'=>$address]);
+        }
     }
 
     /**

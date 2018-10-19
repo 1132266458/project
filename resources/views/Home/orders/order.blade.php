@@ -229,7 +229,6 @@ function getAreaNamebyID(areaID){
                            <div class="pc-click">
                             @if($v->address_statue == 1)
                             <p>默认地址</p> 
-                         
                             @endif
                           </div>
                        </li>
@@ -277,12 +276,28 @@ function getAreaNamebyID(areaID){
                <div class="pc-border">
                    <div class="pc-order-text clearfix">
                        <div class="pc-wares-t"><h4></h4></div>
+                            @foreach($data as $val)
+
                        <div class="clearfix pc-wares-p">
-                           <div class="fl pc-wares"><a href="#"><img src="theme/img/pd/pc1.png"></a></div>
-                           <div class="fl pc-wares-w"> <a href="#">小米（MI）小米USB插线板 3个USB充电口 支持2A快充 3重安全保护</a> <p class="clearfix"><span class="fl">颜色：白色</span><span class="fr">版本：联通高</span></p></div>
-                           <div class="fl pc-wares-s"><span class="reds">￥49.00</span><span>x1</span><span>有货</span></div>
+
+                           <div class="fl pc-wares">
+                            <a href="#"><img style ="width:82px;height:82px;"src="{{$val['goodsinfo']->goods_pic}}"></a>
+                          </div>
+                           <div class="fl pc-wares-w">
+                            <a href="#">{{$val['goodsinfo']->goods_name}}</a> 
+                            <p class="clearfix">
+                              <span class="fl">描述：{{$val['goodsinfo']->goods_describe}}</span>
+                            </p>
+                          </div>
+                          <?php  $money=$val['goodsinfo']->goods_price*$val['num'];?>
+                           <div class="fl pc-wares-s"><span class="reds">价格:{{$money}}<b></b></span>
+                         
+                          <span>数量:<b>{{$val['num']}}</b></span></div>
+
                        </div>
-                       <div class="pc-written"><p>订单留言</p></div>
+                            @endforeach
+
+                       <div class="pc-written">订单留言:<input type="text" name="order_messeges" style="width:500px;"></div>
                    </div>
                </div>
            </div>
@@ -299,21 +314,10 @@ function getAreaNamebyID(areaID){
                 </div>
             </div>
         </div>
-       <div class="clearfix">
-           <div class="fr pc-list-t">
-               <ul>
-                   <li><span><b>2</b> 件商品，总商品金额：</span> <em>￥558.00</em></li>
-                   <li><span>减额：</span> <em>￥558.00</em></li>
-                   <li><span>运费：</span> <em>￥558.00</em></li>
-                   <li><span>应付总额：</span> <em>￥558.00</em></li>
-                   <li><span>减额：</span> <em>￥558.00</em></li>
-               </ul>
-           </div>
-       </div>
        <div class="pc-space-n"></div>
        <div class="clearfix">
            <div class="fr pc-space-j">
-               <spna>应付总额：<strong>￥558.00</strong></spna>
+               <spna>应付总额：<strong>￥{{session('sum')}}</strong></spna>
                <button class="pc-submit">提交订单</button>
            </div>
        </div>

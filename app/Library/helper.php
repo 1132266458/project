@@ -35,16 +35,24 @@ require_once("lib/alipay_submit.class.php");
 
 /**************************请求参数**************************/
         //商户订单号，商户网站订单系统中唯一订单号，必填
-        $out_trade_no =$out_trade_no;
+        // $out_trade_no =$out_trade_no;
 
-        //订单名称，必填
-        $subject =$subject;
+        // //订单名称，必填
+        // $subject =$subject;
 
-        //付款金额，必填
-        $total_fee =$total_fee;
+        // //付款金额，必填
+        // $total_fee =$total_fee;
 
-        //商品描述，可空
-        $body =  $body;
+        // //商品描述，可空
+        // $body =  $body;
+        //商户订单号，商户网站订单系统中唯一订单号，必填
+		$out_trade_no = rand(1,10000); 
+		//订单名称，必填
+		$subject = '电影测试'; 
+		//付款金额，必填
+		$total_fee = 0.01;
+		 //商品描述，可空
+		$body = '描述';
 
 
 

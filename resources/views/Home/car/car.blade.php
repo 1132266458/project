@@ -14,6 +14,7 @@
   <script src="/theme/js/common_js.js" type="text/javascript"></script> 
   <script src="/theme/js/footer.js" type="text/javascript"></script> 
   <script src="/theme/js/jquery.jumpto.js" type="text/javascript"></script> 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>购物车</title> 
  </head> 
  <body> 
@@ -97,13 +98,13 @@
         <!--结算--> 
         <div class="toolbar_right"> 
          <ul class="Price_Info"> 
-          <li class="p_Total"><label class="text">商品总价：</label>￥<span style="color:red;font-size:20px" id="heji">0.00</span></li> 
+          <li class="p_Total"><label class="text">商品总价：</label>￥<span style="color:red;font-size:20px" id="heji"></span></li> 
           <!-- <li class="Discount"><label class="text">以&nbsp;&nbsp;节&nbsp;&nbsp;省：</label><span class="price" id="Preferential_price"></span></li> 
           <li class="integral">本次购物可获得<b id="total_points"></b>积分</li>  -->
          </ul> 
          <div class="btn"> 
           <!-- 马上付款 -->
-          <a class="cartsubmit" href="/homeorders"></a> 
+          <a class="cartsubmit" href="javascript:;" id="sum"></a> 
           <!-- 继续购物 -->
           <a class="continueFind" href="/"></a> 
          </div> 
@@ -235,12 +236,26 @@
               tot=tot-price;
 
               $("#heji").html(tot);
+
               }
-   
+              
             };
         });
 });
 
+  $.ajaxSetup({ headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+});
+
+$('#sum').click(function(){
+  sum = Number($("#heji").html());
+  $.get('/sum',{sum:sum},function(data){
+    if(data==1){
+       window.location.href="/homeorders";
+    }
+  })
+})
+  
 </script>
 <script type="text/javascript">
 $(document).ready(function () {

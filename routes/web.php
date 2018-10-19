@@ -148,6 +148,12 @@ Route::resource('/homeorders','Home\OrdersController');
 Route::get('/address','Home\OrdersController@address');
 // 添加新地址
 Route::post('/doaddress','Home\OrdersController@doaddress');
+// 商品总价
+Route::get('/sum','Home\OrdersController@sum');
+//支付宝接口调用 
+Route::get("/pays","Home\PayController@pays"); 
+// 通知给客户端的界面
+Route::get("/returnurl","Home\PayController@returnurl");
 
 // 订单资源控制器
 Route::resource('/homeorder','Home\OrderController');

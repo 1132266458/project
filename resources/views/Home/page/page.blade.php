@@ -1,20 +1,20 @@
-<!doctype html> 
+<!doctype html>
 <html>
  <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
-  <meta name="renderer" content="webkit">
-  <title>商品详情</title>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
+	<meta name="renderer" content="webkit">
+	<title>商品详情</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
-  <link rel="stylesheet" type="text/css" href="/theme/css/base.css">
-  <link rel="stylesheet" type="text/css" href="/theme/css/home.css">
-  <script type="text/javascript" src="/theme/js/jquery.js"></script>
-  <script type="text/javascript" src="/theme/js/index.js"></script>
-  <script type="text/javascript" src="/theme/js/js-tab.js"></script>
+	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/theme/css/home.css">
+	<script type="text/javascript" src="/theme/js/jquery.js"></script>
+	<script type="text/javascript" src="/theme/js/index.js"></script>
+	<script type="text/javascript" src="/theme/js/js-tab.js"></script>
     <script>
          $(function(){
              $(".yScrollListInList1 ul").css({width:$(".yScrollListInList1 ul li").length*(160+84)+"px"});
@@ -43,29 +43,29 @@
      </script>
     <script>
          $(function(){
-          $("#pro_detail a").click(function(){
-            $("#pro_detail a").removeClass("cur");
-            $(this).addClass("cur");
-            $("#big_img").attr("src",$(this).attr("simg"));
-          });
-          
-          $(".attrdiv a").click(function(){
-            $(".attrdiv a").removeClass("cur");
-        $(this).addClass("cur");
-          });
-          
-          $('.amount2').click(function(){
-            var num_input = $("#subnum");
-            var buy_num = (num_input.val()-1)>0?(num_input.val()-1):1;
-            num_input.val(buy_num);
-        });
-    
-        $('.amount1').click(function(){
-            var num_input = $("#subnum");
-            var buy_num = Number(num_input.val())+1;
-            num_input.val(buy_num);
-        });
-      
+         	$("#pro_detail a").click(function(){
+         		$("#pro_detail a").removeClass("cur");
+         		$(this).addClass("cur");
+         		$("#big_img").attr("src",$(this).attr("simg"));
+         	});
+         	
+         	$(".attrdiv a").click(function(){
+         		$(".attrdiv a").removeClass("cur");
+				$(this).addClass("cur");
+         	});
+         	
+         	$('.amount2').click(function(){
+		        var num_input = $("#subnum");
+		        var buy_num = (num_input.val()-1)>0?(num_input.val()-1):1;
+		        num_input.val(buy_num);
+		    });
+		
+		    $('.amount1').click(function(){
+		        var num_input = $("#subnum");
+		        var buy_num = Number(num_input.val())+1;
+		        num_input.val(buy_num);
+		    });
+			
              $("#H-table li").each(function(i){
                  $(this).click((function(k){
                      var _index = k;
@@ -154,7 +154,7 @@
         </div>
     </div>
     <div class="container clearfix">
-        <div class="header-logo fl"><h1><a href="/"><img src="/theme/icon/logo.png"></a> </h1></div>
+        <div class="header-logo fl"><h1><a href="#"><img src="/theme/icon/logo.png"></a> </h1></div>
         <div class="head-form fl">
             <form class="clearfix">
                 <input type="text" class="search-text" accesskey="" id="key" autocomplete="off"  placeholder="手机模型">
@@ -198,24 +198,16 @@
 <section>
     <div class="pc-details" >
         <div class="containers">
-            <div class="pc-nav-item"><a class="pc-title" href="/">首页</a> &gt; <a href="/types/{{$catess->id}}">{{$catess->name}}</a> &gt; <a href="/types/{{$cates->id}}">{{$cates->name}}</a>&gt; <a href="/types/{{$cate->id}}">{{$cate->name}}</a>&gt; <a href="javascript:;">{{$data->goods_name}}</a> </div>
+            <div class="pc-nav-item"><a class="pc-title" href="#">电脑、办公</a> &gt; <a href="#">外设产品</a> &gt; <a href="#">电玩</a>&gt; <a href="#">爱电玩（IGAME）</a>&gt; <a href="#">{{$data->goods_name}}</a> </div>
             <div class="pc-details-l">
                 <div class="pc-product clearfix">
                     <div class="pc-product-h">
                         <div class="pc-product-top"><img src="/{{$data->goods_pic}}" id="big_img" width="418" height="418"></div>
                         <div class="pc-product-bop clearfix" id="pro_detail">
                             <ul>
-                              @if(count($pic))
                               @foreach($pic as $row)
                                 <li><a href="javascript:void(0);" class="cur" simg="/{{$row->goods_pic}}"><img src="/{{$row->goods_pic}}" width="58" height="58"></a> </li>
                               @endforeach
-                              @else
-                                <li><a href="javascript:void(0);" class="cur" simg=""><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" class="cur" simg=""><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" class="cur" simg=""><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" class="cur" simg=""><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" class="cur" simg=""><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                              @endif
                             </ul>
                         </div>
                     </div>
@@ -241,6 +233,10 @@
                                         <li><a href="javascript:void(0);">32</a> </li>
                                         <li><a href="javascript:void(0);">32</a> </li>
                                         <li><a href="javascript:void(0);">32</a> </li>
+                                        <li><a href="javascript:void(0);">32</a> </li>
+                                        <li><a href="javascript:void(0);">32</a> </li>
+                                        <li><a href="javascript:void(0);">32</a> </li>
+                                        <li><a href="javascript:void(0);">32</a> </li>
                                     </ul>
                                 </div>
                             </div>
@@ -248,15 +244,10 @@
                                 <div class="pc-version">颜色分类</div>
                                 <div class="pc-adults">
                                     <ul>
-                                        @if(count($pic))
-                                        @foreach($pic as $row)
-                                        <li><a href="javascript:;" title="{{$row->goods_color}}"><img src="/{{$row->goods_pic}}" width="52" height="51"></a> </li>
-                                        @endforeach
-                                        @else
-                                        <li><a href="javascript:;" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
-                                        <li><a href="javascript:;" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
-                                        <li><a href="javascript:;" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
-                                        @endif
+                                        <li><a href="#" title="黑色" class="cur"><img src="/theme/img/pd/product.png" width="35" height="35"></a> </li>
+                                        <li><a href="#" title="白色"><img src="/theme/img/pd/product1.png" width="35" height="35"></a> </li>
+                                        <li><a href="#" title="金色"><img src="/theme/img/pd/product2.png" width="35" height="35"></a> </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -264,7 +255,7 @@
                                 <div class="pc-version">数量</div>
                                 <div class="pc-adults clearfix">
                                     <div class="pc-adults-p clearfix fl">
-                                        <input type="" id="subnum" placeholder="1" name="num">
+                                        <input type="" id="subnum" placeholder="1" name="num" value="1">
                                         <a href="javascript:void(0);" class="amount1"><img src="/theme/icon/pro_left.png" alt=""></a>
                                         <a href="javascript:void(0);" class="amount2"><img src="/theme/icon/pro_down.png" alt=""></a>    
                                     </div>
@@ -272,7 +263,7 @@
                                     <div class="fl pc-stock ">库存<em>{{$data->goods_num}}</em>件</div>
                                 </div>
                             </div>
-                            <div class="pc-number clearfix"><span class="fl">商品编号：{{$data->goods_id}}   </span> <span class="fr">分享 收藏</span></div>
+                            <div class="pc-number clearfix"><span class="fl">商品编号：1654456   </span> <span class="fr">分享 收藏</span></div>
                         </div>
                         <div class="pc-emption">
                             <a href="#">立即购买</a>
@@ -281,7 +272,7 @@
                         </div>
                     </div>
                     <div class="pc-product-s">
-                        <div class="pc-shoplo"><a href="javascript:;"><img src="/theme/icon/shop-logo.png"></a> </div>
+                        <div class="pc-shoplo"><a href="#"><img src="/theme/icon/shop-logo.png"></a> </div>
                         <div class="pc-shopti">
                             <h2>神游官方旗舰店</h2>
                             <p>公司名称：优购科技有限公司</p>
@@ -623,6 +614,7 @@
     </div>
 </div>
 <!-- footer End -->
+</body>
 <script>
  $("#addcar").click(function(){
   //获取对应的商品id
@@ -633,5 +625,4 @@
   window.location.href="/addcar?id="+id+"&num="+num;
  });
 </script>
-</body>
 </html>
