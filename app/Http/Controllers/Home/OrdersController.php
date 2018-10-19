@@ -15,12 +15,12 @@ class OrdersController extends Controller
     public function index(Request $request)
     {   
         $data = $request->session()->all();
-        // var_dump($data);
+        // var_dump($data); 
         $data = session('shop');
         $user_id = session('user_id');
         // 根据session 的用户id 查找用户 地址数据
         $info = DB::table('shop_address')->where('user_id','=',$user_id)->get();
-        // var_dump($info);
+        // var_dump($info);    
         return view('Home.orders.order',['info'=>$info,'data'=>$data]);
     }
     // 地址遍历
@@ -34,10 +34,10 @@ class OrdersController extends Controller
     }
     // 添加地址
     public function doaddress(Request $request){
-        // var_dump($_POST);
+        // var_dump($_POST);exit;
         // 根据session用户的ID 查询shop_address
             // 根据session传过来的订单id 
-            $data['user_id'] = 1;
+            $data['user_id'] = session('user_id');
             // 用户的收货人姓名
             $data['name'] = $_POST['name'];
             // 用户的收货地址
@@ -49,12 +49,12 @@ class OrdersController extends Controller
             // 用户的收货地址省份
             $data['address_location'] = $_POST['address_location'];
             // 用户收货默认地址状态 1 是默认 
-            $data['address_statue'] = 1;
+            $data['address_statue'] = 0;
             $res = DB::table('shop_address')->insert($data);
             if($res){
-                echo "<script>alert('添加收货地址成功!');location='/homeorder';</script>";
+                echo "<script>alert('添加收货地址成功!');location='/homeorders';</script>";
             }else{
-                echo "<script>alert('添加收货地址失败!');location='/homeorder';</script>";
+                echo "<script>alert('添加收货地址失败!');location='/homeorders';</script>";
             }
     }   
     public function sum(Request $request){
@@ -109,9 +109,20 @@ class OrdersController extends Controller
         $info['order_messeges'] = $_POST['order_messeges'];
         // 根据地址id查询收货人详情
         $address = DB::table('shop_address')->where('address_id','=',$info['address_id'])->first();
-        // var_dump($address);
+        
+        // var_dump($list);exit;
         if(DB::table('shop_order')->insert($info)){
             // echo "<script>alert('提交订单成功!');</script>";
+            $dd = DB::table('shop_order')->where('order_sn','=',$info['order_sn'])->first();
+            // var_dump($dd);exit;
+            $order_info['order_id'] = $dd->order_id;
+            foreach($list as $v){
+                $order_info['goods_id'] = $v["goodsinfo"]->goods_id;
+                $order_info['num'] = $v['num'];
+                // var_dump($order_info);
+                // 插入数据到order_info表
+                DB::table('order_info')->insert($order_info);
+            }
             return view('Home.orders.success',['info'=>$info,'list'=>$list,'address'=>$address]);
         }
     }
