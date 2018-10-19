@@ -120,6 +120,12 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $s=DB::table('shop_appraise')->where('appraise_id','=',$id)->delete();
+        if($s){
+            
+            echo 1;
+        }else{
+            echo 0;
+        }
     }
 }

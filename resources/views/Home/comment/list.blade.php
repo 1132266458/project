@@ -10,10 +10,12 @@
 	<meta name="renderer" content="webkit">
     <meta content="歪秀购物, 购物, 大家电, 手机" name="keywords">
     <meta content="歪秀购物，购物商城。" name="description">
-	<title>会员系统我的评价</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<title>会员我的评价</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
 	<link rel="stylesheet" type="text/css" href="/theme/css/member.css">
+
     <!-- <link rel="stylesheet" type="text/css" href="/shops/static/h-ui/css/H-ui.min.css" /> -->
   <script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
@@ -149,11 +151,20 @@
                            <ul>
                                 @if(!empty($v['dev']))
                                 @foreach($v['dev'] as $vv)
+                                <div class="dd{{$vv->appraise_id}}">
                                 <div class="pl">
                                     <div class="member-score fl"><i class="reds"></i>我的评价：</div>
                                     <div class="member-star fl">
+                                    @if($vv->appraise_leval==0)
+                                       [好评]
+                                    @elseif($vv->appraise_leval==1)
+                                        [中评]
+                                    @elseif($vv->appraise_leval==2)
+                                        [差评]
+                                    @endif
                                        {{$vv->appraise_coment}}
                                    </div>
+                                   <a href="javascript:;" onclick="del({{$vv->appraise_id}})" class="fr">删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                                    <i class="fr">{{date('Y-m-d h:m:s',$vv->appraise_time)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
                                 </div>
                                 @if($vv->appraise_reply!=null)
@@ -166,6 +177,7 @@
 
                                 </div>
                                 @endif
+                                </div>
                                 @endforeach
                                 @endif
 
@@ -311,6 +323,12 @@
 </div>
 <!-- footer End -->
 <script type="text/javascript">
+
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
   // alert($);
   function opendiv(id){
     // alert(id);
@@ -320,6 +338,24 @@
     }else{
       oo.style.display="none";
     }
+  }
+
+  function del(id){
+    // alert(obj);
+    layer.confirm('确认要删除吗？',function(index){
+      $.ajax({
+        type: 'DELETE',
+        url: '/homecomment/'+id,
+        dataType: 'json',
+        success: function(data){
+          $('.dd'+id).remove();
+          layer.msg('已删除评论!',{icon:1,time:1000});
+        },
+        error:function(data) {
+          layer.msg('删除失败!',{icon: 2,time:1000});
+        },
+      }); 
+    });
   }
 </script>
 </body>

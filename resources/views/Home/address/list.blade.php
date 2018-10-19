@@ -11,7 +11,7 @@
     <meta content="歪秀购物, 购物, 大家电, 手机" name="keywords">
     <meta content="歪秀购物，购物商城。" name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>会员系统地址管理</title>
+    <title>会员地址管理</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/theme/css/base.css">
     <link rel="stylesheet" type="text/css" href="/theme/css/base.css">

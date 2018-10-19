@@ -10,14 +10,13 @@
 	<meta name="renderer" content="webkit">
     <meta content="歪秀购物, 购物, 大家电, 手机" name="keywords">
     <meta content="歪秀购物，购物商城。" name="description">
-	<title>会员系统我的评价</title>
+	<title>会员我的评价</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
 	<link rel="stylesheet" type="text/css" href="/theme/css/member.css">
   <script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
-    <script type="text/javascript" src="/theme/js/jquery.js"></script>
-
+  <script type="text/javascript" src="/theme/js/jquery.js"></script>
  </head>
  <body>
 
