@@ -161,8 +161,8 @@ Route::resource('/homeorder','Home\OrderController');
 Route::post('/ordercancel/{id}','Home\OrderController@cancel');
 // 确认收货
 Route::post('/ordergetup/{id}','Home\OrderController@getup');
-
-
+// 评论资源控制器
+Route::resource('/homecomment','Home\CommentController');
 
 
 

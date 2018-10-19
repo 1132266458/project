@@ -84,7 +84,7 @@
                         <a href="my-s.html">我的收藏</a>
                         <a href="my-user.html">账户安全</a>
                         <a href="/homeaddress">地址管理</a>
-                        <a href="my-p.html">我要评价</a>
+                        <a href="/homecomment">我要评价</a>
                     </div>
                 </li>
                 <li class="headerul">|</li>

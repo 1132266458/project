@@ -215,7 +215,7 @@
                                   <p><a href="javascript:;" onclick="cancel(this,{{$v->order_id}})">取消订单</a> </p>
                                    
                                   @elseif($v->order_state==4)
-                                  <p><a href="">快去评论</a></p>
+                                  <p><a href="/homecomment/{{$v->order_id}}">快去评论</a></p>
                                   @elseif($v->order_state==2)
                                   <p><a href="javascript:;">申请退款</a></p>
                                   @endif

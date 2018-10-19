@@ -14,9 +14,21 @@
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
 	<link rel="stylesheet" type="text/css" href="/theme/css/member.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/shops/static/h-ui/css/H-ui.min.css" /> -->
   <script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
     <script type="text/javascript" src="/theme/js/jquery.js"></script>
+    <style>
+        .pl{
+
+                height: 30px;
+                line-height: 30px;
+                text-align: left;
+                display: block;
+                
+                border-bottom: 1px solid #e0e0e0;
+        }
+    </style>
 
  </head>
  <body>
@@ -111,56 +123,59 @@
                <div class="member-column clearfix">
                    <span class="co1">商品信息</span>
                    <span class="co2">购买时间</span>
-                   <span class="co3">评价状态</span>
+                   <span class="co3">评论操作</span>
                </div>
                <div class="member-class clearfix">
                 
                     <ul>
-                      @foreach($in as $v)
+                      @foreach($data as $v)
+
                         <li class="clearfix">
                             <div class="sp1">
                                 <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/{{$v['goods_pic']}}"></a></span>
                                 <span class="gr2"  style="width:300px">{{$v['goods_name']}}</span>
                                 <span class="gr3">X{{$v['num']}}</span>
                             </div>
-                            <div class="sp2">{{date('Y-m-d H:m:s',$data->order_addtime)}}</div>
-                            <div class="sp3" onclick="opendiv({{$v['goods_id']}})"><a href="javascript:;">发表评价</a> </div>
+                            <div class="sp2">{{date('Y-m-d h:m:s',$v['addtime'])}}</div>
+                            <div class="sp3" onclick="opendiv({{$v['goods_id'].$v['order_id']}})"><a href="javascript:;">查看/发表评价</a> </div>
                         </li>
-                        <div class="member-setup clearfix" id="oo{{$v['goods_id']}}" style="display:none">
+
+                        <form action="/homecomment" method="post">
+                        <div class="member-setup clearfix" id="oo{{$v['goods_id'].$v['order_id']}}" style="display:none">
                            <ul>
+                                
+                                <div class="pl">
+                                    <div class="member-score fl"><i class="reds"></i>我的评价：</div>
+                                    <div class="member-star fl">
+                                       啦啦
+                                   </div>
+                                </div>
+
+
                                <li class="clearfix">
                                    <div class="member-score fl"><i class="reds">*</i>评分：</div>
                                    <div class="member-star fl">
-                                       <ul>
-                                           <li class="on"></li>
-                                           <li class="on"></li>
-                                           <li></li>
-                                           <li></li>
-                                           <li></li>
-                                       </ul>
+                                       <input type="radio" name="appraise_leval" value="0">好评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="1">中评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="2">差评
                                    </div>
-                                   <div class="member-judge fr"><input type="checkbox"> 匿名评价</div>
                                </li>
 
                                <li class="clearfix">
                                    <div class="member-score fl"><i class="reds">*</i>商品评价：</div>
                                    <div class="member-star fl">
-                                       <textarea maxlength="200"></textarea>
+                                       <textarea maxlength="200" name="appraise_coment"></textarea>
                                    </div>
                                </li>
-                               <li class="clearfix">
-                                   <div class="member-score fl">晒单：</div>
-                                   <div class="member-star fl">
-                                       <a href="#"><img src="/theme/img/pd/m2.png"></a>
-                                       <a href="#"><img src="/theme/img/pd/m2.png"></a>
-                                       <a href="#"><img src="/theme/img/pd/m2.png"></a>
-                                   </div>
-                               </li>
-                               <li class="clearfix">
-                                   <div style="padding-left:85px;">最多可以增加<i class="reds">10</i>张</div>
+                               <input type="hidden" name="appraise_time" value="{{time()}}">
+                               <input type="hidden" name="goods_id" value="{{$v['goods_id']}}">
+                               <input type="hidden" name="user_id" value="{{session('user_id')}}">
+                               {{csrf_field()}}
+                               <li class="clearfix" style="padding-right:85px;">
+                                   <input type="submit"  class="btn btn-primary radius size-S submits" value="发表评价" style="float:right;padding: 3px 8px;border: solid 1px #ddd;color: #fff;background-color: #5a98de;border-color: #5a98de;font-size: 14px;height: 31px;border-radius: 4px;">
+                                   
                                </li>
                            </ul>
                        </div>
+                        </form>
                        @endforeach
                         
                     </ul>
