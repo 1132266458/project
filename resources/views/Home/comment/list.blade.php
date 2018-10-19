@@ -28,6 +28,10 @@
                 
                 border-bottom: 1px solid #e0e0e0;
         }
+        .fr{
+            float: right;
+            text-align: right;
+        }
     </style>
 
  </head>
@@ -143,14 +147,27 @@
                         <form action="/homecomment" method="post">
                         <div class="member-setup clearfix" id="oo{{$v['goods_id'].$v['order_id']}}" style="display:none">
                            <ul>
-                                
+                                @if(!empty($v['dev']))
+                                @foreach($v['dev'] as $vv)
                                 <div class="pl">
                                     <div class="member-score fl"><i class="reds"></i>我的评价：</div>
                                     <div class="member-star fl">
-                                       啦啦
+                                       {{$vv->appraise_coment}}
                                    </div>
+                                   <i class="fr">{{date('Y-m-d h:m:s',$vv->appraise_time)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
                                 </div>
+                                @if($vv->appraise_reply!=null)
+                                <div class="pl">
+                                    <div style="display:inline-block" class="fl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="reds"></i>卖家回复：</div>
+                                    <div class="member-star fl">
+                                       {{$vv->appraise_reply}}
+                                   </div>
+                                   <i class="fr">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
 
+                                </div>
+                                @endif
+                                @endforeach
+                                @endif
 
                                <li class="clearfix">
                                    <div class="member-score fl"><i class="reds">*</i>评分：</div>
@@ -167,6 +184,7 @@
                                </li>
                                <input type="hidden" name="appraise_time" value="{{time()}}">
                                <input type="hidden" name="goods_id" value="{{$v['goods_id']}}">
+                               <input type="hidden" name="orderinfo_id" value="{{$v['info_id']}}">
                                <input type="hidden" name="user_id" value="{{session('user_id')}}">
                                {{csrf_field()}}
                                <li class="clearfix" style="padding-right:85px;">

@@ -24,9 +24,17 @@ class CommentController extends Controller
             foreach($info as $key=>$value){
                 // 商品表
                 $goods=DB::table('shop_goods')->where('goods_id','=',$value->goods_id)->first();
+                $oi=DB::table('shop_appraise')->where('orderinfo_id','=',$value->id)->get();
+                // dd($oi[$key]);
+                
                 // 把需要的数据添加到数据中
-                $data[]=['goods_name'=>$goods->goods_name,'goods_pic'=>$goods->goods_pic,'num'=>$value->num,'addtime'=>$v->order_addtime,'goods_id'=>$goods->goods_id,'order_id'=>$v->order_id];
+                $data[]=['goods_name'=>$goods->goods_name,'goods_pic'=>$goods->goods_pic,'num'=>$value->num,'addtime'=>$v->order_addtime,'goods_id'=>$goods->goods_id,'order_id'=>$v->order_id,'info_id'=>$value->id];
+                foreach($oi as $kk=>$vv){
+                  // var_dump($vv);
+                  $data[$key]['dev'][]=$vv;
+                }
             } 
+           
 
         }
         // dd($data);
