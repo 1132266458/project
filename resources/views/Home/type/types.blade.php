@@ -20,13 +20,19 @@
    <div class="BHeader"> 
     <div class="yNavIndex"> 
      <ul class="BHeaderl"> 
-      <li><a href="#">登录</a> </li> 
+      @if(session()->has('user_name'))
+        <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
+      @else
+        <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
+        <li class="headerul">|</li>
+        <li><a href="/homereg">免费注册</a> </li>
+      @endif
       <li class="headerul">|</li> 
       <li><a href="#">订单查询</a> </li> 
       <li class="headerul">|</li> 
       <li><a href="#">我的收藏</a> </li> 
       <li class="headerul">|</li> 
-      <li><a href="#">我的商城</a> </li> 
+      <li><a href="/">我的商城</a> </li> 
       <li class="headerul">|</li> 
       <li><a href="#" class="M-iphone">手机悦商城</a> </li> 
      </ul> 
@@ -117,7 +123,7 @@
   *{margin: 0;padding: 0}
   body{font-size: 12px;font-family: "宋体","微软雅黑";}
   ul,li{list-style: none;}
-  a:link,a:visited{text-decoration: none;color: #fff;}
+  a:link,a:visited{text-decoration: none;}
   .list{width: 190px;border-bottom:solid 1px #316a91;}
   .list ul li{background-color:#467ca2; border:solid 1px #316a91; border-bottom:0;}
   .list ul li a{padding-left: 10px;color: #fff; font-size:12px; display: block; font-weight:bold; height:36px;line-height: 36px;position: relative;
@@ -291,13 +297,15 @@
      </ul> 
      <div class="clearfix"> 
       <div class="fr pc-search-g"> 
-       <a class="fl pc-search-f" href="#">上一页</a>
+       <a class="fl pc-search-f" href="javascript:void(0)" onclick="getData(false)" style="color:black;cursor:pointer;">上一页</a>
        @foreach($pp as $v) 
-       <a href="javascript:void(0)" class="current" onclick="page({{$v}})">{{$v}}</a> 
+       <a href="javascript:void(0)" class="current" onclick="page({{$v}})" style="color:black" id="page{{$v}}">{{$v}}</a> 
        @endforeach
+       <input type="hidden" id="pagesx" value="1">
+       <input type="hidden" id="maxpage" value="{{$maxpage}}">
        <!-- <span class="pc-search-di">…</span>  -->
-       <a title="使用方向键右键也可翻到下一页哦！" class="pc-search-n" href="javascript:;" onclick="SEARCH.page(3, true)">下一页</a> 
-       <span class="pc-search-y"> <em> 共20页 到第</em> <input type="text" class="pc-search-j" placeholder="1" /> <em>页</em> <a href="#" class="confirm">确定</a> </span> 
+       <a title="使用方向键右键也可翻到下一页哦！" class="pc-search-n" href="javascript:;" onclick="getData(true)" style="color:black;">下一页</a> 
+       <span class="pc-search-y"> <em> 共20页 到第</em> <input type="text" class="pc-search-j" placeholder="1" /> <em>页</em> <a href="#" class="confirm" style="color:black;">确定</a> </span> 
       </div> 
      </div> 
     </div> 
@@ -305,7 +313,7 @@
    </div> 
   </div> 
   <!-- footer begin--> 
-  <div class="aui-footer-bot"> 
+  <div class="aui-footer-bot" style="color:black;"> 
    <div class="time-lists aui-footer-pd clearfix"> 
     <div class="aui-footer-list clearfix"> 
      <h4> <span><img src="/theme/icon/icon-d1.png" /></span> <em>消费者权益</em> </h4> 
@@ -429,13 +437,47 @@
   </script>
   <!-- 无刷新分页 -->
 <script type="text/javascript">
-   function page(page){
-    
+  function page(page){
+  $("#pagesx").val(page);
   $.get("/types/{{$cate_id}}",{page:page},function(data){
   //alert(data);
   //赋值给id值为 uid的div
   $("#uid").html(data);
   });
 } 
+//处理上下页
+function getData(mask){
+  if(mask){
+    //获取当前页码数
+    page=$("#pagesx").val();
+    maxpage=$("#maxpage").val();
+    //当前页码减一
+    page++;
+    //判断范围
+    if(page>maxpage){
+      page=maxpage;
+    }
+    $("#pagesx").val(page);
+  $.get("/types/{{$cate_id}}",{page:page},function(data){
+  //alert(data);
+  //赋值给id值为 uid的div
+  $("#uid").html(data);
+  });
+  }else{
+    //获取当前页码数
+    page=$("#pagesx").val();
+   //当前页码减一
+    page--;
+    //判断范围
+    if(page<1){
+      page=1;
+    }
+    $("#pagesx").val(page);
+    $.get("/types/{{$cate_id}}",{page:page},function(data){
+    //赋值给id值为 uid的div
+    $("#uid").html(data);
+    });
+ }
+}
 </script>
 </html>

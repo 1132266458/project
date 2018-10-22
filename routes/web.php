@@ -163,7 +163,8 @@ Route::post('/ordercancel/{id}','Home\OrderController@cancel');
 Route::post('/ordergetup/{id}','Home\OrderController@getup');
 // 评论资源控制器
 Route::resource('/homecomment','Home\CommentController');
-
+// 前台搜索路由
+Route::get('/search','Home\SearchController@index');
 // 用户安全
 Route::get('/usersafety','Home\SafetyController@index');
 // 用户安全修改密码模板

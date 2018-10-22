@@ -74,7 +74,7 @@
            <div class="Numbers"> 
             <a  href="javascript:void(0)" class="jian" ids="{{$car['goodsinfo']->goods_id}}" money="{{$car['goodsinfo']->goods_price}}">-</a> 
             <input type="text" name="qty_item_" value="{{$car['num']}}" id="qty_item_1" onkeyup="setAmount.modify('#qty_item_1')" class="number_text" /> 
-            <a  href="javascript:void(0)" class="jia" ids="{{$car['goodsinfo']->goods_id}}" money="{{$car['goodsinfo']->goods_price}}">+</a> 
+            <a  href="javascript:void(0)" class="jia" ids="{{$car['goodsinfo']->goods_id}}" amount="{{$car['goodsinfo']->goods_num}}" money="{{$car['goodsinfo']->goods_price}}">+</a> 
            </div> </td> 
            <?php
             $money=$car['goodsinfo']->goods_price*$car['num'];
@@ -117,7 +117,11 @@
     @else
     <div class="empty" id="empty" style="">
         <p>您的购物车还是空的，您可以：</p>
+        @if(session()->has('user_name'))
+        <a href="/" class="btn">去逛逛</a>
+        @else
         <a href="/homelogin" class="btn">立即登录</a><a href="/" class="btn">去逛逛</a>
+        @endif
     </div>
     <style>
       .empty {
@@ -153,9 +157,13 @@
           // 判断是否成功
 
           if (data) {
+              tot=Number($("#heji").html());
+              total = Number($("#money"+id).html());
               // 移除对应商品
               $(obj).parent().parent().parent().remove();
-              window.location.reload();
+              tot=tot-total;
+              $("#heji").html(tot);
+              //window.location.reload();
           };
       });
 
@@ -164,6 +172,9 @@
   $(".jia").click(function(){
     // 获取商品的ID
     id=$(this).attr('ids');
+    //获取库存
+    amount=$(this).attr('amount');
+    amount=Number(amount);
     obj=$(this);    
         // 发送ajax请求
         $.post("/CarAdd",{id:id,"_token":"{{csrf_token()}}"},function(data){
@@ -175,6 +186,12 @@
                 num=Number(num);
 
                 obj.prev().val(++num);
+                //判断当加的个数超过库存，提示最大可购买库存量
+                if(num>amount){
+                  alert("购买数量超过库存量");
+                  obj.prev().val(amount);
+                  return false;
+                }
                 // 获取商品的价格
 
                 price=Number(obj.attr("money"));
@@ -204,7 +221,8 @@
   obj=$(this);
   num=$(this).next().val();
   if (num<=1) {
-    return "";              
+    alert("商品数量最少添加一个");
+    return false;        
   };
   num=Number(num);
   // 发送ajax请求

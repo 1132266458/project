@@ -11,6 +11,7 @@ class CarController extends Controller
     //购物车页
     public function index(){
     	$shop=session("shop");
+    	
     	return view("Home.car.car",['shop'=>$shop]);
     }
 
@@ -64,11 +65,16 @@ class CarController extends Controller
 
         foreach ($shop as $key => $value) {
             # code...
+
             // 修改数量
             if ($value['id']==$id) {
                 # code...
-
+								
                 $shop[$key]['num']=++$shop[$key]['num'];
+                //当num的数值超过商品的库存时则将num赋值与商品库存的最大值
+                if($shop[$key]['num']>$shop[$key]['goodsinfo']->goods_num){
+                	$shop[$key]['num']=$shop[$key]['goodsinfo']->goods_num;
+                }
             }
         }
 

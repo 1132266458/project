@@ -63,9 +63,13 @@
         <div class="yNavIndex">
             <ul class="BHeaderl">
                 <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
-                <li><a href="login.html" style="color:#ea4949;">请登录</a> </li>
+                @if(session()->has('user_name'))
+                <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
+                @else
+                <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
                 <li class="headerul">|</li>
-                <li><a href="/reg">免费注册</a> </li>
+                <li><a href="/homereg">免费注册</a> </li>
+                @endif
                 <li class="headerul">|</li>
                 <li><a href="my-d.html">订单查询</a> </li>
                 <li class="headerul">|</li>

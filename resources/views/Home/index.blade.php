@@ -100,9 +100,9 @@
         <div class="header-logo fl"><h1><a href="/"><img src="/theme/icon/logo.png"></a> </h1></div>
         <div class="head-form fl">
             <!-- 搜索 -->
-            <form class="clearfix">
-                <input type="text" class="search-text" accesskey="" id="key" autocomplete="off"  placeholder="洗衣机">
-                <button class="button" onClick="search('key');return false;">搜索</button>
+            <form class="clearfix" action="/search" method="get">
+                <input type="text" class="search-text" accesskey="" id="key" autocomplete="off"  placeholder="洗衣机" name="keywords">
+                <button class="button" type="submit">搜索</button>
             </form>
             <div class="words-text clearfix">
                 <a href="#" class="red">1元秒爆</a>

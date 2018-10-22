@@ -122,7 +122,8 @@ class TypesController extends Controller
 			//加载一个独立的模板界面
 			return view("Home.type.typespage",['goods'=>$goods]);
 			}
+        //dd($maxpage);
 	    //引入分类的页面,并且把分类id，商品信息，分类名，分类数据
-	    return view("Home.type.types",['goods'=>$goods,'name'=>$type->name,'type'=>$typeall,'pp'=>$pp,'cate_id'=>$id]);
+	    return view("Home.type.types",['goods'=>$goods,'name'=>$type->name,'type'=>$typeall,'pp'=>$pp,'cate_id'=>$id,'maxpage'=>$maxpage]);
     }
 }
