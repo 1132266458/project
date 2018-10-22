@@ -8,6 +8,7 @@
 	<meta name="Description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
 	<meta name="renderer" content="webkit">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>商品详情</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
@@ -15,6 +16,7 @@
 	<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	<script type="text/javascript" src="/theme/js/index.js"></script>
 	<script type="text/javascript" src="/theme/js/js-tab.js"></script>
+
     <script>
          $(function(){
              $(".yScrollListInList1 ul").css({width:$(".yScrollListInList1 ul li").length*(160+84)+"px"});
@@ -53,6 +55,10 @@
          		$(".attrdiv a").removeClass("cur");
 				$(this).addClass("cur");
          	});
+          $(".attrdiv1 a").click(function(){
+            $(".attrdiv1 a").removeClass("cur");
+        $(this).addClass("cur");
+          });
          	
          	$('.amount2').click(function(){
 		        var num_input = $("#subnum");
@@ -109,7 +115,6 @@
      </script>
      <script type="text/javascript">
          $(document).ready(function(){
-
              $("#firstpane .menu_body:eq(0)").show();
              $("#firstpane h3.menu_head").click(function(){
                  $(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
@@ -124,9 +129,6 @@
 
          });
      </script>
-
-
-
  </head>
  <body>
 
@@ -135,7 +137,13 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-                <li><a href="#">登录</a> </li>
+                @if(session()->has('user_name'))
+                    <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
+                  @else
+                    <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
+                    <li class="headerul">|</li>
+                    <li><a href="/homereg">免费注册</a> </li>
+                  @endif
                 <li class="headerul">|</li>
                 <li><a href="#">订单查询</a> </li>
                 <li class="headerul">|</li>
@@ -198,16 +206,24 @@
 <section>
     <div class="pc-details" >
         <div class="containers">
-            <div class="pc-nav-item"><a class="pc-title" href="#">电脑、办公</a> &gt; <a href="#">外设产品</a> &gt; <a href="#">电玩</a>&gt; <a href="#">爱电玩（IGAME）</a>&gt; <a href="#">{{$data->goods_name}}</a> </div>
+            <div class="pc-nav-item"><a class="pc-title" href="/">首页</a> &gt; <a href="/types/{{$catess->id}}">{{$catess->name}}</a> &gt; <a href="/types/{{$cates->id}}">{{$cates->name}}</a>&gt; <a href="/types/{{$cate->id}}">{{$cate->name}}</a>&gt; <a href="#">{{$data->goods_name}}</a> </div>
             <div class="pc-details-l">
                 <div class="pc-product clearfix">
                     <div class="pc-product-h">
                         <div class="pc-product-top"><img src="/{{$data->goods_pic}}" id="big_img" width="418" height="418"></div>
                         <div class="pc-product-bop clearfix" id="pro_detail">
                             <ul>
+                              @if(count($pic))
                               @foreach($pic as $row)
-                                <li><a href="javascript:void(0);" class="cur" simg="/{{$row->goods_pic}}"><img src="/{{$row->goods_pic}}" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/{{$row->goods_pic}}"><img src="/{{$row->goods_pic}}" width="58" height="58"></a> </li>
                               @endforeach
+                              @else
+                                <li><a href="javascript:void(0);" class="cur" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
+                              @endif
                             </ul>
                         </div>
                     </div>
@@ -233,21 +249,22 @@
                                         <li><a href="javascript:void(0);">32</a> </li>
                                         <li><a href="javascript:void(0);">32</a> </li>
                                         <li><a href="javascript:void(0);">32</a> </li>
-                                        <li><a href="javascript:void(0);">32</a> </li>
-                                        <li><a href="javascript:void(0);">32</a> </li>
-                                        <li><a href="javascript:void(0);">32</a> </li>
-                                        <li><a href="javascript:void(0);">32</a> </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="pc-telling clearfix">
+                            <div class="attrdiv1 pc-telling clearfix">
                                 <div class="pc-version">颜色分类</div>
                                 <div class="pc-adults">
                                     <ul>
-                                        <li><a href="#" title="黑色" class="cur"><img src="/theme/img/pd/product.png" width="35" height="35"></a> </li>
-                                        <li><a href="#" title="白色"><img src="/theme/img/pd/product1.png" width="35" height="35"></a> </li>
-                                        <li><a href="#" title="金色"><img src="/theme/img/pd/product2.png" width="35" height="35"></a> </li>
-
+                                         @if(count($pic))
+                                        @foreach($pic as $row)
+                                        <li><a href="javascript:;" class="cur" title="{{$row->goods_color}}"><img src="/{{$row->goods_pic}}" width="52" height="51"></a> </li>
+                                        @endforeach
+                                        @else
+                                        <li><a href="javascript:;" class="cur" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
+                                        <li><a href="javascript:;" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
+                                        <li><a href="javascript:;" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -263,7 +280,7 @@
                                     <div class="fl pc-stock ">库存<em>{{$data->goods_num}}</em>件</div>
                                 </div>
                             </div>
-                            <div class="pc-number clearfix"><span class="fl">商品编号：1654456   </span> <span class="fr">分享 收藏</span></div>
+                            <div class="pc-number clearfix"><span class="fl">商品编号：{{$data->goods_id}}   </span> <span class="fr">分享 <a href="javascript:;" onclick="foverite({{$data->goods_id}})">收藏</a></span></div>
                         </div>
                         <div class="pc-emption">
                             <a href="#">立即购买</a>
@@ -330,43 +347,7 @@
                 </ul>
                 <div class="pc-term clearfix">
                    <div class="H-over1 pc-text-word clearfix">
-                       <ul class="clearfix">
-                           <li>
-                               <p>屏幕尺寸：4.8英寸</p>
-                               <p>分辨率：1280×720(HD,720P) </p>
-                           </li>
-                           <li>
-                               <p>后置摄像头：800万像素</p>
-                               <p>分辨率：1280×720(HD,720P) </p>
-                           </li>
-                           <li>
-                               <p>前置摄像头：190万像素</p>
-                               <p>分辨率：1280×720(HD,720P) </p>
-                           </li>
-                           <li>
-                               <p>3G：电信(CDMA2000)</p>
-                               <p>2G：移动/联通(GSM)/电信(CDMA </p>
-                           </li>
-                       </ul>
-                       <div class="pc-line"></div>
-                       <ul class="clearfix">
-                           <li>
-                               <p>商品名称：三星I939I</p>
-                               <p>商品毛重：360.00g </p>
-                           </li>
-                           <li>
-                               <p>商品编号：1089266</p>
-                               <p>商品产地：中国大陆</p>
-                           </li>
-                           <li>
-                               <p>品牌： 三星（SAMSUNG）</p>
-                               <p>系统：安卓（Android </p>
-                           </li>
-                           <li>
-                               <p>上架时间：2015-03-30 09:07:18</p>
-                               <p>机身颜色：白色</p>
-                           </li>
-                       </ul>
+                       
                        <div>
                           @foreach($pic as $r)
                            <div><img src="/{{$r->goods_pic}}" width="80%"></div>
@@ -400,10 +381,10 @@
             </div>
             <div class="pc-overall">
                 <ul class="brand-tab H-table H-table-shop clearfix " id="H-table" style="margin-left:0;">
-                    <li class="cur"><a href="javascript:void(0);">全部评价（199）</a></li>
-                    <li><a href="javascript:void(0);">好评<em class="reds">（33）</em></a></li>
-                    <li><a href="javascript:void(0);">中评<em class="reds">（02）</em></a></li>
-                    <li><a href="javascript:void(0);">差评<em class="reds">（01）</em></a></li>
+                    <li class="cur"><a href="javascript:void(0);">全部评价（{{count($app)}}）</a></li>
+                    <li><a href="javascript:void(0);">好评<em class="reds">（{{$g}}）</em></a></li>
+                    <li><a href="javascript:void(0);">中评<em class="reds">（{{$z}}）</em></a></li>
+                    <li><a href="javascript:void(0);">差评<em class="reds">（{{$c}}）</em></a></li>
                 </ul>
                 <div class="pc-term clearfix">
                     <div class="pc-column">
@@ -414,94 +395,133 @@
                     </div>
                     <div class="H-over  pc-comments clearfix">
                         <ul class="clearfix">
+                          @foreach($app as $vv)
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="#">回复<em>（90）</em></a> <a href="#">赞<em>（90）</em></a> </p>
-                                    <h1>全部评论</h1>
-                                    <p>一次用三星，不是很顺手，但咨询客服后终于上手了，感觉性价比相当不错，值得购买。但最想说的是京东客服更好，产品信得过，正品行货，买的放心。</p>
-                                    <p class="column5">2014-11-25 14:32</p>
+                                    <p>{{$vv->appraise_coment}}</p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
+                                    @if($vv->appraise_reply!=null)
+                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
+                                    @endif
                                 </div>
-                                <div class="column2"><img src="/theme/icon/star.png"></div>
+                                <div class="column2">
+                                @if($vv->appraise_leval==0)
+                                <img src="/theme/icon/star.png">
+                                @elseif($vv->appraise_leval==1)
+                                <img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png">
+                                @elseif($vv->appraise_leval==2)
+                                <img src="/theme/icon/member-x1.png">
+                                @endif
+                               
+
+                                </div>
                                 <div class="column3">颜色：云石白</div>
                                 <div class="column4">
                                     <p><img src="/theme/icon/user.png"></p>
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
+                          @endforeach
                             
                         </ul>
                     </div>
                     <div style="display:none" class="H-over pc-comments">
                         <ul class="clearfix">
+                            @foreach($app as $vv)
+                            @if($vv->appraise_leval==0)
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="#">回复<em>（90）</em></a> <a href="#">赞<em>（90）</em></a> </p>
-                                    <h1>好评</h1>
-                                    <p>一次用三星，不是很顺手，但咨询客服后终于上手了，感觉性价比相当不错，值得购买。但最想说的是京东客服更好，产品信得过，正品行货，买的放心。</p>
-                                    <p class="column5">2014-11-25 14:32</p>
+                                    <p>{{$vv->appraise_coment}}</p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
+                                    @if($vv->appraise_reply!=null)
+                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
+                                    @endif
                                 </div>
-                                <div class="column2"><img src="/theme/icon/star.png"></div>
+                                <div class="column2">
+                                <img src="/theme/icon/star.png">
+                                </div>
                                 <div class="column3">颜色：云石白</div>
                                 <div class="column4">
                                     <p><img src="/theme/icon/user.png"></p>
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
+                          @endif
+                          @endforeach
                             
                         </ul>
                     </div>
                     <div style="display:none" class="H-over pc-comments">
                         <ul class="clearfix">
+                            @foreach($app as $vv)
+                            @if($vv->appraise_leval==1)
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="#">回复<em>（90）</em></a> <a href="#">赞<em>（90）</em></a> </p>
-                                    <h1>中评</h1>
-                                    <p>一次用三星，不是很顺手，但咨询客服后终于上手了，感觉性价比相当不错，值得购买。但最想说的是京东客服更好，产品信得过，正品行货，买的放心。</p>
-                                    <p class="column5">2014-11-25 14:32</p>
+                                    <p>{{$vv->appraise_coment}}</p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
+                                    @if($vv->appraise_reply!=null)
+                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
+                                    @endif
                                 </div>
-                                <div class="column2"><img src="/theme/icon/star.png"></div>
+                                <div class="column2">
+                                @if($vv->appraise_leval==0)
+                                <img src="/theme/icon/star.png">
+                                @elseif($vv->appraise_leval==1)
+                                <img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png">
+                                @elseif($vv->appraise_leval==2)
+                                <img src="/theme/icon/member-x1.png">
+                                @endif
+                                </div>
                                 <div class="column3">颜色：云石白</div>
                                 <div class="column4">
                                     <p><img src="/theme/icon/user.png"></p>
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
+                          @endif
+                          @endforeach
                           
                         </ul>
                     </div>
                     <div style="display:none" class="H-over pc-comments">
                         <ul class="clearfix">
+                            @foreach($app as $vv)
+                            @if($vv->appraise_leval==2)
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="#">回复<em>（90）</em></a> <a href="#">赞<em>（90）</em></a> </p>
-                                    <h1>差评</h1>
-                                    <p>一次用三星，不是很顺手，但咨询客服后终于上手了，感觉性价比相当不错，值得购买。但最想说的是京东客服更好，产品信得过，正品行货，买的放心。</p>
-                                    <p class="column5">2014-11-25 14:32</p>
+                                    <p>{{$vv->appraise_coment}}</p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
+                                    @if($vv->appraise_reply!=null)
+                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
+                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
+                                    @endif
                                 </div>
-                                <div class="column2"><img src="/theme/icon/star.png"></div>
+                                <div class="column2">
+                                @if($vv->appraise_leval==0)
+                                <img src="/theme/icon/star.png">
+                                @elseif($vv->appraise_leval==1)
+                                <img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png">
+                                @elseif($vv->appraise_leval==2)
+                                <img src="/theme/icon/member-x1.png">
+                                @endif
+                                </div>
                                 <div class="column3">颜色：云石白</div>
                                 <div class="column4">
                                     <p><img src="/theme/icon/user.png"></p>
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
+                          @endif
+                          @endforeach
                         </ul>
                     </div>
-                </div>
-            </div>
-            <div class="clearfix">
-                <div class="fr pc-search-g pc-search-gs">
-                    <a href="#" class="fl " style="display:none">上一页</a>
-                    <a class="current" href="#">1</a>
-                    <a href="javascript:;">2</a>
-                    <a href="javascript:;">3</a>
-                    <a href="javascript:;">4</a>
-                    <a href="javascript:;">5</a>
-                    <a href="javascript:;">6</a>
-                    <a href="javascript:;">7</a>
-                    <span class="pc-search-di">…</span>
-                    <a href="javascript:;">1088</a>
-                    <a href="javascript:;" class="" title="使用方向键右键也可翻到下一页哦！">下一页</a>
                 </div>
             </div>
         </div>
@@ -615,7 +635,14 @@
 </div>
 <!-- footer End -->
 </body>
+<script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/shops/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script>
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
  $("#addcar").click(function(){
   //获取对应的商品id
   var id=$("input[name=id]").val();
@@ -624,5 +651,20 @@
   //加入购物车，并把相应的数据传递过去
   window.location.href="/addcar?id="+id+"&num="+num;
  });
+
+ function foverite(id){
+  $.get('/homecollection/'+id,function(data){
+    // alert(data);
+    if(data==1){
+      layer.msg('收藏成功~感谢您的收藏!',{icon:1,time:1000});
+    }else if(data==2){
+      layer.msg('非常抱歉~收藏失败!',{icon:2,time:1000});
+    }else{
+      layer.msg('请先登录!',{icon:7,time:1500},function(){
+        location="/homelogin";
+      });
+    }
+  });
+ }
 </script>
 </html>

@@ -16,6 +16,50 @@
 <link rel="stylesheet" type="text/css" href="/shops/lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="/shops/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="/shops/static/h-ui.admin/css/style.css" />
+  <script src="/theme/js/jquery-1.7.min.js" type="text/javascript"></script>
+  <script src="/theme/js/Area.js" type="text/javascript"></script>
+  <script src="/theme/js/AreaData_min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function (){
+	initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
+});
+
+//得到地区码
+function getAreaID(){
+	var area = 0;          
+	if($("#seachdistrict").val() != "0"){
+		area = $("#seachdistrict").val();                
+	}else if ($("#seachcity").val() != "0"){
+		area = $("#seachcity").val();
+	}else{
+		area = $("#seachprov").val();
+	}
+	return area;
+}
+
+function showAreaID() {
+	//地区码
+	var areaID = getAreaID();
+	//地区名
+	var areaName = getAreaNamebyID(areaID) ;            
+}
+
+//根据地区码查询地区名
+function getAreaNamebyID(areaID){
+	var areaName = "";
+	if(areaID.length == 2){
+		areaName = area_array[areaID];
+	}else if(areaID.length == 4){
+		var index1 = areaID.substring(0, 2);
+		areaName = area_array[index1] + " " + sub_array[index1][areaID];
+	}else if(areaID.length == 6){
+		var index1 = areaID.substring(0, 2);
+		var index2 = areaID.substring(0, 4);
+		areaName = area_array[index1] + " " + sub_array[index1][index2] + " " + sub_arr[index2][areaID];
+	}
+	$('.show').val(areaName);
+}
+</script>
 <!--[if IE 6]>
 <script type="text/javascript" src="/shops/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -33,9 +77,17 @@
 			<input type="text" class="input-text"  placeholder="" id="name" name="name" value="">
 		</div>
 	</div>
-	
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>收货地址：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>收货地区：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<select id="seachprov"  onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>&nbsp;&nbsp;
+			<select id="seachcity"  onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>&nbsp;&nbsp;
+			<span id="seachdistrict_div"><select id="seachdistrict"></select></span>
+			<input type="hidden" class="show" value="" name="address_location">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>详细地址：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text" autocomplete="off" value="" id="address" name="address" >
 		</div>
@@ -49,7 +101,7 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>电子邮箱：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" autocomplete="off" id="address_mail" name="address_mail" value="">
+			<input type="text" class="input-text" autocomplete="off" id="address_email" name="address_email" value="">
 		</div>
 	</div>
 	<div class="row cl">
@@ -58,11 +110,12 @@
 			<input type="text" class="input-text" autocomplete="off"  id="address_code" name="address_code" value="">
 		</div>
 	</div>
-	<input type="hidden" name="address_statue" value="0">
+	
+	<input type="hidden" name="address_statue" value="0"  >
 	{{csrf_field()}}
 	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-			<input class="btn btn-primary radius"   type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			<input class="btn btn-primary radius" onClick="showAreaID()" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 	
 		</div>
 	</div>

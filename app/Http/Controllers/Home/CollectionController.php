@@ -1,39 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-class UserController extends Controller
+class CollectionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // 浏览用户
     public function index()
     {
-        $data=DB::table('shop_user')->get();
-        return view('admin.user.list',['data'=>$data]);
-    }
-    // 禁用
-    public function stop($id){
-        $data=DB::table('shop_user')->where('user_id','=',$id)->update(['user_state'=>1]);
-        if($data){
-            echo 1;
+        if(session()->has('user_name') && session()->has('user_id')){
+            $data=DB::table('shop_fovorite')->where('user_id','=',session('user_id'))->get();
+            $goods=[];
+            foreach($data as $v){
+                $g=DB::table('shop_goods')->where('goods_id','=',$v->goods_id)->first();
+                $goods[]=$g;
+            }
+            return view('Home.collection.list',['data'=>$data,'goods'=>$goods]);
         }else{
-            echo 0;
-        }
-    }
-    // 启用
-    public function start($id){
-        $data=DB::table('shop_user')->where('user_id','=',$id)->update(['user_state'=>0]);
-        if($data){
-            echo 1;
-        }else{
-            echo 0;
+            return redirect('/homelogin');
         }
     }
 
@@ -66,14 +56,23 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        // echo $id;
-        $data=DB::table('shop_userinfo')->where('user_id','=',$id)->first();
-        // dd($data);
-        if($data){
-            return view('admin.user.show',['data'=>$data]);
+        if(session()->has('user_name') && session()->has('user_id')){
+            $data['goods_id']=$id;
+            $data['user_id']=session('user_id');
+            $data['addtime']=time();
+            $s=DB::table('shop_fovorite')->insert($data);
+            if($s){
+                // 收藏成功
+                echo 1;
+            }else{
+                // 收藏失败
+                echo 2;
+            }
         }else{
-            echo "用户还没有添加详情信息~";
+            // 未登录
+            echo 3;
         }
+        
     }
 
     /**
@@ -107,6 +106,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $s=DB::table('shop_fovorite')->where('goods_id','=',$id)->where('user_id','=',session('user_id'))->delete();
+        if($s){
+            echo 1;
+        }else{
+            echo 0;
+        }
     }
 }

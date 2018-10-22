@@ -109,10 +109,10 @@
                 <dl>
                     <dt>我的商城</dt>
                     <dd><a href="/homeorder">我的订单</a></dd>
-                    <dd><a href="#">我的收藏</a></dd>
-                    <dd><a href="#">账户安全</a></dd>
-                    <dd><a href="#">我的评价</a></dd>
-                    <dd><a href="#">地址管理</a></dd>
+                    <dd><a href="/homecollection">我的收藏</a></dd>
+                    <dd><a href="javascript:;">账户安全</a></dd>
+                    <dd><a href="/homecomment">我的评价</a></dd>
+                    <dd><a href="/homeaddress">地址管理</a></dd>
                 </dl>
                 <dl>
                     <dt>客户服务</dt>

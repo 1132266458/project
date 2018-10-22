@@ -25,10 +25,8 @@
 <body>
 <div class="margin clearfix">
  <div class="operation clearfix">
-<button class="btn button_btn btn-danger" type="button" onclick=""><i class="fa fa-trash-o"></i>&nbsp;删除</button>
-<span class="submenu"><a href="javascript:void(0)" name="add_product.html" class="btn button_btn bg-deep-blue" title="添加分类"><i class="fa  fa-edit"></i>&nbsp;添加商品图片</a></span>
 <a href="javascript:ovid()" onclick="close1()" class="btn btn-info button_btn"><i class="fa fa-reply"></i> 返回上一步</a>
-<span class="r_f line30">共：5条</span>
+<span class="r_f line30">共：{{$num}}条</span>
 </div>
 <div class="adverts_list">
 @foreach($data as $v)

@@ -36,7 +36,8 @@
        <li><label class="title_name">收人人电话：</label><span>{{$address->address_phone}}</span></li>
        <li><label class="title_name">地址邮编：</label><span>{{$address->address_code==0?'未知':$address->address_code}}</span></li>
        <li><label class="title_name">备&nbsp;&nbsp;&nbsp;&nbsp;注：</label><span>{{$order->order_messeges==null?'无备注':$order->order_messeges}}</span></li>
-       <li class="address"><label class="title_name">收货地址：</label><span>{{$address->address}}</span></li>     
+       <li class="address"><label class="title_name">收货地区：</label><span>{{$address->address_location}}</span></li>     
+       <li class="address"><label class="title_name">详细地址：</label><span>{{$address->address}}</span></li>     
        </ul>
      </div>
      <table  class="table table_list table_striped  table-bordered">
@@ -73,18 +74,15 @@
      <div class="order_info Buyers_info margin-sx clearfix">
       <ul>
        <li><label class="title_name">支付方式：</label><span>支付宝</span></li>
-       <li><label class="title_name">支付状态：</label><span>已完成</span></li>
+       <li><label class="title_name">支付状态：</label><span>@if($order->order_state==1) 待付款 @else 已付款 @endif</span></li>
        <li><label class="title_name">发货日期：</label><span>2016-08-25</span></li>
-       <li><label class="title_name">交易完成时间：</label><span>2016-08-28</span></li>
-       <li><label class="title_name">发货快递：</label><span>圆通</span></li>
-       <li><label class="title_name">快递单号：</label><span>34567878787</span></li>    
+       <li><label class="title_name">发货快递：</label><span>圆通</span></li>   
        </ul>
      </div>
      <div class="Price clearfix">
      <a href="javascrpit:void()" class="btn button_btn bg-deep-blue margin-top" onclick="logistics_info()">物流信息</a>
      <div class="right_Price">
-      <p><span class="Price_name">总价：</span><b class="font_size_das color_mu">345.80</b>x2</p>
-      <p><span class="Price_name">优惠：</span><b class="font_size color_mu">35.00</b></p>
+      <p><span class="Price_name">总价：</span><b class="font_size_das color_mu">￥{{$order->order_amount}}</b></p>
       </div>
      </div>
     </div>

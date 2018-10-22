@@ -45,7 +45,7 @@
 				<td>{{$data->userinfo_email}}</td>
 			</tr>
 			<tr>
-				<th class="text-r">地址：</th>
+				<th class="text-r">详细地址：</th>
 				<td>{{$data->userinfo_address}}</td>
 			</tr>
 			<tr>

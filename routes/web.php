@@ -81,6 +81,12 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::resource('/admin/adminorder','Admin\OrderController');
 	// 发货
 	Route::post('/admin/admingetup/{id}','Admin\OrderController@getup');
+	// 评论管理控制器
+	Route::resource('/admin/adminappraise','Admin\AppraiseController');
+	// 回复评论
+	Route::post('/admin/adminreply','Admin\AppraiseController@reply');
+	// 查看回复
+	Route::get('/admin/replyshow/{id}','Admin\AppraiseController@replyshow');
 });
 
 // 商城首页资源管理器
@@ -179,3 +185,5 @@ Route::post('/doedemail','Home\SafetyController@doedemail');
 Route::get('/editemail','Home\SafetyController@editemail');
 // 处理更换邮箱
 Route::post('/doemail','Home\SafetyController@doemail');
+// 收藏资源控制器
+Route::resource('/homecollection','Home\CollectionController');

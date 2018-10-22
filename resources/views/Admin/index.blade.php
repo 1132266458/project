@@ -94,8 +94,7 @@
 			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="http://h-ui.duoshuo.com/admin/" data-title="评论列表" href="javascript:;">评论列表</a></li>
-					<li><a data-href="feedback-list.html" data-title="意见反馈" href="javascript:void(0)">意见反馈</a></li>
+					<li><a data-href="/admin/adminappraise" data-title="评论列表" href="javascript:;">评论列表</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -103,8 +102,8 @@
 			<dt><i class="Hui-iconfont">&#xe622;</i> 公告管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="/adminarticles" data-title="评论列表" href="javascript:void(0)">公告列表</a></li>
-					<li><a data-href="/adminarticles/create" data-title="意见反馈" href="javascript:void(0)">添加公告</a></li>
+					<li><a data-href="/adminarticles" data-title="公告列表" href="javascript:void(0)">公告列表</a></li>
+					<li><a data-href="/adminarticles/create" data-title="添加公告" href="javascript:void(0)">添加公告</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -113,7 +112,7 @@
 			<dd>
 				<ul>
 					<li><a data-href="/admin/adminusers" data-title="会员列表" href="javascript:;">会员列表</a></li>
-					<li><a data-href="/admin/adminaddress" data-title="收货地址列表" href="javascript:;">收货地址列表</a></li>
+					<li><a data-href="/admin/adminaddress" data-title="收货信息列表" href="javascript:;">收货信息列表</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -131,7 +130,7 @@
 			<dt><i class="Hui-iconfont">&#xe72b;</i> 广告管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="/admin/adminslider" data-title="折线图" href="javascript:void(0)">轮播图列表</a></li>
+					<li><a data-href="/admin/adminslider" data-title="轮播图列表" href="javascript:void(0)">轮播图列表</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -139,7 +138,7 @@
 			<dt><i class="Hui-iconfont">&#xe60c;</i> 订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="/admin/adminorder" data-title="折线图" href="javascript:void(0)">订单列表</a></li>
+					<li><a data-href="/admin/adminorder" data-title="订单列表" href="javascript:void(0)">订单列表</a></li>
 			</ul>
 		</dd>
 	</dl>

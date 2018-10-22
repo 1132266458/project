@@ -20,10 +20,9 @@ class GoodsController extends Controller
         $type=[];
         foreach($data as $k=>$v){
             $l=DB::table('shop_cates')->where('id','=',$v->type_id)->first();
-            // var_dump($l->level_name);
-            // $data[$k]->admin_level= $l->level_name;
             $type[]=$l->name;
-            // var_dump($data[$k]->admin_level);
+            $s=DB::table('shop_fovorite')->where('goods_id','=',$v->goods_id)->get();
+            $data[$k]->num=count($s);
         }
         return view('admin.goods.list',['data'=>$data,'type'=>$type]);
     }
@@ -170,24 +169,16 @@ class GoodsController extends Controller
                 $data['goods_pic']='./uploads/goods/'.$name.'.'.$ext.'';
                 if(DB::table('shop_goods')->where('goods_id','=',$id)->update($data)){
                     unlink($path->goods_pic);
-                    echo '<script>alert("修改成功");var index = parent.layer.getFrameIndex(window.name);
-            window.parent.location.reload();
-            parent.layer.close(index);</script>';
+                    echo '<script>alert("修改成功");var index = parent.layer.getFrameIndex(window.name);window.parent.location.reload();parent.layer.close(index);</script>';
                 }else{
-                    echo '<script>alert("修改失败");var index = parent.layer.getFrameIndex(window.name);
-            
-            parent.layer.close(index);</script>';
+                    echo '<script>alert("修改失败");var index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);</script>';
                 }  
             }
         }else{
             if(DB::table('shop_goods')->where('goods_id','=',$id)->update($data)){
-                    echo '<script>alert("修改成功");var index = parent.layer.getFrameIndex(window.name);
-            window.parent.location.reload();
-            parent.layer.close(index);</script>';
+                    echo '<script>alert("修改成功");var index = parent.layer.getFrameIndex(window.name);window.parent.location.reload();parent.layer.close(index);</script>';
                 }else{
-                    echo '<script>alert("修改失败");var index = parent.layer.getFrameIndex(window.name);
-            
-            parent.layer.close(index);</script>';
+                    echo '<script>alert("修改失败");var index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);</script>';
                 }
         }
     }

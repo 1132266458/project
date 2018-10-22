@@ -54,13 +54,6 @@
 	</div>
 
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>头像：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<input type="file"  placeholder="" id="adminName" name="admininfo_pic[]" multiple>
-		</div>
-	</div>
-
-	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机号：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text"  placeholder="" id="adminName" name="admininfo_phone" value="{{$data->admininfo_phone}}">

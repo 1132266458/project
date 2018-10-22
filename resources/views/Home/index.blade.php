@@ -76,13 +76,13 @@
                 <li class="headerul">|</li>
                 <li><a href="my-d.html">订单查询</a> </li>
                 <li class="headerul">|</li>
-                <li><a href="my-s.html">我的收藏</a> </li>
+                <li><a href="/homecollection">我的收藏</a> </li>
                 <li class="headerul">|</li>
                 <li id="pc-nav" class="menu"><a href="my-user.html" class="tit">我的商城</a>
                     <div class="subnav">
                         <a href="/homeorder">我的订单</a>
-                        <a href="my-s.html">我的收藏</a>
-                        <a href="my-user.html">账户安全</a>
+                        <a href="/homecollection">我的收藏</a>
+                        <a href="/usersafety">账户安全</a>
                         <a href="/homeaddress">地址管理</a>
                         <a href="/homecomment">我要评价</a>
                     </div>
@@ -115,7 +115,7 @@
             </div>
         </div>
         <!-- 购物车 -->
-        <div class="header-cart fr"><a href="#"><img src="/theme/icon/car.png"></a> <i class="head-amount">0</i></div>
+        <div class="header-cart fr"><a href="/car"><img src="/theme/icon/car.png"></a> <i class="head-amount">{{count(session('shop'))}}</i></div>
         <div class="head-mountain"></div>
     </div>
     <div class="yHeader">

@@ -37,7 +37,7 @@
                 <li class="headerul">|</li>
                 <li><a href="#">订单查询</a> </li>
                 <li class="headerul">|</li>
-                <li><a href="#">我的收藏</a> </li>
+                <li><a href="/homecollection">我的收藏</a> </li>
                 <li class="headerul">|</li>
                 <li id="pc-nav" class="menu"><a href="#" class="tit">我的商城</a>
                     <div class="subnav">
@@ -102,11 +102,11 @@
             <div class="member-lists">
                 <dl>
                     <dt>我的商城</dt>
-                    <dd><a href="#">我的订单</a></dd>
-                    <dd><a href="#">我的收藏</a></dd>
-                    <dd><a href="#">账户安全</a></dd>
-                    <dd><a href="#">我的评价</a></dd>
-                    <dd class="cur"><a href="#">地址管理</a></dd>
+                    <dd><a href="/homeorder">我的订单</a></dd>
+                    <dd><a href="/homecollection">我的收藏</a></dd>
+                    <dd><a href="/usersafety">账户安全</a></dd>
+                    <dd><a href="/homecomment">我的评价</a></dd>
+                    <dd class="cur"><a href="/homeaddress">地址管理</a></dd>
                 </dl>
                 <dl>
                     <dt>客户服务</dt>
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="user-info">
                                     <span class="info1">所在地区：</span>
-                                    <span class="info2">北京市海淀区三环到四环之间</span>
+                                    <span class="info2">{{$v->address_location}}</span>
                                 </div>
                                 <div class="user-info">
                                     <span class="info1">地址：</span>
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="user-info">
                                     <span class="info1">电子邮箱：</span>
-                                    <span class="info2">{{$v->address_mail==null?'未知':"$v->address_mail"}}</span>
+                                    <span class="info2">{{$v->address_email==null?'未知':"$v->address_email"}}</span>
                                 </div>
                                 <div class="user-info">
                                     <span class="info1">邮政编码：</span>

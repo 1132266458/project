@@ -51,7 +51,24 @@ class PageController extends Controller
         $cates=DB::table('shop_cates')->where('id','=',$cate->pid)->first();
         $catess=DB::table('shop_cates')->where('id','=',$cates->pid)->first();
         $pic=DB::table('goods_pics')->where('goods_id','=',$id)->get();
-        return view('Home.page.page',['data'=>$data,'pic'=>$pic,'cate'=>$cate,'cates'=>$cates,'catess'=>$catess]);
+        // 商品评论
+        $app=DB::table('shop_appraise')->where('goods_id','=',$id)->get();
+        // 各评论的数量
+        $g=0;
+        $z=0;
+        $c=0;
+        foreach($app as $v){
+            if($v->appraise_leval==0){
+                $g+=1;
+            }
+            if($v->appraise_leval==1){
+                $z+=1;
+            }
+            if($v->appraise_leval==2){
+                $c+=1;
+            }
+        }
+        return view('Home.page.page',['data'=>$data,'pic'=>$pic,'cate'=>$cate,'cates'=>$cates,'catess'=>$catess,'app'=>$app,'g'=>$g,'z'=>$z,'c'=>$c]);
     }
 
     /**

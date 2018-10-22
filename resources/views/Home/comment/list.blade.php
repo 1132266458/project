@@ -44,11 +44,17 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-                <li><a href="#">登录</a> </li>
+                @if(session()->has('user_name'))
+                  <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
+                @else
+                  <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
+                  <li class="headerul">|</li>
+                  <li><a href="/homereg">免费注册</a> </li>
+                @endif
                 <li class="headerul">|</li>
                 <li><a href="#">订单查询</a> </li>
                 <li class="headerul">|</li>
-                <li><a href="#">我的收藏</a> </li>
+                <li><a href="/homecollection">我的收藏</a> </li>
                 <li class="headerul">|</li>
                 <li id="pc-nav" class="menu"><a href="#" class="tit">我的商城</a>
                     <div class="subnav">
@@ -85,135 +91,142 @@
 </header>
 <!-- header End -->
 
-<div class="containers"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
+<div class="containers"><div class="pc-nav-item"><a href="/">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 
 <!-- 商城快讯 begin -->
 <section id="member">
-    <div class="member-center clearfix">
-        <div class="member-left fl">
-            <div class="member-apart clearfix">
-                <div class="fl"><a href="#"><img src="/theme/img/bg/mem.png"></a></div>
-                <div class="fl">
-                    <p>用户名：</p>
-                    <p><a href="#">亚里士多德</a></p>
-                    <p>搜悦号：</p>
-                    <p>389323080</p>
-                </div>
-            </div>
-            <div class="member-lists">
-                <dl>
-                    <dt>我的商城</dt>
-                    <dd><a href="#">我的订单</a></dd>
-                    <dd><a href="#">我的收藏</a></dd>
-                    <dd><a href="#">账户安全</a></dd>
-                    <dd class="cur"><a href="#">我的评价</a></dd>
-                    <dd><a href="#">地址管理</a></dd>
-                </dl>
-                <dl>
-                    <dt>客户服务</dt>
-                    <dd><a href="#">退货申请</a></dd>
-                    <dd><a href="#">退货/退款记录</a></dd>
-                </dl>
-                <dl>
-                    <dt>我的消息</dt>
-                    <dd><a href="#">商城快讯</a></dd>
-                    <dd><a href="#">帮助中心</a></dd>
-                </dl>
-            </div>
-        </div>
-        <div class="member-right fr">
-            <div class="member-head">
-                <div class="member-heels fl"><h2>我的评价</h2></div>
-            </div>
-            <div class="member-border">
-               <div class="member-column clearfix">
-                   <span class="co1">商品信息</span>
-                   <span class="co2">购买时间</span>
-                   <span class="co3">评论操作</span>
-               </div>
-               <div class="member-class clearfix">
-                
+  <div class="member-center clearfix">
+    <div class="member-left fl">
+      <div class="member-apart clearfix">
+          <div class="fl"><a href="#"><img src="/theme/img/bg/mem.png"></a></div>
+          <div class="fl">
+              <p>用户名：</p>
+              <p><a href="#">亚里士多德</a></p>
+              <p>搜悦号：</p>
+              <p>389323080</p>
+          </div>
+      </div>
+      <div class="member-lists">
+          <dl>
+              <dt>我的商城</dt>
+              <dd><a href="/homeorder">我的订单</a></dd>
+              <dd><a href="/homecollection">我的收藏</a></dd>
+              <dd><a href="/usersafety">账户安全</a></dd>
+              <dd class="cur"><a href="/homecomment">我的评价</a></dd>
+              <dd><a href="/homeaddress">地址管理</a></dd>
+          </dl>
+          <dl>
+              <dt>客户服务</dt>
+              <dd><a href="#">退货申请</a></dd>
+              <dd><a href="#">退货/退款记录</a></dd>
+          </dl>
+          <dl>
+              <dt>我的消息</dt>
+              <dd><a href="#">商城快讯</a></dd>
+              <dd><a href="#">帮助中心</a></dd>
+          </dl>
+      </div>
+  </div>
+  <div class="member-right fr">
+      <div class="member-head">
+          <div class="member-heels fl"><h2>我的评价</h2></div>
+      </div>
+      <div class="member-border">
+         <div class="member-column clearfix">
+             <span class="co1">商品信息</span>
+             <span class="co2">购买时间</span>
+             <span class="co3">评论操作</span>
+         </div>
+         <div class="member-class clearfix">
+          
+              <ul>
+                @foreach($data as $v)
+
+                  <li class="clearfix">
+                      <div class="sp1">
+                          <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/{{$v['goods_pic']}}"></a></span>
+                          <span class="gr2"  style="width:300px">{{$v['goods_name']}}</span>
+                          <span class="gr3">X{{$v['num']}}</span>
+                      </div>
+                      <div class="sp2">{{date('Y-m-d h:m:s',$v['addtime'])}}</div>
+                      <div class="sp3" onclick="opendiv({{$v['goods_id'].$v['order_id']}})"><a href="javascript:;">查看/发表评价</a> </div>
+                  </li>
+                <!-- 评论开始 -->
+                  <form action="/homecomment" method="post">
+                  <div class="member-setup clearfix" id="oo{{$v['goods_id'].$v['order_id']}}" style="display:none">
                     <ul>
-                      @foreach($data as $v)
-
-                        <li class="clearfix">
-                            <div class="sp1">
-                                <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/{{$v['goods_pic']}}"></a></span>
-                                <span class="gr2"  style="width:300px">{{$v['goods_name']}}</span>
-                                <span class="gr3">X{{$v['num']}}</span>
+                      <!-- 显示历史评论信息 -->
+                      @if(!empty($v['dev']))
+                      @foreach($v['dev'] as $vv)
+                      <div class="dd{{$vv->appraise_id}}">
+                        <div class="pl">
+                            <div class="member-score fl"><i class="reds"></i>我的评价：</div>
+                            <div class="member-star fl">
+                            @if($vv->appraise_leval==0)
+                               [好评]
+                            @elseif($vv->appraise_leval==1)
+                                [中评]
+                            @elseif($vv->appraise_leval==2)
+                                [差评]
+                            @endif
+                               {{$vv->appraise_coment}}
+                           </div>
+                           <a href="javascript:;" onclick="del({{$vv->appraise_id}})" class="fr">删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                           <i class="fr">{{date('Y-m-d h:m:s',$vv->appraise_time)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                        </div>
+                      <!-- 卖家回复 -->
+                        @if($vv->appraise_reply!=null)
+                        <div class="pl">
+                            <div style="display:inline-block" class="fl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="reds"></i>卖家回复：</div>
+                            <div class="member-star fl">
+                               {{$vv->appraise_reply}}
                             </div>
-                            <div class="sp2">{{date('Y-m-d h:m:s',$v['addtime'])}}</div>
-                            <div class="sp3" onclick="opendiv({{$v['goods_id'].$v['order_id']}})"><a href="javascript:;">查看/发表评价</a> </div>
-                        </li>
-
-                        <form action="/homecomment" method="post">
-                        <div class="member-setup clearfix" id="oo{{$v['goods_id'].$v['order_id']}}" style="display:none">
-                           <ul>
-                                @if(!empty($v['dev']))
-                                @foreach($v['dev'] as $vv)
-                                <div class="dd{{$vv->appraise_id}}">
-                                <div class="pl">
-                                    <div class="member-score fl"><i class="reds"></i>我的评价：</div>
-                                    <div class="member-star fl">
-                                    @if($vv->appraise_leval==0)
-                                       [好评]
-                                    @elseif($vv->appraise_leval==1)
-                                        [中评]
-                                    @elseif($vv->appraise_leval==2)
-                                        [差评]
-                                    @endif
-                                       {{$vv->appraise_coment}}
-                                   </div>
-                                   <a href="javascript:;" onclick="del({{$vv->appraise_id}})" class="fr">删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                                   <i class="fr">{{date('Y-m-d h:m:s',$vv->appraise_time)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                                </div>
-                                @if($vv->appraise_reply!=null)
-                                <div class="pl">
-                                    <div style="display:inline-block" class="fl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="reds"></i>卖家回复：</div>
-                                    <div class="member-star fl">
-                                       {{$vv->appraise_reply}}
-                                   </div>
-                                   <i class="fr">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-
-                                </div>
-                                @endif
-                                </div>
-                                @endforeach
-                                @endif
-
-                               <li class="clearfix">
-                                   <div class="member-score fl"><i class="reds">*</i>评分：</div>
-                                   <div class="member-star fl">
-                                       <input type="radio" name="appraise_leval" value="0">好评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="1">中评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="2">差评
-                                   </div>
-                               </li>
-
-                               <li class="clearfix">
-                                   <div class="member-score fl"><i class="reds">*</i>商品评价：</div>
-                                   <div class="member-star fl">
-                                       <textarea maxlength="200" name="appraise_coment"></textarea>
-                                   </div>
-                               </li>
-                               <input type="hidden" name="appraise_time" value="{{time()}}">
-                               <input type="hidden" name="goods_id" value="{{$v['goods_id']}}">
-                               <input type="hidden" name="orderinfo_id" value="{{$v['info_id']}}">
-                               <input type="hidden" name="user_id" value="{{session('user_id')}}">
-                               {{csrf_field()}}
-                               <li class="clearfix" style="padding-right:85px;">
-                                   <input type="submit"  class="btn btn-primary radius size-S submits" value="发表评价" style="float:right;padding: 3px 8px;border: solid 1px #ddd;color: #fff;background-color: #5a98de;border-color: #5a98de;font-size: 14px;height: 31px;border-radius: 4px;">
-                                   
-                               </li>
-                           </ul>
-                       </div>
-                        </form>
-                       @endforeach
-                        
+                            <i class="fr">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                        </div>
+                        @endif
+                      <!-- 卖家回复结束 -->
+                      </div>
+                      @endforeach
+                      @endif
+                      <!-- 显示历史评论信息结束 -->
+                      <!-- 评分开始 -->
+                      <li class="clearfix">
+                        <div class="member-score fl"><i class="reds">*</i>评分：</div>
+                        <div class="member-star fl">
+                          <input type="radio" name="appraise_leval" value="0">好评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="1">中评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="2">差评
+                        </div>
+                      </li>
+                      <!-- 评分结束 -->
+                      <!-- 评价开始 -->
+                      <li class="clearfix">
+                        <div class="member-score fl"><i class="reds">*</i>商品评价：</div>
+                        <div class="member-star fl">
+                          <textarea maxlength="200" name="appraise_coment"></textarea>
+                        </div>
+                      </li>
+                      <!-- 评价结束 -->
+                      <input type="hidden" name="appraise_time" value="{{time()}}">
+                      <!-- 商品id -->
+                      <input type="hidden" name="goods_id" value="{{$v['goods_id']}}">
+                      <!-- 订单详情id -->
+                      <input type="hidden" name="orderinfo_id" value="{{$v['info_id']}}">
+                      <!-- 会员id -->
+                      <input type="hidden" name="user_id" value="{{session('user_id')}}">
+                      {{csrf_field()}}
+                      <li class="clearfix" style="padding-right:85px;">
+                        <input type="submit"  class="btn btn-primary radius size-S submits" value="发表评价" style="float:right;padding: 3px 8px;border: solid 1px #ddd;color: #fff;background-color: #5a98de;border-color: #5a98de;font-size: 14px;height: 31px;border-radius: 4px;">
+                      </li>
                     </ul>
-                </div>
+                  </div>
+                  </form>
+                 @endforeach
 
-            </div>
-        </div>
+              </ul>
+          </div>
+
+      </div>
     </div>
+  </div>
 </section>
 <!-- 商城快讯 End -->
 
@@ -357,6 +370,10 @@ headers: {
       }); 
     });
   }
+
+  @if(count($errors))
+    layer.msg('评论失败!',{icon: 2,time:1000});
+  @endif
 </script>
 </body>
 </html>

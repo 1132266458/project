@@ -25,7 +25,13 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-                <li><a href="#">登录</a> </li>
+                @if(session()->has('user_name'))
+                    <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
+                  @else
+                    <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
+                    <li class="headerul">|</li>
+                    <li><a href="/homereg">免费注册</a> </li>
+                  @endif
                 <li class="headerul">|</li>
                 <li><a href="#">订单查询</a> </li>
                 <li class="headerul">|</li>
@@ -66,7 +72,7 @@
 </header>
 <!-- header End -->
 
-<div class="containers"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
+<div class="containers"><div class="pc-nav-item"><a href="/">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 
 <!-- 商城快讯 begin -->
 <section id="member">
@@ -84,11 +90,11 @@
             <div class="member-lists">
                 <dl>
                     <dt>我的商城</dt>
-                    <dd><a href="#">我的订单</a></dd>
-                    <dd><a href="#">我的收藏</a></dd>
+                    <dd><a href="/homeorder">我的订单</a></dd>
+                    <dd><a href="/homecollection">我的收藏</a></dd>
                     <dd><a href="#">账户安全</a></dd>
-                    <dd class="cur"><a href="#">我的评价</a></dd>
-                    <dd><a href="#">地址管理</a></dd>
+                    <dd class="cur"><a href="/homecomment">我的评价</a></dd>
+                    <dd><a href="/homeaddress">地址管理</a></dd>
                 </dl>
                 <dl>
                     <dt>客户服务</dt>
@@ -116,6 +122,7 @@
                 
                     <ul>
                       @foreach($in as $v)
+                      <form action="/homecomment" method="post">
                         <li class="clearfix">
                             <div class="sp1">
                                 <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/{{$v['goods_pic']}}"></a></span>
@@ -130,36 +137,26 @@
                                <li class="clearfix">
                                    <div class="member-score fl"><i class="reds">*</i>评分：</div>
                                    <div class="member-star fl">
-                                       <ul>
-                                           <li class="on"></li>
-                                           <li class="on"></li>
-                                           <li></li>
-                                           <li></li>
-                                           <li></li>
-                                       </ul>
+                                       <input type="radio" name="appraise_leval" value="0">好评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="1">中评&nbsp;&nbsp;&nbsp;<input type="radio" name="appraise_leval" value="2">差评
                                    </div>
-                                   <div class="member-judge fr"><input type="checkbox"> 匿名评价</div>
                                </li>
-
                                <li class="clearfix">
                                    <div class="member-score fl"><i class="reds">*</i>商品评价：</div>
                                    <div class="member-star fl">
-                                       <textarea maxlength="200"></textarea>
+                                       <textarea maxlength="200" name="appraise_coment"></textarea>
                                    </div>
                                </li>
-                               <li class="clearfix">
-                                   <div class="member-score fl">晒单：</div>
-                                   <div class="member-star fl">
-                                       <a href="#"><img src="/theme/img/pd/m2.png"></a>
-                                       <a href="#"><img src="/theme/img/pd/m2.png"></a>
-                                       <a href="#"><img src="/theme/img/pd/m2.png"></a>
-                                   </div>
-                               </li>
-                               <li class="clearfix">
-                                   <div style="padding-left:85px;">最多可以增加<i class="reds">10</i>张</div>
+                               <input type="hidden" name="appraise_time" value="{{time()}}">
+                                <input type="hidden" name="goods_id" value="{{$v['goods_id']}}">
+                                <input type="hidden" name="orderinfo_id" value="{{$v['info_id']}}">
+                                <input type="hidden" name="user_id" value="{{session('user_id')}}">
+                              {{csrf_field()}}
+                               <li class="clearfix" style="padding-right:85px;">
+                                   <input type="submit"  class="btn btn-primary radius size-S submits" value="发表评价" style="float:right;padding: 3px 8px;border: solid 1px #ddd;color: #fff;background-color: #5a98de;border-color: #5a98de;font-size: 14px;height: 31px;border-radius: 4px;">
                                </li>
                            </ul>
                        </div>
+                       </form>
                        @endforeach
                         
                     </ul>
@@ -287,6 +284,9 @@
       oo.style.display="none";
     }
   }
+  @if(count($errors))
+    layer.msg('评论失败!',{icon: 2,time:1000});
+  @endif
 </script>
 </body>
 </html>

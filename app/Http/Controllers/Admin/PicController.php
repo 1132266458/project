@@ -15,13 +15,13 @@ class PicController extends Controller
     public function index()
     {
 
-        echo "这是一个神奇的世界";
     }
 
     // 查看商品图片
     public function piclist($id){
         $data=DB::table('goods_pics')->where('goods_id','=',$id)->get();
-        return view('admin.goods.piclist',['data'=>$data]);
+        $num=count($data);
+        return view('admin.goods.piclist',['data'=>$data,'num'=>$num]);
     }
 
     // 添加商品图片
@@ -45,25 +45,17 @@ class PicController extends Controller
             //移动到指定的目录下（提前在public下新建uploads目录）
             $s=$request->file("goods_pic")->move("./uploads/goods",$name.".".$ext);
             if(!$s){
-                echo '<script>alert("上传错误");var index = parent.layer.getFrameIndex(window.name);
-            
-            parent.layer.close(index);</script>';
+                echo '<script>alert("上传错误");var index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);</script>';
             }else{
                 $data['goods_pic']='./uploads/goods/'.$name.'.'.$ext.'';
                 if(DB::table('goods_pics')->insert($data)){
-                    echo '<script>alert("添加成功");var index = parent.layer.getFrameIndex(window.name);
-            
-            parent.layer.close(index);</script>';
+                    echo '<script>alert("添加成功");var index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);</script>';
                 }else{
-                    echo '<script>alert("添加失败");var index = parent.layer.getFrameIndex(window.name);
-            
-            parent.layer.close(index);</script>';
+                    echo '<script>alert("添加失败");var index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);</script>';
                 }  
             }
         }else{
-            echo '<script>alert("上传错误,您没有添加商品图片~");var index = parent.layer.getFrameIndex(window.name);
-            
-            parent.layer.close(index);</script>';
+            echo '<script>alert("上传错误,您没有添加商品图片~");var index = parent.layer.getFrameIndex(window.name);parent.layer.close(index);</script>';
         }
     }
 

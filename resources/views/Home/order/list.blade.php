@@ -114,11 +114,11 @@
             <div class="member-lists">
                 <dl>
                     <dt>我的商城</dt>
-                    <dd class="cur"><a href="#">我的订单</a></dd>
-                    <dd><a href="#">我的收藏</a></dd>
+                    <dd class="cur"><a href="/homeorder">我的订单</a></dd>
+                    <dd><a href="/homecollection">我的收藏</a></dd>
                     <dd><a href="/usersafety">账户安全</a></dd>
-                    <dd><a href="#">我的评价</a></dd>
-                    <dd><a href="#">地址管理</a></dd>
+                    <dd><a href="/homecomment">我的评价</a></dd>
+                    <dd><a href="/homeaddress">地址管理</a></dd>
                 </dl>
                 <dl>
                     <dt>客户服务</dt>
@@ -207,7 +207,7 @@
                                    <div class="ci5 ci8">
                                     <div class="getup{{$v->order_id}}">
                                   @if($v->order_state==1)
-                                   <p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p>
+                                   <p>剩余15时20分</p> <p><a href="/pays" class="member-touch">立即支付</a> </p>
                                    <p><a href="javascript:;" onclick="cancel(this,{{$v->order_id}})">取消订单</a> </p>
                                     
                                   @elseif($v->order_state==3)
@@ -297,7 +297,7 @@
                                    <div class="ci5 ci8">
                                     <div class="getup{{$v->order_id}}">
                                   @if($v->order_state==1)
-                                   <p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p>
+                                   <p>剩余15时20分</p> <p><a href="/pays" class="member-touch">立即支付</a> </p>
                                    <p><a href="javascript:;" onclick="cancel(this,{{$v->order_id}})">取消订单</a> </p>
                                     
                                   @elseif($v->order_state==3)
@@ -378,7 +378,7 @@
                                    <div class="ci5 ci8">
                                     <div class="getup{{$v->order_id}}">
                                   @if($v->order_state==1)
-                                   <p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p>
+                                   <p>剩余15时20分</p> <p><a href="/pays" class="member-touch">立即支付</a> </p>
                                    <p><a href="javascript:;" onclick="cancel(this,{{$v->order_id}})">取消订单</a> </p>
                                     
                                   @elseif($v->order_state==3)
@@ -458,7 +458,7 @@
                                    <div class="ci5 ci8">
                                    <div class="getup{{$v->order_id}}">
                                   @if($v->order_state==1)
-                                   <p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p>
+                                   <p>剩余15时20分</p> <p><a href="/pays" class="member-touch">立即支付</a> </p>
                                    <p><a href="javascript:;" onclick="cancel(this,{{$v->order_id}})">取消订单</a> </p>
                                     
                                   @elseif($v->order_state==3)
@@ -537,7 +537,7 @@
                                    <div class="ci5 ci8">
                                     <div class="getup{{$v->order_id}}">
                                   @if($v->order_state==1)
-                                   <p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p>
+                                   <p>剩余15时20分</p> <p><a href="/pays" class="member-touch">立即支付</a> </p>
                                    <p><a href="javascript:;" onclick="cancel(this,{{$v->order_id}})">取消订单</a> </p>
                                     
                                   @elseif($v->order_state==3)

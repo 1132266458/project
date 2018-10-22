@@ -31,7 +31,8 @@
 			<tr class="text-c">
 				<th width="80">ID</th>
 				<th width="100">收货人名</th>
-				<th>收货地址</th>
+				<th>收货地区</th>
+				<th>详细地址</th>
 				<th>邮编号</th>
 				<th width="130">手机号码</th>
 				<th width="70">状态</th>
@@ -42,9 +43,9 @@
 			<tr class="text-c">
 				<td>{{$v->address_id}}</td>
 				<td>{{$v->name}}</td>
+				<td>{{$v->address_location}}</td>
 				<td>{{$v->address}}</td>
 				<td>{{$v->address_code}}</td>
-				
 				<td>{{$v->address_phone}}</td>
 				<td class="td-status">
 				@if($v->address_statue==0)

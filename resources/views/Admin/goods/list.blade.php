@@ -47,6 +47,7 @@
 					<th width="80">商品价格</th>
 					<th>商品描述</th>
 					<th width="150">更新时间</th>
+					<th>被收藏数</th>
 					<th>发布状态</th>
 					<th width="100">操作</th>
 				</tr>
@@ -64,6 +65,7 @@
 					<td class="text-c">{{$v->goods_price}}￥</td>
 					<td class="text-c">{{$v->goods_describe}}</td>
 					<td>{{date('Y-m-d h:m:s',$v->goods_addtime)}}</td>
+					<td>{{$v->num}}</td>
 					
 					@if($v->goods_status==0)
 			     <td class="td-status"><span class="label label-success radius">已发布</span></td>

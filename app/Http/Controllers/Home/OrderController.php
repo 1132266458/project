@@ -39,11 +39,14 @@ class OrderController extends Controller
             //获取偏移量
             $offset=($page-1)*$rev;
 
-            $data=DB::table('shop_order')->where('user_id','=',session('user_id'))->orderBy('order_addtime','desc')->offset($offset)->limit($rev)->get();
+            $data=DB::table('shop_order')->where('user_id','=',session('user_id'))->offset($offset)->limit($rev)->get();
 
             foreach($data as $k=>$v){
                 // 订单信息表
                 $info=DB::table('order_info')->where('order_id','=',$v->order_id)->get();
+                $address=DB::table('shop_address')->where('address_id','=',$v->address_id)->first(); 
+                // var_dump($address);
+                $data[$k]->name=$address->name;
                 // var_dump($info[$k]);
                 foreach($info as $value){
                     // 商品表
@@ -51,16 +54,12 @@ class OrderController extends Controller
                     // 把需要的数据添加到数据中
                     $data[$k]->dev[]=['goods_name'=>$goods->goods_name,'goods_pic'=>$goods->goods_pic,'num'=>$value->num,'id'=>$goods->goods_id];
                 }   
-                $address=DB::table('shop_address')->where('address_id','=',$v->address_id)->first(); 
-                // var_dump($address);
-                $data[$k]->name=$address->name;
             }
            $pp=array();
             //遍历
             for($i=1;$i<=$maxpage;$i++){
                 $pp[$i]=$i;
             }
-
             if($request->ajax()){
                 //单独加载模板 把Ajax 当前页数据分配过去
                 return view("Home.order.test",['data'=>$data,'pp'=>$pp]);
