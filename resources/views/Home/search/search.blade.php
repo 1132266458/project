@@ -8,6 +8,7 @@
   <meta name="Description" content="" /> 
   <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" /> 
   <meta name="renderer" content="webkit" /> 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>歪秀购物</title> 
   <link rel="shortcut icon" type="image/x-icon" href="theme/icon/favicon.ico" /> 
   <link rel="stylesheet" type="text/css" href="theme/css/base.css" /> 
@@ -158,7 +159,9 @@
    <div class="time-border-list pc-search-list clearfix"> 
     <ul class="clearfix">
      @foreach($goods as $row) 
-     <li> <a href="/homepage/{{$row->goods_id}}"> <img src="/{{$row->goods_pic}}" /></a> <p class="head-name"><a href="#">{{$row->goods_describe}}</a> </p> <br><p><span class="price">{{$row->goods_price}}</span></p> <p class="head-futi clearfix"><span class="fl">好评度：90% </span> <span class="fr">100人购买</span></p> <p class="clearfix"><span class="label-default fl">抢购</span> <a href="#" class="fr pc-search-c">收藏</a> </p> </li> 
+     @if($row->goods_status==0)
+     <li> <a href="/homepage/{{$row->goods_id}}"> <img src="/{{$row->goods_pic}}" width="240px" height="280px"/></a> <p class="head-name"><a href="/homepage/{{$row->goods_id}}">{{$row->goods_describe}}</a> </p> <br><p><span class="price">{{$row->goods_price}}</span></p> <p class="head-futi clearfix"><span class="fl">好评度：90% </span> <span class="fr">100人购买</span></p> <p class="clearfix"><span class="label-default fl">抢购</span> <a href="javascript:;" onclick="foverite({{$row->goods_id}})" class="fr pc-search-c">收藏</a> </p> </li> 
+     @endif
      @endforeach
     </ul> 
    </div> 
@@ -285,6 +288,30 @@
     </div> 
    </div> 
   </div> 
-  <!-- footer End -->   
+  <!-- footer End -->  
+  <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/shops/static/h-ui.admin/js/H-ui.admin.js"></script>
+  <script type="text/javascript">
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+    // 收藏商品
+ function foverite(id){
+  $.get('/homecollection/'+id,function(data){
+    // alert(data);
+    if(data==1){
+      layer.msg('收藏成功~感谢您的收藏!',{icon:1,time:1000});
+    }else if(data==2){
+      layer.msg('非常抱歉~收藏失败!',{icon:2,time:1000});
+    }else{
+      layer.msg('请先登录!',{icon:7,time:1500},function(){
+        location="/homelogin";
+      });
+    }
+  });
+ }
+  </script> 
  </body>
 </html>

@@ -293,7 +293,9 @@
     <div class="time-border-list pc-search-list clearfix"> 
       <ul class="clearfix" id="uid">
       @foreach($goods as $good)
+      @if($good->goods_status==0)
       <li> <a href="/homepage/{{$good->goods_id}}"> <img src="/{{$good->goods_pic}}" width="240px" height="280px" /></a> <p class="head-name"><a href="/homepage/{{$good->goods_id}}" style="font-size:12px;color:black;">{{$good->goods_describe}}</a> </p> <p><span class="price">￥{{$good->goods_price}}</span></p> <p class="head-futi clearfix"><span class="fl">好评度：90% </span> <span class="fr">100人购买</span></p> <p class="clearfix"><span class="label-default fl">抢购</span> <a href="javascript:;" class="fr pc-search-c" onclick="foverite({{$good->goods_id}})" style="color:black;">收藏</a> </p> </li> 
+      @endif
       @endforeach
      </ul> 
      <div class="clearfix"> 
