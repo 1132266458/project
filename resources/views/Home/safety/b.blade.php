@@ -1,0 +1,1 @@
+<a href="http://chao123.com/editemail/?id={{$id}}&token={{$token}}">修改邮箱</a>

@@ -42,7 +42,9 @@ class LoginController extends Controller
 		$request->session()->pull('user_id');
 		return redirect('/home');	
 	}
+	// 邮箱发送方法
 	public function sendMail($id,$token,$mail){
+			// var_dump($id,$token,$mail);exit;
 	        // $message 消息生成器
 	        //在闭包函数内部不能直接使用闭包函数外部的变量  如果想使用 use 导入
 	        Mail::send('Home.login.a',['id'=>$id,'token'=>$token],function($message)use($mail){
@@ -50,7 +52,7 @@ class LoginController extends Controller
 	            $message->subject('密码重置');
 	        });
 	        return true;
-	    }
+	}
 	public function forget(){
 		return view('Home.login.forget');
 	}

@@ -1,1 +1,1 @@
-<a href="http://fini123.com/reset/?id={{$id}}&token={{$token}}">密码重置</a>
+<a href="http://chao123.com/reset/?id={{$id}}&token={{$token}}">密码重置</a>

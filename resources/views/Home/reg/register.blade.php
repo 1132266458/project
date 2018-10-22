@@ -50,35 +50,35 @@
                     {{csrf_field()}}
                     <div class="login-input">
                         <label><i class="heart">*</i>用户名：</label>
-                        <input type="text" class="list-input1" id="username" name="user_name" placeholder="请输入用户名" onblur="checkUsername('username', 'usernameInfo')" onfocus="clearInfo('usernameInfo')">
+                        <input type="text" class="list-input1" id="username" name="user_name" placeholder="请输入用户名" onblur="checkUsername('username', 'usernameInfo')" onfocus="clearInfo('usernameInfo')" style="width:300px;">
                     </div>
                     <div id="name">
                         <span id="usernameInfo"></span>
                     </div>
                     <div class="login-input">
                         <label><i class="heart">*</i>请设置密码：</label>
-                        <input type="password" class="list-input" id="pass" name="user_pwd" placeholder="请输入密码" onblur="checkPassword('pass', 'passwordInfo')" onfocus="clearInfo('passwordInfo')">
+                        <input type="password" class="list-input" id="pass" name="user_pwd" placeholder="请输入密码" onblur="checkPassword('pass', 'passwordInfo')" onfocus="clearInfo('passwordInfo')" style="width:300px;">
                     </div>
                     <div id="pwd">
                         <span id="passwordInfo"></span>
                     </div>
                     <div class="login-input">
                         <label><i class="heart">*</i>请确认密码：</label>
-                        <input type="password" class="list-input" id="passwordAgain" name="user_repwd" placeholder="请再次输入密码" onblur="checkPasswordAgain('pass', 'passwordAgain', 'passwordAgainInfo')" onfocus="clearInfo('passwordAgainInfo')" >
+                        <input type="password" class="list-input" id="passwordAgain" name="user_repwd" placeholder="请再次输入密码" onblur="checkPasswordAgain('pass', 'passwordAgain', 'passwordAgainInfo')" onfocus="clearInfo('passwordAgainInfo')"  style="width:300px;">
                     </div>
                     <div id="repwd">
                         <span id="passwordAgainInfo"></span>
                     </div>
                     <div class="login-input">
                         <label><i class="heart">*</i>请确认邮箱：</label>
-                        <input type="email" class="list-input" id="email" name="user_email" placeholder="请输入邮箱" onblur="checkEmail('email', 'emailInfo')" onfocus="clearInfo('emailInfo')">
+                        <input type="email" class="list-input" id="email" name="user_email" placeholder="请输入邮箱" onblur="checkEmail('email', 'emailInfo')" onfocus="clearInfo('emailInfo')"  style="width:300px;">
                     </div>
                     <div id="eamil">
                         <span id="emailInfo"></span>
                     </div>
                     <div class="login-input">
                         <label><i class="heart">*</i>手机号：</label>
-                        <input type="phone" class="list-input" id="tel" name="user_phone" placeholder="请输入手机号" onblur="checkTel('tel', 'telInfo')" onfocus="clearInfo('telInfo')">
+                        <input type="phone" class="list-input" id="tel" name="user_phone" placeholder="请输入手机号" onblur="checkTel('tel', 'telInfo')" onfocus="clearInfo('telInfo')"  style="width:300px;">
                        <span class="msgs">获取短信验证码</span>
                     </div>
                     <div id="phone">

@@ -164,6 +164,17 @@ Route::post('/ordergetup/{id}','Home\OrderController@getup');
 // 评论资源控制器
 Route::resource('/homecomment','Home\CommentController');
 
-
-
-
+// 用户安全
+Route::get('/usersafety','Home\SafetyController@index');
+// 用户安全修改密码模板
+Route::get('/useredpwd','Home\SafetyController@edpwd');
+// 用户修改密码
+Route::post('/doedpwd','Home\SafetyController@doedpwd');
+// 用户更换邮箱模板
+Route::get('/useredemail','Home\SafetyController@edemail');
+// 用户更换邮箱验证
+Route::post('/doedemail','Home\SafetyController@doedemail');
+// 更换邮箱
+Route::get('/editemail','Home\SafetyController@editemail');
+// 处理更换邮箱
+Route::post('/doemail','Home\SafetyController@doemail');
