@@ -79,7 +79,7 @@
                     <div class="login-input">
                         <label><i class="heart">*</i>手机号：</label>
                         <input type="phone" class="list-input" id="tel" name="user_phone" placeholder="请输入手机号" onblur="checkTel('tel', 'telInfo')" onfocus="clearInfo('telInfo')"  style="width:300px;">
-                       <span class="msgs">获取短信验证码</span>
+                       <a href="javascript:;" class="msgs">获取短信验证码</a>
                     </div>
                     <div id="phone">
                         <span id="telInfo"></span>
@@ -212,7 +212,7 @@
     
     //电子邮箱
     function checkEmail(id, infoId) {
-        var reg = /^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/;
+        var reg = "/^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/";
         var txtEmail = document.getElementById(id).value;
         if(!reg.test(txtEmail)) {
             setInfo(infoId, '请输入正确邮箱地址');
@@ -247,31 +247,35 @@
     $(function  () {
     //获取短信验证码
     var validCode=true;
-    $(".msgs").click (function  () {
-        // 获取手机号
-        var phone = $(".msgs").prev();
-        var phonere = phone.val();
-        var time=60;
-        var code=$(this);
-        if (validCode) {
-            validCode=false;
-            code.addClass("msgs1");
-            // alert(phonere);
-            $.get('/homeregPhone',{phonere:phonere},function(){
-            });
-        var t=setInterval(function  () {
-            time--;
-            code.html(time+"秒");
-            if (time==0) {
-                clearInterval(t);
-            code.html("重新获取");
-                validCode=true;
-            code.removeClass("msgs1");
+        $(".msgs").click (function  () {
+            // 获取手机号
+            var phone = $(".msgs").prev();
+            var phonere = phone.val();
+
+            if(!checkTel('tel','telInfo')){
+                return false;
             }
-        },1000)
-        }
+            var time=60;
+            var code=$(this);
+            if (validCode) {
+                validCode=false;
+                code.addClass("msgs1");
+                // alert(phonere);
+                $.get('/homeregPhone',{phonere:phonere},function(){
+                });
+            var t=setInterval(function  () {
+                time--;
+                code.html(time+"秒");
+                if (time==0) {
+                    clearInterval(t);
+                code.html("重新获取");
+                    validCode=true;
+                code.removeClass("msgs1");
+                }
+            },1000)
+            }
+        })
     })
-})
     function checkCode(id, infoId){
     // 校验码检测
     $("input[name='code']").blur(function(){

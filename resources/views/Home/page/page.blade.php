@@ -129,6 +129,23 @@
 
          });
      </script>
+     <style type="text/css">
+      .sub{
+            width: 148px;
+            line-height: 38px;
+            line-height: 38px;
+            border: 1px solid #e6433e;
+            text-align: center;
+            background: #ffeded;
+            font-size: 14px;
+            color: #c40000;
+            display: block;
+            float: left;
+            margin-right: 14px;
+            border-radius: 2px;
+            margin-left:80px
+      }
+     </style>
  </head>
  <body>
 
@@ -268,6 +285,8 @@
                                     </ul>
                                 </div>
                             </div>
+                        <form action="/nowpay" method="post">
+                        {{csrf_field()}}
                             <div class="pc-telling clearfix">
                                 <div class="pc-version">数量</div>
                                 <div class="pc-adults clearfix">
@@ -283,9 +302,11 @@
                             <div class="pc-number clearfix"><span class="fl">商品编号：{{$data->goods_id}}   </span> <span class="fr">分享 <a href="javascript:;" onclick="foverite({{$data->goods_id}})">收藏</a></span></div>
                         </div>
                         <div class="pc-emption">
-                            <a href="#">立即购买</a>
-                            <a href="#" class="join" id="addcar">加入购物车</a>
+                            <!-- <a href="#">立即购买</a> -->
+                            <input type="submit" class="sub" value="立即购买">
+                            <a href="javascript:;" class="join" id="addcar">加入购物车</a>
                             <input type="hidden" name="id" value="{{$data->goods_id}}">
+                        </form>
                         </div>
                     </div>
                     <div class="pc-product-s">

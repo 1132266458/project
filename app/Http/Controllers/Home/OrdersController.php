@@ -14,8 +14,7 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {   
-        $data = $request->session()->all();
-        // var_dump($data); 
+         
         $data = session('shop');
         $user_id = session('user_id');
         // 根据session 的用户id 查找用户 地址数据
@@ -23,15 +22,7 @@ class OrdersController extends Controller
         // var_dump($info);    
         return view('Home.orders.order',['info'=>$info,'data'=>$data]);
     }
-    // 地址遍历
-    public function address(Request $request){
-        // var_dump($request->all());
-        $upid = $request->input('upid');
-        // 省级
-        $list = DB::table('district')->where('upid','=',$upid)->get();
-        echo json_encode($list);
-        // var_dump($list);
-    }
+ 
     // 添加地址
     public function doaddress(Request $request){
         // var_dump($_POST);exit;
@@ -124,6 +115,35 @@ class OrdersController extends Controller
                 DB::table('order_info')->insert($order_info);
             }
             return view('Home.orders.success',['info'=>$info,'list'=>$list,'address'=>$address]);
+        }
+    }
+
+    
+    
+
+    // 添加地址
+    public function doaddre(Request $request){
+        // var_dump($_POST);exit;
+        // 根据session用户的ID 查询shop_address
+        // 根据session传过来的订单id 
+        $data['user_id'] = session('user_id');
+        // 用户的收货人姓名
+        $data['name'] = $_POST['name'];
+        // 用户的收货地址
+        $data['address'] = $_POST['address'];
+        // 用户收货手机
+        $data['address_phone'] = $_POST['address_phone'];
+        // 用户的联系邮箱
+        $data['address_email'] = $_POST['address_email'];
+        // 用户的收货地址省份
+        $data['address_location'] = $_POST['address_location'];
+        // 用户收货默认地址状态 1 是默认 
+        $data['address_statue'] = 0;
+        $res = DB::table('shop_address')->insert($data);
+        if($res){
+            echo "<script>alert('添加收货地址成功!');location='/nowpay';</script>";
+        }else{
+            echo "<script>alert('添加收货地址失败!');location='/nowpay';</script>";
         }
     }
 

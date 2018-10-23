@@ -5,19 +5,17 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use Hash;
-//导入Mail
-use Mail;
-class RegisterController extends Controller
+class NowpayController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    // 立即购买
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -38,7 +36,28 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(session()->has('user_name') && session()->has('user_id')){
+        if(!session()->has('now')){
+          // var_dump($_POST);
+          $num=$_POST['num'];
+          $goods_id=$_POST['id'];
+          $data=DB::table('shop_goods')->where('goods_id','=',$goods_id)->first();
+          $data->num=$num;
+          $user_id = session('user_id');
+          // 根据session 的用户id 查找用户 地址数据
+          $info = DB::table('shop_address')->where('user_id','=',$user_id)->get();   
+          return view('Home.orders.now',['info'=>$info,'data'=>$data]);
+        }else{
+          $data = session('now');
+          $user_id = session('user_id');
+          // 根据session 的用户id 查找用户 地址数据
+          $info = DB::table('shop_address')->where('user_id','=',$user_id)->get();
+          // var_dump($info);    
+          return view('Home.orders.now',['info'=>$info,'data'=>$data]);
+        } 
+      }else{
+        return redirect('/homelogin');
+      }
     }
 
     /**
@@ -85,14 +104,4 @@ class RegisterController extends Controller
     {
         //
     }
-    public function send(){
-        // 消息生成器
-        Mail::raw('this is demo',function ($message){
-            // 发送主题
-            $message->subject('o2o28');
-            // 接受方
-            $message->to("996623225@qq.com");
-        });
-    }
-
 }

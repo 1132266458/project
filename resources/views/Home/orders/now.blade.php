@@ -17,6 +17,7 @@
   <script src="/theme/js/jquery-1.7.min.js" type="text/javascript"></script>
   <script src="/theme/js/Area.js" type="text/javascript"></script>
   <script src="/theme/js/AreaData_min.js" type="text/javascript"></script>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   
 <script type="text/javascript">
 $(function (){
@@ -62,6 +63,11 @@ function getAreaNamebyID(areaID){
 }
 </script>
     <script type="text/javascript">
+    $.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
          (function(a){
              a.fn.hoverClass=function(b){
                  var a=this;
@@ -80,7 +86,17 @@ function getAreaNamebyID(areaID){
              $("#pc-nav").hoverClass("current");
          });
 
-
+// html('<ul class=" clearfix">
+//          <li class="clearfix fl">
+//             <div class="fl pc-address">
+//               <input type="radio"value=""name="address_id" checked>
+//               <span>名字</span> 
+//               <span>地区</span>
+//               <span>详细地址</span>
+//               <span>手机</span>
+//             </div>
+//          </li>
+//      </ul>');
 
 
          $(document).ready(function($){
@@ -90,10 +106,21 @@ function getAreaNamebyID(areaID){
                  $(".box").css({"display":"block"});
              });
 
+
              $(".hint-in3").click(function(event) {
+                var name=$('.name').val();
+                var show=$('.show').val();
+                var address=$('.address').val();
+                var phone=$('.phone').val();
+                str={name:name,show:show,address:address,phone:phone};
+                $.post('/',{str:str},function(data){
+
+                });
+                // alert(name);
                  $(".hint").css({"display":"none"});
                  $(".box").css({"display":"none"});
              });
+
 
              $(".hint3").click(function(event) {
                  $(this).parent().parent().css({"display":"none"});
@@ -119,23 +146,21 @@ function getAreaNamebyID(areaID){
  <body>
 
 <div class="box">
-   <form action="/doaddress" method="post">
-    {{csrf_field()}}
+   <!-- <form action="/doaddre" method="post"> -->
+    <!-- {{csrf_field()}} -->
     <div class="hint">
         <div class="hint-in1">
             <div class="hint2">添加收货地址</div>
             <div class="hint3"></div>
         </div>
 
-        <div class="pc-label"><label><i class="reds ">*</i>收货人:</label><input type="text" placeholder="请您填写收货人姓名" name="name"></div>
+        <div class="pc-label"><label><i class="reds ">*</i>收货人:</label>
+        <input type="text" placeholder="请您填写收货人姓名" name="name" class="name"></div>
         <div id="sjld" style="margin-top:10px; padding-left:40px; position:relative;" class="clearfix">
-
             <div class="clearfix" style="padding-bottom:5px;"><i class="reds fl">*</i><p class="fl">所在地区:</p></div>
-
-            <!-- <div id="province"></div> -->
+             <div id="province"></div>
             <div>
             <select id="seachprov" name="seachprov" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');">
-              
             </select>&nbsp;&nbsp;
             <select id="seachcity" name="homecity" onChange="changeCity(this.value,'seachdistrict','seachdistrict');">
               
@@ -146,17 +171,17 @@ function getAreaNamebyID(areaID){
             </div>
         </div>
 
-        <div class="pc-label"><label><i class="reds ">*</i>详细地址:</label><input type="text" style="width:400px; " placeholder="请您填写收货人详细地址" name="address"></div>
-        <div class="pc-label"><label><i class="reds ">*</i>手机号码:</label><input type="text" style="width:400px;"placeholder="请您填写收货人手机号码" name="address_phone"></div>
+        <div class="pc-label"><label><i class="reds ">*</i>详细地址:</label><input type="text" class="address" style="width:400px; " placeholder="请您填写收货人详细地址" name="address"></div>
+        <div class="pc-label"><label><i class="reds ">*</i>手机号码:</label><input type="text" class="phone" style="width:400px;"placeholder="请您填写收货人手机号码" name="address_phone"></div>
         <div class="pc-label"><label>邮箱:</label><input type="text" style="width:400px;" placeholder="请您填写邮箱地址" name="address_email"></div>
         <input type="hidden" class="show" value="" name="address_location">
         <input type="submit" value="保存收货地址" class="hint-in3" onClick="showAreaID()">
     </div>
-  </form>
+  <!-- </form> -->
   
 </div>
 
-<!--- header begin-->
+<!-- - header begin -->
 <header id="pc-header">
     <div class="BHeader">
         <div class="yNavIndex">
@@ -198,7 +223,7 @@ function getAreaNamebyID(areaID){
     </div>
 
 </header>
-<!-- header End -->
+<!-- header End 
 
 
 <!-- 订单提交成功 begin-->
@@ -207,7 +232,7 @@ function getAreaNamebyID(areaID){
 <section>
     <div class="containers">
        <div class="pc-space">
-           <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> <a href="javascript:;" class="fr pc-order-add btn1">新增收货地址</a> </div>
+           <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> <a href="/homeaddress" target="_blank" class="fr ">管理收货地址</a> </div>
            <div class="pc-border">
                <div class="pc-order-text clearfix">
                     @foreach($info as $v)
@@ -234,6 +259,7 @@ function getAreaNamebyID(areaID){
                        </li>
                    </ul>
                     @endforeach
+                    <a href="javascript:;" class="fr btn1">使用新地址</a>
                </div>
            </div>
        </div>
@@ -276,26 +302,26 @@ function getAreaNamebyID(areaID){
                <div class="pc-border">
                    <div class="pc-order-text clearfix">
                        <div class="pc-wares-t"><h4></h4></div>
-                            @foreach($data as $val)
+                            
 
                        <div class="clearfix pc-wares-p">
 
                            <div class="fl pc-wares">
-                            <a href="#"><img style ="width:82px;height:82px;"src="{{$val['goodsinfo']->goods_pic}}"></a>
+                            <a href="#"><img style ="width:82px;height:82px;"src="{{$data->goods_pic}}"></a>
                           </div>
                            <div class="fl pc-wares-w">
-                            <a href="#">{{$val['goodsinfo']->goods_name}}</a> 
+                            <a href="#">{{$data->goods_name}}</a> 
                             <p class="clearfix">
-                              <span class="fl">描述：{{$val['goodsinfo']->goods_describe}}</span>
+                              <span class="fl">描述：{{$data->goods_describe}}</span>
                             </p>
                           </div>
-                          <?php  $money=$val['goodsinfo']->goods_price*$val['num'];?>
-                           <div class="fl pc-wares-s"><span class="reds">价格:{{$money}}<b></b></span>
+                          <?php  $money=$data->goods_price*$data->num;?>
+                           <div class="fl pc-wares-s"><span class="reds">价格:￥{{$data->goods_price}}<b></b></span>
                          
-                          <span>数量:<b>{{$val['num']}}</b></span></div>
+                          <span>数量:<b>{{$data->num}}</b></span></div>
 
                        </div>
-                            @endforeach
+                           
 
                        <div class="pc-written">订单留言:<input type="text" name="order_messeges" style="width:500px;"></div>
                    </div>
@@ -317,7 +343,7 @@ function getAreaNamebyID(areaID){
        <div class="pc-space-n"></div>
        <div class="clearfix">
            <div class="fr pc-space-j">
-               <spna>应付总额：<strong>￥{{session('sum')}}</strong></spna>
+               <spna>应付总额：<strong>￥{{$money}}</strong></spna>
                <button class="pc-submit">提交订单</button>
            </div>
        </div>
@@ -440,6 +466,8 @@ function getAreaNamebyID(areaID){
         $("#sjld").sjld("#shenfen","#chengshi","#quyu");
 
     });
+
+    
 </script>
 
 </body>

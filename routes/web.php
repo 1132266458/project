@@ -114,8 +114,7 @@ Route::post('/doforget','Home\LoginController@doforget');
 Route::get('/reset','Home\LoginController@reset');
 // 处理重置密码
 Route::post('/doreset','Home\LoginController@doreset');
-// 测试邮件
-// Route::get("/send","Home\RegisterController@send");
+
 // 验证码
 Route::get("/code","Home\RegisterController@code");
 // 处理退出
@@ -147,13 +146,14 @@ Route::post('/CarDel',"Home\CarController@CarDel");
 //购物车批量删除	
 Route::get('/CarDelall',"Home\CarController@CarDelall");
 
-
+// 立即购买
+Route::resource('/nowpay','Home\NowpayController');
 // 提交订单
 Route::resource('/homeorders','Home\OrdersController');
-// 地址遍历
-Route::get('/address','Home\OrdersController@address');
 // 添加新地址
 Route::post('/doaddress','Home\OrdersController@doaddress');
+// 立即购买的添加新地址
+Route::post('/doaddre','Home\OrdersController@doaddre');
 // 商品总价
 Route::get('/sum','Home\OrdersController@sum');
 //支付宝接口调用 
