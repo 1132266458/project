@@ -32,21 +32,21 @@
 		<input type="text" name="" id="" placeholder=" 商品名称" style="width:250px" class="input-text">
 		<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜商品</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="picture_add('添加商品','/admin/admingoods/create')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加商品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="picture_add('添加商品','/admin/admingoods/create')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加商品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-hover table-sort">
 			<thead>
 				<tr class="text-c">
 					<th width="40"><input name="" type="checkbox" value=""></th>
 					<th width="40">ID</th>
-					<th>商品名称</th>
+					<th width="60">商品名称</th>
 					<th width="80">分类</th>
 					<th>封面</th>
 					
 					<th width="80">商品数量</th>
 					<th width="80">商品价格</th>
-					<th>商品描述</th>
-					<th width="150">更新时间</th>
+					<th width="100">商品描述</th>
+					<th width="110">更新时间</th>
 					<th>被收藏数</th>
 					<th>发布状态</th>
 					<th width="100">操作</th>
@@ -81,6 +81,9 @@
 					@endif
 					<a style="text-decoration:none" class="ml-5" onClick="picture_edit('图库编辑','/admin/admingoods/{{$v->goods_id}}/edit')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
 					<a style="text-decoration:none" class="ml-5" onClick="pic_add('添加图库','/admin/picadd/{{$v->goods_id}}')" href="javascript:;" title="添加图库"><i class="Hui-iconfont">&#xe61f;</i></a>
+					
+					<a style="text-decoration:none" class="ml-5" onClick="pic_add('添加商品详情','/admin/details/{{$v->goods_id}}')" href="javascript:;" title="添加商品详情"><i class="Hui-iconfont">&#xe64f;</i></a>
+
 					<a style="text-decoration:none" class="ml-5" onClick="picture_del(this,'{{$v->goods_id}}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
 					</td>
 				</tr>

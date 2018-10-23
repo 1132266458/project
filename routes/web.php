@@ -87,6 +87,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::post('/admin/adminreply','Admin\AppraiseController@reply');
 	// 查看回复
 	Route::get('/admin/replyshow/{id}','Admin\AppraiseController@replyshow');
+	// 商品详情添加
+	Route::get('/admin/details/{id}','Admin\DetailsController@index');
+	// 商品详情处理添加
+	Route::post('/admin/adddetails','Admin\DetailsController@add');
 });
 
 // 商城首页资源管理器

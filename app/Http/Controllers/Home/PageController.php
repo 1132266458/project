@@ -50,6 +50,8 @@ class PageController extends Controller
         $cate=DB::table('shop_cates')->where('id','=',$data->type_id)->first();
         $cates=DB::table('shop_cates')->where('id','=',$cate->pid)->first();
         $catess=DB::table('shop_cates')->where('id','=',$cates->pid)->first();
+        $list = DB::table('goods_details')->where('goods_id','=',$id)->first();;
+        // var_dump($list);
         $pic=DB::table('goods_pics')->where('goods_id','=',$id)->get();
         // 商品评论
         $app=DB::table('shop_appraise')->where('goods_id','=',$id)->get();
@@ -68,7 +70,7 @@ class PageController extends Controller
                 $c+=1;
             }
         }
-        return view('Home.page.page',['data'=>$data,'pic'=>$pic,'cate'=>$cate,'cates'=>$cates,'catess'=>$catess,'app'=>$app,'g'=>$g,'z'=>$z,'c'=>$c]);
+        return view('Home.page.page',['data'=>$data,'pic'=>$pic,'cate'=>$cate,'cates'=>$cates,'catess'=>$catess,'app'=>$app,'g'=>$g,'z'=>$z,'c'=>$c,'list'=>$list]);
     }
 
     /**

@@ -368,7 +368,11 @@
                 </ul>
                 <div class="pc-term clearfix">
                    <div class="H-over1 pc-text-word clearfix">
-                       
+                    @if($list)
+                    <div>{!!$list->details!!}</div>
+                    @else
+                    <div></div>
+                    @endif
                        <div>
                           @foreach($pic as $r)
                            <div><img src="/{{$r->goods_pic}}" width="80%"></div>
