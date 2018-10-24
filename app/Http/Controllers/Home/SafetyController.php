@@ -10,10 +10,16 @@ use Mail;
 class SafetyController extends Controller
 {
 	public function index(){
-		$id = session('user_id');
-		$info = DB::table('shop_user')->where('user_id','=',$id)->first();
-		// 加载模板
-    	return view('Home.safety.my-safety',['info'=>$info]);
+		if(session()->has('user_name') && session()->has('user_id')){
+			$id = session('user_id');
+			$info = DB::table('shop_user')->where('user_id','=',$id)->first();
+			$i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
+			// 加载模板
+	    	return view('Home.safety.my-safety',['info'=>$info,'i'=>$i]);
+		}else{
+			return redirect('/homelogin');
+		}
+		
 	}
 	// 修改密码模板
 	public function edpwd(){

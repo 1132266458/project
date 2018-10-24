@@ -36,9 +36,9 @@
                  if (minute <= 9) minute = '0' + minute;
                  if (second <= 9) second = '0' + second;
 
-                 $('#hour_show').html('<s id="h"></s>'+hour+'');
-                 $('#minute_show').html('<s></s>'+minute+'');
-                 $('#second_show').html('<s></s>'+second+'');
+                 $('javascript:;hour_show').html('<s id="h"></s>'+hour+'');
+                 $('javascript:;minute_show').html('<s></s>'+minute+'');
+                 $('javascript:;second_show').html('<s></s>'+second+'');
                  intDiff--;
              }, 1000);
          }
@@ -67,9 +67,9 @@
         <div class="yNavIndex">
             <ul class="BHeaderl">
               @if(session()->has('user_name'))
-                <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
+                <li><a href="/homeuser" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
               @else
-                <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
+                <li><a href="/homelogin" style="color:javascript:;ea4949;">请登录</a> </li>
                 <li class="headerul">|</li>
                 <li><a href="/homereg">免费注册</a> </li>
               @endif
@@ -88,9 +88,9 @@
                     </div>
                 </li>
                 <li class="headerul">|</li>
-                <li id="pc-nav1" class="menu"><a href="#" class="tit M-iphone">手机悦商城</a>
+                <li id="pc-nav1" class="menu"><a href="javascript:;" class="tit M-iphone">手机悦商城</a>
                    <div class="subnav">
-                       <a href="#"><img src="/theme/icon/ewm.png" width="115" height="115" title="扫一扫，有惊喜！"></a>
+                       <a href="javascript:;"><img src="/theme/icon/ewm.png" width="115" height="115" title="扫一扫，有惊喜！"></a>
                    </div>
                 </li>
             </ul>
@@ -105,13 +105,13 @@
                 <button class="button" type="submit">搜索</button>
             </form>
             <div class="words-text clearfix">
-                <a href="#" class="red">1元秒爆</a>
-                <a href="#">低至五折</a>
-                <a href="#">农用物资</a>
-                <a href="#">买一赠一</a>
-                <a href="#">佳能相机</a>
-                <a href="#">稻香村月饼</a>
-                <a href="#">服装城</a>
+                <a href="javascript:;" class="red">1元秒爆</a>
+                <a href="javascript:;">低至五折</a>
+                <a href="javascript:;">农用物资</a>
+                <a href="javascript:;">买一赠一</a>
+                <a href="javascript:;">佳能相机</a>
+                <a href="javascript:;">稻香村月饼</a>
+                <a href="javascript:;">服装城</a>
             </div>
         </div>
         <!-- 购物车 -->
@@ -167,7 +167,7 @@
     <div class="yBanner">
         <div class="banner" id="banner" >
           @foreach($data as $row)
-            <a href="javascript:;" class="d1" style="background:url(/uploads/slider/{{$row->slider_img}}) center no-repeat;background-color: #f01a38; padding-left:180px;"></a>
+            <a href="javascript:;" class="d1" style="background:url(/uploads/slider/{{$row->slider_img}}) center no-repeat;background-color: javascript:;f01a38; padding-left:180px;"></a>
           @endforeach
             <div class="d2" id="banner_id">
                 <ul>
@@ -320,14 +320,14 @@
         </div>
     </div>
     <div class="news-list fr">
-        <div class="time-title time-clear"><h2>商城快讯</h2><a href="#" class="fr"> 更多资讯</a> </div>
+        <div class="time-title time-clear"><h2>商城快讯</h2><a href="javascript:;" class="fr"> 更多资讯</a> </div>
         <div class="time-border" style="border-left:none;">
             <ul class="news">
-                <li><a href="#">[特惠]洗护节 跨品牌满199减100</a> </li>
-                <li><a href="#">[特惠]新一代Moto 360智能手表登陆</a> </li>
-                <li><a href="#">[特惠]惠氏品牌日 两件立享85折</a> </li>
-                <li><a href="#">[特惠]洗护节 跨品牌满199减100</a> </li>
-                <li><a href="#">[特惠]仁怀政府开启“仁怀酱香酒馆”</a> </li>
+                <li><a href="javascript:;">[特惠]洗护节 跨品牌满199减100</a> </li>
+                <li><a href="javascript:;">[特惠]新一代Moto 360智能手表登陆</a> </li>
+                <li><a href="javascript:;">[特惠]惠氏品牌日 两件立享85折</a> </li>
+                <li><a href="javascript:;">[特惠]洗护节 跨品牌满199减100</a> </li>
+                <li><a href="javascript:;">[特惠]仁怀政府开启“仁怀酱香酒馆”</a> </li>
             </ul>
             <div class="time-poduse"><img src="/theme/img/pd/pj1.png"></div>
         </div>
@@ -340,15 +340,15 @@
     <div class="time-list fl">
         <div class="time-title time-clear"><h2>卖场推荐</h2><a href="javascript:;" class="pc-spin fr">换一换</a> </div>
         <div class="time-poued clearfix">
-            <a href="#"><img src="/theme/img/ad/a2.png"></a>
-            <a href="#"><img src="/theme/img/ad/a3.png"></a>
-            <a href="#"><img src="/theme/img/ad/a4.png"></a>
-            <a href="#"><img src="/theme/img/ad/a5.png"></a>
+            <a href="javascript:;"><img src="/theme/img/ad/a2.png"></a>
+            <a href="javascript:;"><img src="/theme/img/ad/a3.png"></a>
+            <a href="javascript:;"><img src="/theme/img/ad/a4.png"></a>
+            <a href="javascript:;"><img src="/theme/img/ad/a5.png"></a>
         </div>
     </div>
     <div class="news-list fr">
         <div class="time-title time-clear"><h2>今日值得购买</h2></div>
-        <div class="news-right"><a href="#"><img src="/theme/img/ad/a1.png"></a></div>
+        <div class="news-right"><a href="javascript:;"><img src="/theme/img/ad/a1.png"></a></div>
     </div>
 </div>
 <!-- 卖场推荐 End -->
@@ -411,7 +411,7 @@
     </div>
 </div>
 
-<div class="containers main-banner"><a href="#"><img src="/theme/img/ad/br1.jpg" width="1200" height="105"></a> </div>
+<div class="containers main-banner"><a href="javascript:;"><img src="/theme/img/ad/br1.jpg" width="1200" height="105"></a> </div>
 
 <div class="time-lists  clearfix">
     <div class="time-list time-list-w fl">
@@ -430,46 +430,46 @@
         <div class="time-border time-border-h clearfix">
             <div class="brand-img fl">
                 <ul>
-                    <li><a href="#"><img src="/theme/img/ad/p1.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p2.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p3.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p4.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p5.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p6.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p1.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p2.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p3.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p4.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p5.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p6.png" width="125" height="47"></a></li>
                 </ul>
             </div>
-            <div class="brand-bar fl"><a href="#"><img src="/theme/img/ad/bar.jpg" width="300" height="476"></a> </div>
+            <div class="brand-bar fl"><a href="javascript:;"><img src="/theme/img/ad/bar.jpg" width="300" height="476"></a> </div>
             <div class="brand-poa fl">
                 <div class="brand-poa H-over clearfix">
                     <ul>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar2.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar2.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar3.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar3.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar4.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar4.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar5.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar5.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                     </ul>
@@ -477,33 +477,33 @@
                 <div class="brand-poa H-over clearfix" style="display:none;">
                     <ul>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar5.png"></a></div>
-                            <div class="brand-title"><a href="#">松下（Panasonic）智能马桶盖 洁身器 电子坐便盖DL-1109CWS</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar5.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">松下（Panasonic）智能马桶盖 洁身器 电子坐便盖DL-1109CWS</a> </div>
                             <div class="brand-price">￥299.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar2.png"></a></div>
-                            <div class="brand-title"><a href="#">一加（OnePlus）64GB 砂岩黑 移动4G手机</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar2.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">一加（OnePlus）64GB 砂岩黑 移动4G手机</a> </div>
                             <div class="brand-price">￥455.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">【全球购】moony尤尼佳纸尿裤 日本官方进口尿不湿宝宝婴儿尿片 大号L54片(9-14kg)</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">【全球购】moony尤尼佳纸尿裤 日本官方进口尿不湿宝宝婴儿尿片 大号L54片(9-14kg)</a> </div>
                             <div class="brand-price">￥299.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar4.png"></a></div>
-                            <div class="brand-title"><a href="#">【顺丰包邮】北海道白色恋人黑白巧克力36枚铁盒混合夹心饼干 日本进口零食礼盒中秋送礼送女友</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar4.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">【顺丰包邮】北海道白色恋人黑白巧克力36枚铁盒混合夹心饼干 日本进口零食礼盒中秋送礼送女友</a> </div>
                             <div class="brand-price">￥655.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar5.png"></a></div>
-                            <div class="brand-title"><a href="#">便宜坊（Bianyifang）烤鸭 焖炉烤鸭1000g 原味（整只）</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar5.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">便宜坊（Bianyifang）烤鸭 焖炉烤鸭1000g 原味（整只）</a> </div>
                             <div class="brand-price">￥189.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">加拿大进口Polar Bear极地熊牌榛子仁400g</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">加拿大进口Polar Bear极地熊牌榛子仁400g</a> </div>
                             <div class="brand-price">￥349.00 </div>
                         </li>
                     </ul>
@@ -530,46 +530,46 @@
         <div class="time-border time-border-h clearfix">
             <div class="brand-img fl">
                 <ul>
-                    <li><a href="#"><img src="/theme/img/ad/p1.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p2.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p3.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p4.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p5.png" width="125" height="47"></a></li>
-                    <li><a href="#"><img src="/theme/img/ad/p6.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p1.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p2.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p3.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p4.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p5.png" width="125" height="47"></a></li>
+                    <li><a href="javascript:;"><img src="/theme/img/ad/p6.png" width="125" height="47"></a></li>
                 </ul>
             </div>
-            <div class="brand-bar fl"><a href="#"><img src="/theme/img/ad/bar1.jpg" width="300" height="476"></a> </div>
+            <div class="brand-bar fl"><a href="javascript:;"><img src="/theme/img/ad/bar1.jpg" width="300" height="476"></a> </div>
             <div class="brand-poa fl">
                 <div class="brand-poa H-over1 clearfix">
                     <ul>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar2.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar2.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar3.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar3.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar4.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar4.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar5.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar5.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                     </ul>
@@ -577,33 +577,33 @@
                 <div class="brand-poa H-over1 clearfix" style="display:none;">
                     <ul>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被一羊毛蚕丝被</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar2.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar2.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar3.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar3.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar4.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar4.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar5.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar5.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                         <li>
-                            <div class="brand-imgss"><a href="#"><img src="/theme/img/pd/bar1.png"></a></div>
-                            <div class="brand-title"><a href="#">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
+                            <div class="brand-imgss"><a href="javascript:;"><img src="/theme/img/pd/bar1.png"></a></div>
+                            <div class="brand-title"><a href="javascript:;">罗莱家纺 暖融二合一羊毛蚕丝被 床上用品</a> </div>
                             <div class="brand-price">￥599.00 </div>
                         </li>
                     </ul>
@@ -613,42 +613,42 @@
     </div>
 </div>
 
-<div class="containers main-banner"><a href="#"><img src="/theme/img/ad/br1.jpg" width="1200" height="105"></a> </div>
+<div class="containers main-banner"><a href="javascript:;"><img src="/theme/img/ad/br1.jpg" width="1200" height="105"></a> </div>
 
 <div class="time-lists clearfix">
     <div class="time-list fl">
         <div class="time-title time-clear"><h2>好店推荐 </h2></div>
         <div class="time-border time-border-h clearfix">
             <div class="fl shop-img">
-                <div class="shop-title"><a href="#"><img src="/theme/img/ad/shop1.png"></a></div>
+                <div class="shop-title"><a href="javascript:;"><img src="/theme/img/ad/shop1.png"></a></div>
                 <div class="shop-text"><h2>熊太子坚果炒货金冠店铺...</h2> <p>[正品 有赠品 如实描述]</p></div>
-                <div class="shop-work clearfix"><a href="#"><img src="/theme/img/ad/shop2.png"></a><a href="#"><img src="/theme/img/ad/shop3.png"></a> </div>
+                <div class="shop-work clearfix"><a href="javascript:;"><img src="/theme/img/ad/shop2.png"></a><a href="javascript:;"><img src="/theme/img/ad/shop3.png"></a> </div>
             </div>
             <div class="shop-bar clearfix fl">
                 <ul>
                     <li>
-                        <div class="shop-icn"><a href="#"><img src="/theme/img/ad/shop4.png"></a></div>
-                        <div class="shop-tex"><a href="#">阿迪王品牌店铺</a> </div>
+                        <div class="shop-icn"><a href="javascript:;"><img src="/theme/img/ad/shop4.png"></a></div>
+                        <div class="shop-tex"><a href="javascript:;">阿迪王品牌店铺</a> </div>
                     </li>
                     <li>
-                        <div class="shop-icn"><a href="#"><img src="/theme/img/ad/shop4.png"></a></div>
-                        <div class="shop-tex"><a href="#">阿迪王品牌店铺</a> </div>
+                        <div class="shop-icn"><a href="javascript:;"><img src="/theme/img/ad/shop4.png"></a></div>
+                        <div class="shop-tex"><a href="javascript:;">阿迪王品牌店铺</a> </div>
                     </li>
                     <li>
-                        <div class="shop-icn"><a href="#"><img src="/theme/img/ad/shop4.png"></a></div>
-                        <div class="shop-tex"><a href="#">阿迪王品牌店铺</a> </div>
+                        <div class="shop-icn"><a href="javascript:;"><img src="/theme/img/ad/shop4.png"></a></div>
+                        <div class="shop-tex"><a href="javascript:;">阿迪王品牌店铺</a> </div>
                     </li>
                     <li>
-                        <div class="shop-icn"><a href="#"><img src="/theme/img/ad/shop4.png"></a></div>
-                        <div class="shop-tex"><a href="#">阿迪王品牌店铺</a> </div>
+                        <div class="shop-icn"><a href="javascript:;"><img src="/theme/img/ad/shop4.png"></a></div>
+                        <div class="shop-tex"><a href="javascript:;">阿迪王品牌店铺</a> </div>
                     </li>
                     <li>
-                        <div class="shop-icn"><a href="#"><img src="/theme/img/ad/shop4.png"></a></div>
-                        <div class="shop-tex"><a href="#">阿迪王品牌店铺</a> </div>
+                        <div class="shop-icn"><a href="javascript:;"><img src="/theme/img/ad/shop4.png"></a></div>
+                        <div class="shop-tex"><a href="javascript:;">阿迪王品牌店铺</a> </div>
                     </li>
                     <li>
-                        <div class="shop-icn"><a href="#"><img src="/theme/img/ad/shop4.png"></a></div>
-                        <div class="shop-tex"><a href="#">阿迪王品牌店铺</a> </div>
+                        <div class="shop-icn"><a href="javascript:;"><img src="/theme/img/ad/shop4.png"></a></div>
+                        <div class="shop-tex"><a href="javascript:;">阿迪王品牌店铺</a> </div>
                     </li>
                 </ul>
             </div>
@@ -659,23 +659,23 @@
         <div style="border-left:none;" class="time-border time-border-h">
             <ul class="shop-top">
                 <li class="clearfix">
-                    <div class="shop-name fl"><a href="#"><img src="/theme/img/ad/top1.png"></a></div>
+                    <div class="shop-name fl"><a href="javascript:;"><img src="/theme/img/ad/top1.png"></a></div>
                     <div class="shop-titl fl"><p><b>NO.1 阿卡官方旗舰店</b></p> <p>梦想会喜欢 <span class="fr red">已售出：3000+</span></p> </div>
                 </li>
                 <li class="clearfix">
-                    <div class="shop-name fl"><a href="#"><img src="/theme/img/ad/top1.png"></a></div>
+                    <div class="shop-name fl"><a href="javascript:;"><img src="/theme/img/ad/top1.png"></a></div>
                     <div class="shop-titl fl"><p><b>NO.1 阿卡官方旗舰店</b></p> <p>梦想会喜欢 <span class="fr red">已售出：3000+</span></p> </div>
                 </li>
                 <li class="clearfix">
-                    <div class="shop-name fl"><a href="#"><img src="/theme/img/ad/top1.png"></a></div>
+                    <div class="shop-name fl"><a href="javascript:;"><img src="/theme/img/ad/top1.png"></a></div>
                     <div class="shop-titl fl"><p><b>NO.1 阿卡官方旗舰店</b></p> <p>梦想会喜欢 <span class="fr red">已售出：3000+</span></p> </div>
                 </li>
                 <li class="clearfix">
-                    <div class="shop-name fl"><a href="#"><img src="/theme/img/ad/top1.png"></a></div>
+                    <div class="shop-name fl"><a href="javascript:;"><img src="/theme/img/ad/top1.png"></a></div>
                     <div class="shop-titl fl"><p><b>NO.1 阿卡官方旗舰店</b></p> <p>梦想会喜欢 <span class="fr red">已售出：3000+</span></p> </div>
                 </li>
                 <li class="clearfix">
-                    <div class="shop-name fl"><a href="#"><img src="/theme/img/ad/top1.png"></a></div>
+                    <div class="shop-name fl"><a href="javascript:;"><img src="/theme/img/ad/top1.png"></a></div>
                     <div class="shop-titl fl"><p><b>NO.1 阿卡官方旗舰店</b></p> <p>梦想会喜欢 <span class="fr red">已售出：3000+</span></p> </div>
                 </li>
             </ul>
@@ -692,43 +692,43 @@
                     <div class="shop-hgou"><h3>新手上路</h3></div>
                     <div class="shop-help clearfix">
                         <ul>
-                            <li><a href="#">开店指南</a> </li>
-                            <li><a href="#">购物流程</a> </li>
-                            <li><a href="#">交易安全</a> </li>
-                            <li><a href="#">常见问题</a> </li>
-                            <li><a href="#">联系客服</a> </li>
-                            <li><a href="#">用户协议</a> </li>
+                            <li><a href="javascript:;">开店指南</a> </li>
+                            <li><a href="javascript:;">购物流程</a> </li>
+                            <li><a href="javascript:;">交易安全</a> </li>
+                            <li><a href="javascript:;">常见问题</a> </li>
+                            <li><a href="javascript:;">联系客服</a> </li>
+                            <li><a href="javascript:;">用户协议</a> </li>
                         </ul>
                     </div>
-                    <div class="shop-re"><a href="#"><img src="/theme/img/ad/shop5.png"></a> </div>
+                    <div class="shop-re"><a href="javascript:;"><img src="/theme/img/ad/shop5.png"></a> </div>
                 </div>
                 <div class="shop-bar shop-bar-w clearfix fl">
-                    <div class="shop-dan clearfix"><h3 class="fl">悦用户晒单</h3> <a href="#" class="fr">更多晒单</a> </div>
+                    <div class="shop-dan clearfix"><h3 class="fl">悦用户晒单</h3> <a href="javascript:;" class="fr">更多晒单</a> </div>
                     <div class="clearfix" style="width:980px;">
                         <div class="shop-fl fl">
-                            <div class="shop-work clearfix"><a href="#"><img src="/theme/img/ad/shop2.png"></a><a href="#"><img src="/theme/img/ad/shop3.png"></a> </div>
-                            <div class="clearfix"><div class="shop-name fl"><a href="#"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
-                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="#">查看商品</a> </p> </div>
+                            <div class="shop-work clearfix"><a href="javascript:;"><img src="/theme/img/ad/shop2.png"></a><a href="javascript:;"><img src="/theme/img/ad/shop3.png"></a> </div>
+                            <div class="clearfix"><div class="shop-name fl"><a href="javascript:;"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
+                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="javascript:;">查看商品</a> </p> </div>
                         </div>
                         <div class="shop-fl fl">
-                            <div class="shop-work clearfix"><a href="#"><img src="/theme/img/ad/shop2.png"></a><a href="#"><img src="/theme/img/ad/shop3.png"></a> </div>
-                            <div class="clearfix"><div class="shop-name fl"><a href="#"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
-                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="#">查看商品</a> </p> </div>
+                            <div class="shop-work clearfix"><a href="javascript:;"><img src="/theme/img/ad/shop2.png"></a><a href="javascript:;"><img src="/theme/img/ad/shop3.png"></a> </div>
+                            <div class="clearfix"><div class="shop-name fl"><a href="javascript:;"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
+                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="javascript:;">查看商品</a> </p> </div>
                         </div>
                         <div class="shop-fl fl">
-                            <div class="shop-work clearfix"><a href="#"><img src="/theme/img/ad/shop2.png"></a><a href="#"><img src="/theme/img/ad/shop3.png"></a> </div>
-                            <div class="clearfix"><div class="shop-name fl"><a href="#"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
-                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="#">查看商品</a> </p> </div>
+                            <div class="shop-work clearfix"><a href="javascript:;"><img src="/theme/img/ad/shop2.png"></a><a href="javascript:;"><img src="/theme/img/ad/shop3.png"></a> </div>
+                            <div class="clearfix"><div class="shop-name fl"><a href="javascript:;"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
+                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="javascript:;">查看商品</a> </p> </div>
                         </div>
                         <div class="shop-fl fl">
-                            <div class="shop-work clearfix"><a href="#"><img src="/theme/img/ad/shop2.png"></a><a href="#"><img src="/theme/img/ad/shop3.png"></a> </div>
-                            <div class="clearfix"><div class="shop-name fl"><a href="#"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
-                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="#">查看商品</a> </p> </div>
+                            <div class="shop-work clearfix"><a href="javascript:;"><img src="/theme/img/ad/shop2.png"></a><a href="javascript:;"><img src="/theme/img/ad/shop3.png"></a> </div>
+                            <div class="clearfix"><div class="shop-name fl"><a href="javascript:;"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
+                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="javascript:;">查看商品</a> </p> </div>
                         </div>
                         <div class="shop-fl fl">
-                            <div class="shop-work clearfix"><a href="#"><img src="/theme/img/ad/shop2.png"></a><a href="#"><img src="/theme/img/ad/shop3.png"></a> </div>
-                            <div class="clearfix"><div class="shop-name fl"><a href="#"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
-                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="#">查看商品</a> </p> </div>
+                            <div class="shop-work clearfix"><a href="javascript:;"><img src="/theme/img/ad/shop2.png"></a><a href="javascript:;"><img src="/theme/img/ad/shop3.png"></a> </div>
+                            <div class="clearfix"><div class="shop-name fl"><a href="javascript:;"><img src="/theme/icon/shop-user.png"></a></div><div class=" fl"><p>搜悦用户</p> <p>2015-5-24 <em>11:25</em></p> </div></div>
+                            <div class="shop-sun"><p>晒单内容:</p> <p>物美价廉，挺好的，物流超快.很不错，下次继续来</p> <p class="shop-see"><a href="javascript:;">查看商品</a> </p> </div>
                         </div>
                     </div>
                 </div>
@@ -750,11 +750,11 @@
                 <em>消费者权益</em>
             </h4>
             <ul>
-                <li><a href="#">保障范围 </a> </li>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;">保障范围 </a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">服务中心 </a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
             </ul>
         </div>
         <div class="aui-footer-list clearfix">
@@ -763,10 +763,10 @@
                 <em>新手上路</em>
             </h4>
             <ul>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">服务中心 </a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
             </ul>
         </div>
         <div class="aui-footer-list clearfix">
@@ -775,10 +775,10 @@
                 <em>保障正品</em>
             </h4>
             <ul>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">服务中心 </a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
             </ul>
         </div>
         <div class="aui-footer-list clearfix">
@@ -787,60 +787,60 @@
                 <em>消费者权益</em>
             </h4>
             <ul>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">服务中心 </a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
             </ul>
         </div>
     </div>
-    <div style="border-bottom:1px solid #dedede"></div>
+    <div style="border-bottom:1px solid javascript:;dedede"></div>
     <div class="time-lists aui-footer-pd time-lists-ls clearfix">
         <div class="aui-footer-list clearfix">
             <h4>购物指南</h4>
             <ul>
-                <li><a href="#">保障范围 </a> </li>
-                <li><a href="#">购物流程</a> </li>
-                <li><a href="#">会员介绍 </a> </li>
-                <li><a href="#">生活旅行</a> </li>
-                <li><a href="#"> 常见问题 </a> </li>
-                <li><a href="#"> 联系客服购物指南 </a> </li>
+                <li><a href="javascript:;">保障范围 </a> </li>
+                <li><a href="javascript:;">购物流程</a> </li>
+                <li><a href="javascript:;">会员介绍 </a> </li>
+                <li><a href="javascript:;">生活旅行</a> </li>
+                <li><a href="javascript:;"> 常见问题 </a> </li>
+                <li><a href="javascript:;"> 联系客服购物指南 </a> </li>
             </ul>
         </div>
         <div class="aui-footer-list clearfix">
             <h4>特色服务</h4>
             <ul>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">服务中心 </a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
             </ul>
         </div>
         <div class="aui-footer-list clearfix">
             <h4>帮助中心</h4>
             <ul>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">服务中心 </a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
             </ul>
         </div>
         <div class="aui-footer-list clearfix">
             <h4>新手指导</h4>
             <ul>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">退货退款流程</a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#">服务中心</a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
-                <li><a href="#"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">退货退款流程</a> </li>
+                <li><a href="javascript:;">服务中心 </a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;">服务中心</a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
+                <li><a href="javascript:;"> 更多特色服务 </a> </li>
             </ul>
         </div>
     </div>

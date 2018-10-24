@@ -83,7 +83,7 @@
             <div class="member-apart clearfix">
                 <div class="fl"><a href="#">
                 @if(count($info))
-                <img src="{{$info->userinfo_pic==null?'/theme/img/bg/mem.png':'/$info->userinfo_pic'}}">
+                <img src='{{$info->userinfo_pic==null?"/theme/img/bg/mem.png":"/$info->userinfo_pic"}}'>
                 @else
                 <img src="/theme/img/bg/mem.png">
                 @endif
@@ -95,8 +95,7 @@
                     @else
                         <p><a href="#">未知</a></p>
                     @endif
-                    <p>搜悦号：</p>
-                    <p>389323080</p>
+                    
                 </div>
             </div>
             <div class="member-lists">

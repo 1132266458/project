@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="cl pd-20" style=" background-color:#5bacb6">
-	<img class="avatar size-XL l" src="/shops/static/h-ui/images/ucnter/avatar-default.jpg">
+	<img class="avatar size-XL l" src="@if($data->userinfo_pic) /{{$data->userinfo_pic}} @else /shops/static/h-ui/images/ucnter/avatar-default.jpg @endif">
 	<dl style="margin-left:80px; color:#fff">
 		<dt>
 			<span class="f-18">{{$data->userinfo_pname}}</span>
@@ -40,10 +40,7 @@
 				<td>男</td>
 			</tr>
 			
-			<tr>
-				<th class="text-r">邮箱：</th>
-				<td>{{$data->userinfo_email}}</td>
-			</tr>
+			
 			<tr>
 				<th class="text-r">详细地址：</th>
 				<td>{{$data->userinfo_address}}</td>

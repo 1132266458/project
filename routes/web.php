@@ -152,6 +152,10 @@ Route::get('/CarDelall',"Home\CarController@CarDelall");
 
 // 立即购买
 Route::resource('/nowpay','Home\NowpayController');
+// 立即添加收货地址
+Route::post('/nowadd','Home\NowpayController@nowadd');
+// 提交订单
+Route::post('/getup','Home\NowpayController@getup');
 // 提交订单
 Route::resource('/homeorders','Home\OrdersController');
 // 添加新地址
@@ -191,3 +195,5 @@ Route::get('/editemail','Home\SafetyController@editemail');
 Route::post('/doemail','Home\SafetyController@doemail');
 // 收藏资源控制器
 Route::resource('/homecollection','Home\CollectionController');
+// 个人模块资源控制器
+Route::resource('/homeuser','Home\UserController');

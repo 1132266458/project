@@ -90,19 +90,28 @@
 </header>
 <!-- header End -->
 
-<div class="containers"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
+<div class="containers"><div class="pc-nav-item"><a href="/">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 
 <!-- 商城快讯 begin -->
 <section id="member">
     <div class="member-center clearfix">
         <div class="member-left fl">
             <div class="member-apart clearfix">
-                <div class="fl"><a href="#"><img src="theme/img/bg/mem.png"></a></div>
+                <div class="fl"><a href="#">
+                @if(count($i))
+                <img src='{{$i->userinfo_pic==null?"/theme/img/bg/mem.png":"/$i->userinfo_pic"}}'>
+                @else
+                <img src="/theme/img/bg/mem.png">
+                @endif
+                </a></div>
                 <div class="fl">
                     <p>用户名：</p>
-                    <p><a href="#">{{session('user_name')}}</a></p>
-                    <p>搜悦号：</p>
-                    <p>389323080</p>
+                    @if(count($i))
+                        <p><a href="#">{{$i->userinfo_pname}}</a></p>
+                    @else
+                        <p><a href="#">未知</a></p>
+                    @endif
+                    
                 </div>
             </div>
             <div class="member-lists">

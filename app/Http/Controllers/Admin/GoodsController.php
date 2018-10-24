@@ -77,7 +77,7 @@ class GoodsController extends Controller
     {
         // dd($request->str);
         // echo '<pre>';
-        dd($request->all());
+        // dd($request->all());
         $data=$request->except(['_token']);
         //判断是否具有文件上传
         if($request->hasFile('goods_pic')){

@@ -21,7 +21,8 @@ class CollectionController extends Controller
                 $g=DB::table('shop_goods')->where('goods_id','=',$v->goods_id)->first();
                 $goods[]=$g;
             }
-            return view('Home.collection.list',['data'=>$data,'goods'=>$goods]);
+            $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
+            return view('Home.collection.list',['data'=>$data,'goods'=>$goods,'i'=>$i]);
         }else{
             return redirect('/homelogin');
         }

@@ -64,7 +64,8 @@ class OrderController extends Controller
                 //单独加载模板 把Ajax 当前页数据分配过去
                 return view("Home.order.test",['data'=>$data,'pp'=>$pp]);
             }
-            return view('Home.order.list',['data'=>$data,'wei'=>$w,'d'=>$tot,'dd'=>$dd,'ddd'=>$ddd,'dddd'=>$dddd,'pp'=>$pp]);
+            $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
+            return view('Home.order.list',['data'=>$data,'wei'=>$w,'d'=>$tot,'dd'=>$dd,'ddd'=>$ddd,'dddd'=>$dddd,'pp'=>$pp,'i'=>$i]);
         }else{
             return redirect('/homelogin');
         }
@@ -110,8 +111,8 @@ class OrderController extends Controller
             $in[]=['goods_name'=>$goods->goods_name,'goods_price'=>$goods->goods_price,'goods_id'=>$goods->goods_id,'num'=>$v->num]; 
             // $tot+=$v->num*$goods->goods_price;
         }
-        // dd($tot);
-        return view('Home.order.info',['data'=>$data,'in'=>$in,'address'=>$address]);
+        $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
+        return view('Home.order.info',['data'=>$data,'in'=>$in,'address'=>$address,'i'=>$i]);
         // dd($in);
     }
 

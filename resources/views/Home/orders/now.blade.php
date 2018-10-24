@@ -8,6 +8,7 @@
 	<meta name="Description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
 	<meta name="renderer" content="webkit">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>提交订单</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
@@ -17,7 +18,7 @@
   <script src="/theme/js/jquery-1.7.min.js" type="text/javascript"></script>
   <script src="/theme/js/Area.js" type="text/javascript"></script>
   <script src="/theme/js/AreaData_min.js" type="text/javascript"></script>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  
   
 <script type="text/javascript">
 $(function (){
@@ -62,8 +63,8 @@ function getAreaNamebyID(areaID){
   // return areaName;
 }
 </script>
-    <script type="text/javascript">
-    $.ajaxSetup({
+<script type="text/javascript">
+$.ajaxSetup({
 headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 }
@@ -86,17 +87,7 @@ headers: {
              $("#pc-nav").hoverClass("current");
          });
 
-// html('<ul class=" clearfix">
-//          <li class="clearfix fl">
-//             <div class="fl pc-address">
-//               <input type="radio"value=""name="address_id" checked>
-//               <span>名字</span> 
-//               <span>地区</span>
-//               <span>详细地址</span>
-//               <span>手机</span>
-//             </div>
-//          </li>
-//      </ul>');
+
 
 
          $(document).ready(function($){
@@ -112,13 +103,17 @@ headers: {
                 var show=$('.show').val();
                 var address=$('.address').val();
                 var phone=$('.phone').val();
-                str={name:name,show:show,address:address,phone:phone};
-                $.post('/',{str:str},function(data){
-
+                var address_email=$('.address_email').val();
+                str={name:name,address_location:show,address:address,address_phone:phone,address_email:address_email};
+                // 添加地址
+                $.post('/nowadd',{str:str},function(data){
+                  // alert(data);
+                  if(data!='a'){
+                    $('.ddd').html(data);
+                    $(".hint").css({"display":"none"});
+                    $(".box").css({"display":"none"});
+                  }
                 });
-                // alert(name);
-                 $(".hint").css({"display":"none"});
-                 $(".box").css({"display":"none"});
              });
 
 
@@ -139,7 +134,7 @@ headers: {
              });
 
          });
-     </script>
+</script>
 
 
  </head>
@@ -173,7 +168,7 @@ headers: {
 
         <div class="pc-label"><label><i class="reds ">*</i>详细地址:</label><input type="text" class="address" style="width:400px; " placeholder="请您填写收货人详细地址" name="address"></div>
         <div class="pc-label"><label><i class="reds ">*</i>手机号码:</label><input type="text" class="phone" style="width:400px;"placeholder="请您填写收货人手机号码" name="address_phone"></div>
-        <div class="pc-label"><label>邮箱:</label><input type="text" style="width:400px;" placeholder="请您填写邮箱地址" name="address_email"></div>
+        <div class="pc-label"><label>邮箱:</label><input type="text" style="width:400px;" class="address_email" placeholder="请您填写邮箱地址" name="address_email"></div>
         <input type="hidden" class="show" value="" name="address_location">
         <input type="submit" value="保存收货地址" class="hint-in3" onClick="showAreaID()">
     </div>
@@ -227,7 +222,7 @@ headers: {
 
 
 <!-- 订单提交成功 begin-->
-<form action="/homeorders" method="post">
+<form action="/getup" method="post">
             {{csrf_field()}}
 <section>
     <div class="containers">
@@ -259,6 +254,7 @@ headers: {
                        </li>
                    </ul>
                     @endforeach
+                    <ul class="ddd"></ul>
                     <a href="javascript:;" class="fr btn1">使用新地址</a>
                </div>
            </div>
@@ -302,10 +298,7 @@ headers: {
                <div class="pc-border">
                    <div class="pc-order-text clearfix">
                        <div class="pc-wares-t"><h4></h4></div>
-                            
-
                        <div class="clearfix pc-wares-p">
-
                            <div class="fl pc-wares">
                             <a href="#"><img style ="width:82px;height:82px;"src="{{$data->goods_pic}}"></a>
                           </div>
@@ -321,8 +314,6 @@ headers: {
                           <span>数量:<b>{{$data->num}}</b></span></div>
 
                        </div>
-                           
-
                        <div class="pc-written">订单留言:<input type="text" name="order_messeges" style="width:500px;"></div>
                    </div>
                </div>
@@ -344,6 +335,9 @@ headers: {
        <div class="clearfix">
            <div class="fr pc-space-j">
                <spna>应付总额：<strong>￥{{$money}}</strong></spna>
+               <input type="hidden" name="sum" value="{{$money}}">
+               <input type="hidden" name="goods_id" value="{{$data->goods_id}}">
+               <input type="hidden" name="num" value="{{$data->num}}">
                <button class="pc-submit">提交订单</button>
            </div>
        </div>
@@ -459,7 +453,7 @@ headers: {
 </div>
 <!-- footer End -->
 
-<script type="text/javascript" src="/theme/js/address.js"></script>
+<!-- <script type="text/javascript" src="/theme/js/address.js"></script> -->
 <script type="text/javascript">
     $(function(){
 

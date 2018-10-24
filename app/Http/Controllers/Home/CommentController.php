@@ -39,7 +39,8 @@ class CommentController extends Controller
               } 
             }
             // dd($data);
-            return view('Home.comment.list',['data'=>$data]);
+            $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
+            return view('Home.comment.list',['data'=>$data,'i'=>$i]);
         }else{
             return redirect('/homelogin');
         }
@@ -93,8 +94,8 @@ class CommentController extends Controller
             $in[]=['goods_name'=>$goods->goods_name,'goods_price'=>$goods->goods_price,'goods_id'=>$goods->goods_id,'num'=>$v->num,'goods_pic'=>$goods->goods_pic,'info_id'=>$v->id]; 
             // $tot+=$v->num*$goods->goods_price;
         }
-        // dd($in);
-        return view('Home.comment.comment',['info'=>$info,'in'=>$in,'data'=>$data]);
+        $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
+        return view('Home.comment.comment',['info'=>$info,'in'=>$in,'data'=>$data,'i'=>$i]);
     }
 
     /**
