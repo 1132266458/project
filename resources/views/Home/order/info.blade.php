@@ -74,12 +74,21 @@
     <div class="member-center clearfix">
         <div class="member-left fl">
             <div class="member-apart clearfix">
-                <div class="fl"><a href="#"><img src="/theme/img/bg/mem.png"></a></div>
+                <div class="fl"><a href="#">
+                  @if(count($i))
+                  <img src='{{$i->userinfo_pic==null?"/theme/img/bg/mem.png":"/$i->userinfo_pic"}}'>
+                  @else
+                  <img src="/theme/img/bg/mem.png">
+                  @endif
+                </a></div>
                 <div class="fl">
-                    <p>用户名：</p>
-                    <p><a href="#">亚里士多德</a></p>
-                    <p>搜悦号：</p>
-                    <p>389323080</p>
+                  <p>用户名：</p>
+                  @if(count($i))
+                      <p><a href="#">{{$i->userinfo_pname}}</a></p>
+                  @else
+                      <p><a href="#">未知</a></p>
+                  @endif
+                    
                 </div>
             </div>
             <div class="member-lists">
@@ -93,13 +102,13 @@
                 </dl>
                 <dl>
                     <dt>客户服务</dt>
-                    <dd><a href="#">退货申请</a></dd>
-                    <dd><a href="#">退货/退款记录</a></dd>
+                    <dd><a href="/homereturn">退货申请</a></dd>
+                    
                 </dl>
                 <dl>
                     <dt>我的消息</dt>
                     <dd><a href="#">商城快讯</a></dd>
-                    <dd><a href="#">帮助中心</a></dd>
+                    
                 </dl>
             </div>
         </div>

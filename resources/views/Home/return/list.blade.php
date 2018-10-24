@@ -8,34 +8,16 @@
 	<meta name="Description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
 	<meta name="renderer" content="webkit">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="歪秀购物, 购物, 大家电, 手机" name="keywords">
     <meta content="歪秀购物，购物商城。" name="description">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>会员系统我的收藏</title>
+	<title>退后申请</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
 	<link rel="stylesheet" type="text/css" href="/theme/css/member.css">
+    <script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
     <script type="text/javascript" src="/theme/js/jquery.js"></script>
-    <script type="text/javascript">
-         (function(a){
-             a.fn.hoverClass=function(b){
-                 var a=this;
-                 a.each(function(c){
-                     a.eq(c).hover(function(){
-                         $(this).addClass(b)
-                     },function(){
-                         $(this).removeClass(b)
-                     })
-                 });
-                 return a
-             };
-         })(jQuery);
-
-         $(function(){
-             $("#pc-nav").hoverClass("current");
-         });
-     </script>
-
      <script>
          $(function(){
 
@@ -61,12 +43,6 @@
              });
          });
      </script>
-    <style type="text/css">
-        .comcel{
-            float:right;
-        }
-    </style>
-
  </head>
  <body>
 
@@ -76,11 +52,9 @@
         <div class="yNavIndex">
             <ul class="BHeaderl">
                 @if(session()->has('user_name'))
-                  <li><a href="#" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
+                <li><a href="#">{{session('user_name')}}</a></li>
                 @else
-                  <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
-                  <li class="headerul">|</li>
-                  <li><a href="/homereg">免费注册</a> </li>
+                    <li><a href="/homelogin">登录</a> </li>
                 @endif
                 <li class="headerul">|</li>
                 <li><a href="#">订单查询</a> </li>
@@ -122,7 +96,7 @@
 </header>
 <!-- header End -->
 
-<div class="containers"><div class="pc-nav-item"><a href="/">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
+<div class="containers"><div class="pc-nav-item"><a href="/">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">退货申请</a></div></div>
 
 <!-- 商城快讯 begin -->
 <section id="member">
@@ -150,73 +124,129 @@
                 <dl>
                     <dt>我的商城</dt>
                     <dd><a href="/homeorder">我的订单</a></dd>
-                    <dd class="cur"><a href="/homecollection">我的收藏</a></dd>
+                    <dd><a href="/homecollection">我的收藏</a></dd>
                     <dd><a href="/usersafety">账户安全</a></dd>
                     <dd><a href="/homecomment">我的评价</a></dd>
                     <dd><a href="/homeaddress">地址管理</a></dd>
                 </dl>
                 <dl>
                     <dt>客户服务</dt>
-                    <dd><a href="/homereturn">退货申请</a></dd>
+                    <dd class="cur"><a href="javascript:;">退货申请</a></dd>
                     
                 </dl>
                 <dl>
                     <dt>我的消息</dt>
                     <dd><a href="#">商城快讯</a></dd>
-                  
+                   
                 </dl>
             </div>
         </div>
         <div class="member-right fr">
             <div class="member-head">
-                <div class="member-heels fl"><h2>我的收藏</h2></div>
-                <div class="member-backs member-icons fr"><a href="#">搜索</a></div>
-                <div class="member-about fr"><input type="text" placeholder="商品名称/商品编号/订单编号"></div>
+                <div class="member-heels fl"><h2>退货申请</h2></div>
             </div>
-            <div class="member-switch clearfix">
+            <div class="member-whole clearfix">
                 <ul id="H-table" class="H-table">
-                    <li class="cur"><a href="#">我的收藏的商品</a></li>
+                    <li class="cur"><a href="javascript:;">退货申请</a></li>
+                    <li><a href="javascript:;">退货/退款记录</a></li>
                 </ul>
             </div>
             <div class="member-border">
+            
                <div class="member-return H-over">
-                   <div class="member-troll clearfix">
-                       <div class="member-all fl"><b class="on"></b>全选</div>
-                       <div class="member-check clearfix fl"> <a href="#">加入购物车</a> <a href="#" class="member-delete">删除商品</a> </div>
+                   <div class="member-cancel clearfix">
+                       <span class="be1">订单信息</span>
+                       <span class="be2">收货人</span>
+                       <span class="be2">订单金额</span>
+                       <span class="be2">订单时间</span>
+                       <span class="be2">订单状态</span>
+                       <span class="be2">订单操作</span>
                    </div>
-                   <div class="time-border-list pc-search-list member-all1 clearfix">
-                       <ul class="clearfix">
-                       @if(count($data)) 
-                       @foreach($goods as $v)
-                           <li>
-                               <a href="#"> <img src="/{{$v->goods_pic}}" width="220px" height="220px"></a>
-                               <p class="head-name"><a href="#">{{$v->goods_name}}</a> </p>
-                               <p><span class="price">￥{{$v->goods_price}}</span><a href="javascript:;" onclick="comcel(this,{{$v->goods_id}})" class="comcel">取消收藏</a></p>
+                   <div class="member-sheet clearfix">
+                       <ul>
+                        @foreach($data as $v)
+                        <!-- {{var_dump($v)}} -->
+                           <li class="dd{{$v->order_id}}">
+                               <div class="member-minute clearfix">
+                                   <span>{{date('Y-m-d H:m:s',$v->order_addtime)}}</span>
+                                   <span>订单号：<em>{{$v->order_sn}}</em></span>
+                                   <span><a href="#">以纯甲醇旗舰店</a></span>
+                                   <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
+                               </div>
+                               <div class="member-circle clearfix">
+                                   <div class="ci1">
+                                      @foreach($v->dev as $val)
+                                       <div class="ci7 clearfix" >
+                                           <span class="gr1"><a href="/homepage/{{$val['id']}}"><img src="/{{$val['goods_pic']}}" width="60" height="60" title="" about=""></a></span>
+                                           <span class="gr2" style="width:230px">{{$val['goods_name']}}</span>
+                                           <span class="gr3">X{{$val['num']}}</span>
+                                       </div>
+                                      @endforeach
+                                      
+                                   </div>
+                                   <div class="ci2">{{$v->name}}</div>
+                                   <div class="ci3"><b>￥{{$v->order_amount}}</b><p>线上支付</p><p class="iphone">手机订单</p></div>
+                                   <div class="ci4"><p>{{date('Y-m-d',$v->order_addtime)}}</p></div>
+                                   <div class="ci5">
+                                     <div class="statue{{$v->order_id}}"><p>已完成</p></div>
+                                     <p><a href="/homeorder/{{$v->order_id}}">订单详情</a></p>
+                                    </div>
+                                    <div class="ci6"><p><a href="/homereturn/{{$v->order_id}}">申请退货</a> </p></div>
+                                  
+                               </div>
                            </li>
-                        @endforeach
-                        @else
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您还没有收藏商品,快去寻找心仪的商品吧~
-                        @endif
+                          @endforeach
                        </ul>
                    </div>
-               </div>
-               
-                <!-- <div class="clearfix" style="padding:30px 20px;">
-                    <div class="fr pc-search-g pc-search-gs">
-                        <a style="display:none" class="fl " href="#">上一页</a>
-                        <a href="#" class="current">1</a>
-                        <a href="javascript:;">2</a>
-                        <a href="javascript:;">3</a>
-                        <a href="javascript:;">4</a>
-                        <a href="javascript:;">5</a>
-                        <a href="javascript:;">6</a>
-                        <a href="javascript:;">7</a>
-                        <span class="pc-search-di">…</span>
-                        <a href="javascript:;">1088</a>
-                        <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
-                    </div>
-                </div> -->
+                </div>
 
+
+                <div class="member-return H-over" style="display:none">
+                   <div class="member-cancel clearfix">
+                       <span class="be1">订单信息</span>
+                       <span class="be2">收货人</span>
+                       <span class="be2">订单金额</span>
+                       <span class="be2">订单时间</span>
+                       <span class="be2">订单状态</span>
+                       <span class="be2">订单操作</span>
+                   </div>
+                   <div class="member-sheet clearfix">
+                       <ul>
+                        @foreach($re as $vv)
+                         <li>
+                             <div class="member-minute clearfix">
+                                 <span>{{date('Y-m-d H:m:s',$vv->return_addtime)}}</span>
+                                 <span>订单号：<em>{{$vv->dev['order_sn']}}</em></span>
+                                 <span><a href="#">以纯甲醇旗舰店</a></span>
+                                 <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
+                             </div>
+                             <div class="member-circle clearfix">
+                                 <div class="ci1">
+                                     <div class="ci7 clearfix">
+                                         <span class="gr1"><a href="#"><img src="/{{$vv->dev['goods_pic']}}" width="60" height="60" title="" about=""></a></span>
+                                         <span class="gr2"><a href="#">{{$vv->dev['goods_name']}}</a></span>
+                                         <span class="gr3">X{{$vv->dev['num']}}</span>
+                                     </div>
+                                 </div>
+                                 <div class="ci2" >{{$vv->dev['name']}}</div>
+                                 <div class="ci3"><b>￥{{$vv->dev['goods_price']}}</b><p>货到付款</p><p class="iphone">手机订单</p></div>
+                                 <div class="ci4"><p>{{date('Y-m-d',$vv->dev['order_addtime'])}}</p></div>
+                                 <div class="ci5">
+                                 @if($vv->return_state==0)
+                                 <p>已申请退货</p> 
+                                 @elseif($vv->return_state==1)
+                                 <p>已完成</p> 
+                                 @elseif($vv->return_state==2)
+                                 <p>拒绝退货</p>
+                                 @endif
+                                 </div>
+                                 <div class="ci6"><p><a href="javascript:;" onclick="del(this,{{$vv->id}})">取消退货</a> </p></div>
+                             </div>
+                           </li>
+                        @endforeach
+                       </ul>
+                   </div>
+                </div>
             </div>
         </div>
     </div>
@@ -328,32 +358,102 @@
     </div>
 </div>
 <!-- footer End -->
-<script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
-  <script type="text/javascript" src="/shops/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript">
 $.ajaxSetup({
 headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 }
 });
+  // alert($);
+  function del(obj,id){
+    // alert(obj);
+    layer.confirm('是否取消退款吗？',function(index){
+      $.ajax({
+        type: 'DELETE',
+        url: '/homereturn/'+id,
+        dataType: 'json',
+        success: function(data){
+          $(obj).parents("li").remove();
+          layer.msg('已取消!',{icon:1,time:1000});
+        },
+        error:function(data) {
+          layer.msg('取消失败!',{icon: 2,time:1000});
+        },
+      }); 
+    });
+  }
 
-    function comcel(obj,id){
-        layer.confirm('确认要取消收藏吗？',function(index){
-          $.ajax({
-            type: 'DELETE',
-            url: '/homecollection/'+id,
-            dataType: 'json',
-            success: function(data){
-              $(obj).parents("li").remove();
-              layer.msg('已取消收藏!',{icon:1,time:1000});
-            },
-            error:function(data) {
-              layer.msg('取消失败!',{icon: 2,time:1000});
-            },
-          }); 
-        });
-    }
+  function cancel(obj,id){
+    // alert(id);
+    layer.confirm('确认要取消该订单吗？',function(index){
+      $.ajax({
+        type: 'post',
+        url: '/ordercancel/'+id,
+        dataType: 'json',
+        success: function(data){
+          $('.statue'+id).html('<p>交易关闭</p>');
+           $('.getup'+id).html(' ');
+          layer.msg('已取消!',{icon:1,time:1000});
+        },
+        error:function(data) {
+          layer.msg('取消失败!',{icon: 2,time:1000});
+        },
+      }); 
+    });
+  }
+
+  function getup(id){
+    // alert(id);
+    layer.confirm('确认已收到货品吗？',function(index){
+      $.ajax({
+        type: 'post',
+        url: '/ordergetup/'+id,
+        dataType: 'json',
+        success: function(data){
+          $('.statue'+id).html('<p>已收货</p><p><a href="javascript:;">物流跟踪</a></p>');
+          $('.getup'+id).html('<p><a href="">快去评论</a></p>');
+          layer.msg('已收货!',{icon:1,time:1000});
+        },
+        error:function(data) {
+          layer.msg('收货失败!',{icon: 2,time:1000});
+        },
+      }); 
+    });
+  }
+
+  function getu(id){
+    // alert(id);
+    layer.confirm('确认已收到货品吗？',function(index){
+      $.ajax({
+        type: 'post',
+        url: '/ordergetup/'+id,
+        dataType: 'json',
+        success: function(data){
+          layer.msg('已收货!',{icon:1,time:1000});
+          window.location.reload();
+        },
+        error:function(data) {
+          layer.msg('收货失败!',{icon: 2,time:1000});
+        },
+      }); 
+    });
+  }
+
+   function page(page){
+    //触发Ajax请求
+    $.get("/homeorder",{page:page},function(data){
+      //赋值给id值为uid 的div
+      $("#uid").html(data);
+    });
+   }
+
+   function page1(page){
+    //触发Ajax请求
+    $.get("/homeorderone",{page:page},function(data){
+      //赋值给id值为uid 的div
+      $("#uid1").html(data);
+    });
+   }
 </script>
 </body>
 </html>

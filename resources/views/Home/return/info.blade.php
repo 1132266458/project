@@ -1,25 +1,69 @@
 <!doctype html>
 <html>
  <head>
-    <meta charset="UTF-8">
-    <meta name="Generator" content="EditPlus®">
-    <meta name="Author" content="">
-    <meta name="Keywords" content="">
-    <meta name="Description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
-    <meta name="renderer" content="webkit">
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
+	<meta name="renderer" content="webkit">
     <meta content="歪秀购物, 购物, 大家电, 手机" name="keywords">
     <meta content="歪秀购物，购物商城。" name="description">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>会员地址管理</title>
+	<title>会员系统退货申请</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/theme/css/base.css">
-    <link rel="stylesheet" type="text/css" href="/theme/css/base.css">
-    <link rel="stylesheet" type="text/css" href="/theme/css/member.css">
-  
+	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/theme/css/member.css">
   <script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
   <script type="text/javascript" src="/shops/static/h-ui.admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/theme/js/jquery.js"></script>
+    <script type="text/javascript">
+         (function(a){
+             a.fn.hoverClass=function(b){
+                 var a=this;
+                 a.each(function(c){
+                     a.eq(c).hover(function(){
+                         $(this).addClass(b)
+                     },function(){
+                         $(this).removeClass(b)
+                     })
+                 });
+                 return a
+             };
+         })(jQuery);
+
+         $(function(){
+             $("#pc-nav").hoverClass("current");
+         });
+     </script>
+
+     <script>
+         $(function(){
+
+             $("#H-table li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over").hide();
+                         $(".H-over:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+             $("#H-table1 li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over1").hide();
+                         $(".H-over1:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+         });
+     </script>
+
 
  </head>
  <body>
@@ -29,15 +73,15 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-            @if(session()->has('user_name'))
+                @if(session()->has('user_name'))
                 <li><a href="#">{{session('user_name')}}</a></li>
-            @else
-                <li><a href="/homelogin">登录</a> </li>
-            @endif
+                @else
+                    <li><a href="/homelogin">登录</a> </li>
+                @endif
                 <li class="headerul">|</li>
                 <li><a href="#">订单查询</a> </li>
                 <li class="headerul">|</li>
-                <li><a href="/homecollection">我的收藏</a> </li>
+                <li><a href="#">我的收藏</a> </li>
                 <li class="headerul">|</li>
                 <li id="pc-nav" class="menu"><a href="#" class="tit">我的商城</a>
                     <div class="subnav">
@@ -69,12 +113,12 @@
                 <a href="#">服装城</a>
             </div>
         </div>
-        <div class="header-cart fr"><a href="#"><img src="/theme/icon/car.png"></a> <i class="head-amount">0</i></div>
+        <div class="header-cart fr"><a href="#"><img src="/theme/icon/car.png"></a> <i class="head-amount">99</i></div>
     </div>
 </header>
 <!-- header End -->
 
-<div class="containers"><div class="pc-nav-item"><a href="/">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
+<div class="containers"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
 
 <!-- 商城快讯 begin -->
 <section id="member">
@@ -82,34 +126,33 @@
         <div class="member-left fl">
             <div class="member-apart clearfix">
                 <div class="fl"><a href="#">
-                @if(count($info))
-                <img src='{{$info->userinfo_pic==null?"/theme/img/bg/mem.png":"/$info->userinfo_pic"}}'>
-                @else
-                <img src="/theme/img/bg/mem.png">
-                @endif
+                  @if(count($i))
+                  <img src='{{$i->userinfo_pic==null?"/theme/img/bg/mem.png":"/$i->userinfo_pic"}}'>
+                  @else
+                  <img src="/theme/img/bg/mem.png">
+                  @endif
                 </a></div>
                 <div class="fl">
-                    <p>用户名：</p>
-                    @if(count($info))
-                        <p><a href="#">{{$info->userinfo_pname}}</a></p>
-                    @else
-                        <p><a href="#">未知</a></p>
-                    @endif
-                    
+                  <p>用户名：</p>
+                  @if(count($i))
+                      <p><a href="#">{{$i->userinfo_pname}}</a></p>
+                  @else
+                      <p><a href="#">未知</a></p>
+                  @endif
                 </div>
             </div>
             <div class="member-lists">
                 <dl>
                     <dt>我的商城</dt>
-                    <dd><a href="/homeorder">我的订单</a></dd>
-                    <dd><a href="/homecollection">我的收藏</a></dd>
-                    <dd><a href="/usersafety">账户安全</a></dd>
-                    <dd><a href="/homecomment">我的评价</a></dd>
-                    <dd class="cur"><a href="/homeaddress">地址管理</a></dd>
+                    <dd><a href="#">我的订单</a></dd>
+                    <dd><a href="#">我的收藏</a></dd>
+                    <dd><a href="#">账户安全</a></dd>
+                    <dd><a href="#">我的评价</a></dd>
+                    <dd><a href="#">地址管理</a></dd>
                 </dl>
                 <dl>
                     <dt>客户服务</dt>
-                    <dd><a href="/homereturn">退货申请</a></dd>
+                    <dd class="cur"><a href="javascript:;">退货申请</a></dd>
                     
                 </dl>
                 <dl>
@@ -121,76 +164,52 @@
         </div>
         <div class="member-right fr">
             <div class="member-head">
-                <div class="member-heels fl"><h2>地址管理</h2></div>
+                <div class="member-heels fl"><h2>退货申请</h2></div>
+                <div class="member-backs fr"><a href="/homereturn">返回上一页</a></div>
             </div>
             <div class="member-border">
-                <div class="member-newly"><b onclick="add('新增收货地址','/homeaddress/create','700','400')">新增收货地址</b>您已经创建了<i class="reds">{{$num}}</i>个收货地址了，最多可创建<i class="reds">20</i>个</div>
-                <div class="member-sites">
+                <div class="member-newly"><span><b>订单号：</b>{{$data->order_sn}}</span> <span><b>订单状态：</b><i class="reds">已完成</i></span></div>
+                <div class="member-cargo">
+                    <h3>收货人信息：</h3>
+                    <p>{{$address->name}}</p>
+                    <p>{{$address->address_phone}}</p>
+                    <p>{{$address->address_location}} {{$address->address}}</p>
+                </div>
+                <div class="member-cargo">
+                    <h3>商品信息：</h3>
+                    <p>悦商城自营店</p>
+                </div>
+                <div class="member-sheet clearfix">
                     <ul>
-                      @foreach($data as $v)
-                        <li class="clearfix">
-                            <div class="default fl">@if($v->address_statue==1)<a href="javascript:void(0);">默认地址 </a> @endif</div>
-                            
-                            <div class="user-info1 fl clearfix">
-                                <div class="user-info">
-                                    <span class="info1">收货人：</span>
-                                    <span class="info2">{{$v->name}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">所在地区：</span>
-                                    <span class="info2">{{$v->address_location}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">地址：</span>
-                                    <span class="info2">{{$v->address}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">手机：</span>
-                                    <span class="info2">{{$v->address_phone}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">电子邮箱：</span>
-                                    <span class="info2">{{$v->address_email==null?'未知':"$v->address_email"}}</span>
-                                </div>
-                                <div class="user-info">
-                                    <span class="info1">邮政编码：</span>
-                                    <span class="info2">{{$v->address_code==0?'未知':"$v->address_code"}}</span>
-                                </div>
-                            </div>
-
-                            <div class="pc-event">
-                                @if($v->address_statue==0)
-                                <a href="/addressstart/{{$v->address_id}}" class="pc-event-d">设为默认地址</a>
-                                @else
-                                <a href="javascript:void(0);" class="pc-event-d">设为默认地址</a>
-                                @endif
-                                <a href="javascript:void(0);" onclick="edit('收货地址编辑','/homeaddress/{{$v->address_id}}/edit','700','400')" class="haha">编辑 </a>
-                                <a href="javascript:;" onclick="del(this,{{$v->address_id}})">删除</a>
+                        <li>
+                            <div class="member-circle clearfix">
+                            @foreach($in as $v)
+                              <div class="member-apply clearfix">
+                                 <div class="ap1 fl">
+                                     <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="/{{$v['goods_pic']}}"></a></span>
+                                     <span class="gr2"><a href="#">{{$v['goods_name']}}</a></span>
+                                     <span class="gr3">X{{$v['num']}}</span>
+                                 </div>
+                                 <div class="ap2 fl"><a href="#">查看订单</a> </div>
+                                 <div class="ap3 fl"><a href="javascript:;" onclick="reason('申请退货','/hometuihuo/{{$v['id']}}','700','400')">申请退款</a> </div>
+                              </div>
+                            @endforeach
                             </div>
                         </li>
-                      @endforeach
                     </ul>
                 </div>
-                <div class="member-pages clearfix">
-                    <div class="fr pc-search-g">
-                        <a href="#" class="fl pc-search-f">上一页</a>
-                        <a class="current" href="#">1</a>
-                        <a href="javascript:;">2</a>
-                        <a href="javascript:;">3</a>
-                        <a href="javascript:;">4</a>
-                        <a href="javascript:;">5</a>
-                        <a href="javascript:;">6</a>
-                        <a href="javascript:;">7</a>
-                        <span class="pc-search-di">…</span>
-                        <a onClick="SEARCH.page(3, true)" href="javascript:;" class="pc-search-n" title="使用方向键右键也可翻到下一页哦！">下一页</a>
-                    <span class="pc-search-y">
-                        <em>  共20页    到第</em>
-                        <input type="text" placeholder="1" class="pc-search-j">
-                        <em>页</em>
-                        <a class="confirm" href="#">确定</a>
-                    </span>
-
-                    </div>
+                <div class="member-modes clearfix">
+                    <p class="clearfix"><b>支付方式：</b><em>{{$data->order_payment}}</em></p>
+                    <p class="clearfix"><b>发票信息：</b><em>无发票</em></p>
+                </div>
+                <div class="member-modes clearfix">
+                    <p class="clearfix"><b>配送方式：</b><em> 顺丰快递</em></p>
+                </div>
+                <div class="member-modes clearfix">
+                    <p class="clearfix"><b>商品金额：</b><em> ￥{{$data->order_amount}}</em></p>
+                </div>
+                <div class="member-modes clearfix">
+                    <p class="clearfix"><b>订单合计金额：</b><em> {{$data->order_amount}}元</em></p>
                 </div>
             </div>
         </div>
@@ -304,39 +323,10 @@
 </div>
 <!-- footer End -->
 <script type="text/javascript">
-$.ajaxSetup({
-headers: {
-'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  /*申请退货*/
+function reason(title,url,w,h){
+  layer_show(title,url,w,h);
 }
-});
-  function del(obj,id){
-    // alert(obj);
-    layer.confirm('确认要删除吗？',function(index){
-      $.ajax({
-        type: 'DELETE',
-        url: '/homeaddress/'+id,
-        dataType: 'json',
-        success: function(data){
-          $(obj).parents("li").remove();
-          layer.msg('已删除!',{icon:1,time:1000});
-        },
-        error:function(data) {
-          layer.msg('删除失败!',{icon: 2,time:1000});
-        },
-      }); 
-    });
-  }
-
-  function edit(title,url,w,h){
-    layer_show(title,url,w,h);
-  }
-
-  function add(title,url,w,h){
-    // alert(id);
-    layer_show(title,url,w,h);
-
-  }
-
 </script>
 </body>
 </html>

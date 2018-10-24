@@ -111,7 +111,8 @@ class NowpayController extends Controller
             DB::table('order_info')->insert($order_info);
             $list=DB::table('shop_goods')->where('goods_id','=',$_POST['goods_id'])->first();
             $list->sum=$_POST['sum'];
-            return view('Home.orders.nowsuccess',['info'=>$info,'list'=>$list,'address'=>$address]);
+            $sn=DB::table('shop_order')->where('order_id','=',$id)->first();
+            return view('Home.orders.nowsuccess',['info'=>$info,'list'=>$list,'address'=>$address,'sn'=>$sn]);
         }
     }
 

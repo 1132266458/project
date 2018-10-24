@@ -59,8 +59,8 @@
      </div> 
     </div> 
     <div class="header-cart fr">
-     <a href="#"><img src="/theme/icon/car.png" /></a> 
-     <i class="head-amount">99</i>
+     <a href="/car"><img src="/theme/icon/car.png" /></a> 
+     <i class="head-amount">{{session()->has('shop')?count(session('shop')):'0'}}</i>
     </div> 
     <div class="head-mountain"></div> 
    </div> 

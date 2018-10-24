@@ -142,6 +142,14 @@
 			</ul>
 		</dd>
 	</dl>
+	<dl id="menu-tongji">
+			<dt><i class="Hui-iconfont">&#xe60c;</i> 退货管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="/admin/adminreturn" data-title="退货列表" href="javascript:void(0)">退货列表</a></li>
+			</ul>
+		</dd>
+	</dl>
 
 </div>
 </aside>

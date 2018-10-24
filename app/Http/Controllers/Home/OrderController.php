@@ -105,11 +105,11 @@ class OrderController extends Controller
         $address=DB::table('shop_address')->where('address_id','=',$data->address_id)->first();
         $info=DB::table('order_info')->where('order_id','=',$data->order_id)->get();
         $in=[];
-        // $tot="";
+        
         foreach($info as $v){
             $goods=DB::table('shop_goods')->where('goods_id','=',$v->goods_id)->first();
             $in[]=['goods_name'=>$goods->goods_name,'goods_price'=>$goods->goods_price,'goods_id'=>$goods->goods_id,'num'=>$v->num]; 
-            // $tot+=$v->num*$goods->goods_price;
+            
         }
         $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
         return view('Home.order.info',['data'=>$data,'in'=>$in,'address'=>$address,'i'=>$i]);

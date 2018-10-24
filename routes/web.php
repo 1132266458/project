@@ -91,6 +91,12 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::get('/admin/details/{id}','Admin\DetailsController@index');
 	// 商品详情处理添加
 	Route::post('/admin/adddetails','Admin\DetailsController@add');
+	// 退货管理资源控制器
+	Route::resource('/admin/adminreturn','Admin\ReturnController');
+	// 确认退款
+	Route::post('/oktui/{id}','Admin\ReturnController@oktui');
+	// 拒绝退款
+	Route::post('/notui/{id}','Admin\ReturnController@notui');
 });
 
 // 商城首页资源管理器
@@ -197,3 +203,10 @@ Route::post('/doemail','Home\SafetyController@doemail');
 Route::resource('/homecollection','Home\CollectionController');
 // 个人模块资源控制器
 Route::resource('/homeuser','Home\UserController');
+
+// 退货资源控制器
+Route::resource('/homereturn','Home\ReturnController');
+// 加载退货理由模板
+Route::get('/hometuihuo/{id}','Home\ReturnController@tuihuo');
+// 确认退货
+Route::post('/dotui','Home\ReturnController@dotui');

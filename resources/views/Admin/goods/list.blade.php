@@ -72,7 +72,6 @@
 			    @else
 			     <td class="td-status"><span class="label label-defaunt radius">未发布</span></td>
 			    @endif
-					
 					<td class="td-manage">
 					@if($v->goods_status==0)
 					<a style="text-decoration:none" onClick="picture_stop(this,{{$v->goods_id}})" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> 
@@ -101,7 +100,6 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/shops/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
-<script type="text/javascript" src="/shops/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="/shops/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
 $.ajaxSetup({
