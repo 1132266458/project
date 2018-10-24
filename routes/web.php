@@ -165,7 +165,7 @@ Route::post('/doaddre','Home\OrdersController@doaddre');
 // 商品总价
 Route::get('/sum','Home\OrdersController@sum');
 //支付宝接口调用 
-Route::get("/pays","Home\PayController@pays"); 
+Route::get("/pays/{id}","Home\PayController@pays"); 
 // 通知给客户端的界面
 Route::get("/returnurl","Home\PayController@returnurl");
 

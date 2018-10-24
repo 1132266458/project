@@ -212,7 +212,7 @@
     
     //电子邮箱
     function checkEmail(id, infoId) {
-        var reg = "/^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/";
+        var reg = /^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/;
         var txtEmail = document.getElementById(id).value;
         if(!reg.test(txtEmail)) {
             setInfo(infoId, '请输入正确邮箱地址');
@@ -276,6 +276,7 @@
             }
         })
     })
+  
     function checkCode(id, infoId){
     // 校验码检测
     $("input[name='code']").blur(function(){
