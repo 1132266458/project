@@ -14,13 +14,20 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {   
-         
-        $data = session('shop');
-        $user_id = session('user_id');
-        // 根据session 的用户id 查找用户 地址数据
-        $info = DB::table('shop_address')->where('user_id','=',$user_id)->get();
-        // var_dump($info);    
-        return view('Home.orders.order',['info'=>$info,'data'=>$data]);
+        // $data = $request->session()->all();
+        // var_dump($data);exit;
+        // 判断是否登录,登录后跳转到订单界面
+        if($request->session()->has('user_name')){
+            $data = session('shop');
+            $user_id = session('user_id');
+            // 根据session 的用户id 查找用户 地址数据
+            $info = DB::table('shop_address')->where('user_id','=',$user_id)->get();
+            // var_dump($info);    
+            return view('Home.orders.order',['info'=>$info,'data'=>$data]);
+        }else{
+            echo "<script>alert('请登录后支付!');location='/homelogin';</script>";
+        }
+       
     }
  
     // 添加地址
@@ -113,7 +120,10 @@ class OrdersController extends Controller
                 // var_dump($order_info);
                 // 插入数据到order_info表
                 DB::table('order_info')->insert($order_info);
+                session()->pull('shop');
+                // var_dump(session()->all());
             }
+
             return view('Home.orders.success',['info'=>$info,'list'=>$list,'address'=>$address]);
         }
     }

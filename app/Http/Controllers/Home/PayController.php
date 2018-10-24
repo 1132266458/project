@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use DB;
 class PayController extends Controller
 {
     /**
@@ -83,18 +83,28 @@ class PayController extends Controller
         //
     }
     //支付宝 接口调用
-    public function pays(){
-        $out_trade_no = rand(1,10000); 
+    public function pays($id){
+        //商户订单号，商户网站订单系统中唯一订单号，必填
+        $out_trade_no = $id;
         //订单名称，必填
-        $subject = '测试'; 
-        //付款金额，必填
+        $subject = '演示'; 
+        // //付款金额，必填
         $total_fee = 0.01;
-         //商品描述，可空
+        //  //商品描述，可空
         $body = '';
-        pay($out_trade_no,$subject,$total_fee,$body); 
+        // 根据订单查询支付状态
+        session(['order_id'=>$out_trade_no]);
+        pay($out_trade_no,$subject,$total_fee,$body);
+
     }
     //通知界面
-    public function returnurl(){
-        echo '支付成功';
+    public function returnurl(Request $request){
+        // $data = $request->session()->all();
+        // var_dump($data);
+        $id = session('order_id');
+        if(DB::table('shop_order')->where('order_sn','=',$id)->update(['order_state'=>2])){
+            session()->pull('order_id');
+            return view('Home.pay.pay');
+        }
     }
 }

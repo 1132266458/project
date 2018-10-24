@@ -146,7 +146,7 @@
             <div style="display:none;" class="time-border-list  pc-shop-clear pc-order-clear H-over clearfix">
                 
             </div>
-            <div class="pc-order-go"><a href="/pays">去支付</a></div>
+            <div class="pc-order-go"><a href="/pays/{{$info['order_sn']}}">去支付</a></div>
         </div>
     </div>
 </div>
