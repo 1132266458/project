@@ -1,5 +1,4 @@
-@extends("Home.public")
-@section('main')
+<?php $__env->startSection('main'); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head> 
@@ -14,7 +13,7 @@
   <script src="/theme/js/common_js.js" type="text/javascript"></script> 
   <script src="/theme/js/footer.js" type="text/javascript"></script> 
   <script src="/theme/js/jquery.jumpto.js" type="text/javascript"></script> 
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   <title>购物车</title> 
  </head> 
  <body> 
@@ -39,7 +38,7 @@
   </div> 
   <!--购物车样式图层--> 
   <div class="Inside_pages">
-  @if($shop) 
+  <?php if($shop): ?> 
    <div class="shop_carts"> 
     <div class="Process"></div> 
     <div class="Shopping_list"> 
@@ -58,31 +57,31 @@
        <table class="table_list"> 
         <tbody>
         <?php $tot=0; ?> 
-        @foreach($shop as $car)
+        <?php $__currentLoopData = $shop; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
          <tr class="tr"> 
-          <td class="checkbox"><input name="checkitems" type="checkbox" value="{{$car['id']}}" id="check{{$car['id']}}"/></td> 
+          <td class="checkbox"><input name="checkitems" type="checkbox" value="<?php echo e($car['id']); ?>" id="check<?php echo e($car['id']); ?>"/></td> 
           <td class="name"> 
            <div class="img"> 
-            <a href="/homepage/{{$car['goodsinfo']->goods_id}}"><img src="/{{$car['goodsinfo']->goods_pic}}" /></a> 
+            <a href="/homepage/<?php echo e($car['goodsinfo']->goods_id); ?>"><img src="/<?php echo e($car['goodsinfo']->goods_pic); ?>" /></a> 
            </div> 
            <div class="p_name"> 
-            <a href="#">{{$car['goodsinfo']->goods_name}}</a> 
+            <a href="#"><?php echo e($car['goodsinfo']->goods_name); ?></a> 
            </div> </td> 
-          <td class="scj sp" style="padding-left:60px;"><span id="Original_Price_1">￥{{$car['goodsinfo']->goods_price}}</span></td>
+          <td class="scj sp" style="padding-left:60px;"><span id="Original_Price_1">￥<?php echo e($car['goodsinfo']->goods_price); ?></span></td>
           <td class="sl" style="padding-left:60px;"> 
            <div class="Numbers"> 
-            <a  href="javascript:void(0)" class="jian" ids="{{$car['goodsinfo']->goods_id}}" money="{{$car['goodsinfo']->goods_price}}">-</a> 
-            <input type="text" name="qty_item_" value="{{$car['num']}}" id="qty_item_1" onkeyup="setAmount.modify('#qty_item_1')" class="number_text" /> 
-            <a  href="javascript:void(0)" class="jia" ids="{{$car['goodsinfo']->goods_id}}" amount="{{$car['goodsinfo']->goods_num}}" money="{{$car['goodsinfo']->goods_price}}">+</a> 
+            <a  href="javascript:void(0)" class="jian" ids="<?php echo e($car['goodsinfo']->goods_id); ?>" money="<?php echo e($car['goodsinfo']->goods_price); ?>">-</a> 
+            <input type="text" name="qty_item_" value="<?php echo e($car['num']); ?>" id="qty_item_1" onkeyup="setAmount.modify('#qty_item_1')" class="number_text" /> 
+            <a  href="javascript:void(0)" class="jia" ids="<?php echo e($car['goodsinfo']->goods_id); ?>" amount="<?php echo e($car['goodsinfo']->goods_num); ?>" money="<?php echo e($car['goodsinfo']->goods_price); ?>">+</a> 
            </div> </td> 
            <?php
             $money=$car['goodsinfo']->goods_price*$car['num'];
             // $tot+= $money;
            ?>
-          <td class="xj" style="padding-right:180px;">￥<span id="money{{$car['goodsinfo']->goods_id}}">{{$money}}</span></td> 
-          <td class="cz"> <p><a href="javascript:;" onclick="deleline(this,{{$car['goodsinfo']->goods_id}})">删除</a></p><p> </p><p><a href="#">收藏该商品</a></p> </td> 
+          <td class="xj" style="padding-right:180px;">￥<span id="money<?php echo e($car['goodsinfo']->goods_id); ?>"><?php echo e($money); ?></span></td> 
+          <td class="cz"> <p><a href="javascript:;" onclick="deleline(this,<?php echo e($car['goodsinfo']->goods_id); ?>)">删除</a></p><p> </p><p><a href="#">收藏该商品</a></p> </td> 
          </tr> 
-         @endforeach
+         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody> 
        </table> 
        <div class="sp_Operation clearfix"> 
@@ -113,14 +112,14 @@
      </div> 
     </div> 
    </div>
-    @else
+    <?php else: ?>
     <div class="empty" id="empty" style="">
         <p>您的购物车还是空的，您可以：</p>
-        @if(session()->has('user_name'))
+        <?php if(session()->has('user_name')): ?>
         <a href="/" class="btn">去逛逛</a>
-        @else
+        <?php else: ?>
         <a href="/homelogin" class="btn">立即登录</a><a href="/" class="btn">去逛逛</a>
-        @endif
+        <?php endif; ?>
     </div>
     <style>
       .empty {
@@ -145,14 +144,14 @@
         color: #8a8888;
       }
     </style>
-    @endif
+    <?php endif; ?>
 
 <script type="text/javascript">
   
   //单次删除
   function deleline(obj,id){
 
-      $.post("/CarDel",{id:id,"_token":"{{csrf_token()}}"},function(data){
+      $.post("/CarDel",{id:id,"_token":"<?php echo e(csrf_token()); ?>"},function(data){
           // 判断是否成功
 
           if (data) {
@@ -176,7 +175,7 @@
     amount=Number(amount);
     obj=$(this);    
         // 发送ajax请求
-        $.post("/CarAdd",{id:id,"_token":"{{csrf_token()}}"},function(data){
+        $.post("/CarAdd",{id:id,"_token":"<?php echo e(csrf_token()); ?>"},function(data){
 
             if (data) {
                 // js修改输入框的数量
@@ -225,7 +224,7 @@
   };
   num=Number(num);
   // 发送ajax请求
-        $.post("/CarJian",{id:id,"_token":"{{csrf_token()}}"},function(data){
+        $.post("/CarJian",{id:id,"_token":"<?php echo e(csrf_token()); ?>"},function(data){
 
           if (data) {
               // js修改输入框的数量
@@ -359,5 +358,7 @@ $(document).ready(function(){
   </div>    
  </body>
 </html>
-@endsection
-@section("title",'购物车')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("title",'购物车'); ?>
+
+<?php echo $__env->make("Home.public", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -26,13 +26,14 @@
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
-@if(session('error'))
+<?php if(session('error')): ?>
     <div class="row cl">
       <label class="form-label col-xs-3" style="color:red">
-    {{session('error')}}
+    <?php echo e(session('error')); ?>
+
     </label>
     </div>
-    @endif
+    <?php endif; ?>
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> 
@@ -55,7 +56,7 @@
 				<li class="dropDown dropDown_hover" style=" cursor:pointer;" onclick="huancun()">清除缓存&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				<li>超级管理员</li>
 				<li class="dropDown dropDown_hover">
-					<a href="#" class="dropDown_A">{{session('name')}}<i class="Hui-iconfont">&#xe6d5;</i></a>
+					<a href="#" class="dropDown_A"><?php echo e(session('name')); ?><i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
 						<li><a href="#">切换账户</a></li>
@@ -264,7 +265,7 @@ var _hmt = _hmt || [];
 
 //处理缓存
 function huancun(){
-	$.get("/admin/flush",{'_token':'{{csrf_token()}}'},function(data){
+	$.get("/admin/flush",{'_token':'<?php echo e(csrf_token()); ?>'},function(data){
 	if(data==1){
 		alert("缓存清除成功");
 	}

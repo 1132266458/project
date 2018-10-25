@@ -42,13 +42,13 @@
 						<span class="select-box">
 						<select class="select" id="sel_Sub" name="pid" onchange="SetSubID(this);">
 							<option value="0">--请选择--</option>
-						@foreach($data as $k=>$v)
-							@if($v->level==3)
-							<option value="{{$v->id}}" disabled>{{$v->name}}</option>
-							@else
-							<option value="{{$v->id}}">{{$v->name}}</option>
-							@endif
-						@endforeach
+						<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<?php if($v->level==3): ?>
+							<option value="<?php echo e($v->id); ?>" disabled><?php echo e($v->name); ?></option>
+							<?php else: ?>
+							<option value="<?php echo e($v->id); ?>"><?php echo e($v->name); ?></option>
+							<?php endif; ?>
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						</select>
 						</span>
 					</div>
@@ -62,11 +62,11 @@
 					<div class="formControls col-xs-8 col-sm-9">
 						<input type="text" class="input-text" value="" placeholder="" id="cate" name="name">
 					</div>
-					 @if(session('error'))
+					 <?php if(session('error')): ?>
 				    <div class="row cl">
-				      <label class="form-label col-xs-3" style="color:red;">&nbsp;{{session('error')}}</label>
+				      <label class="form-label col-xs-3" style="color:red;">&nbsp;<?php echo e(session('error')); ?></label>
 				    </div>
-				    @endif
+				    <?php endif; ?>
 					<div class="col-3">
 					</div>
 				</div>
@@ -74,7 +74,8 @@
 			
 		
 		</div>
-		{{csrf_field()}}
+		<?php echo e(csrf_field()); ?>
+
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
 				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">

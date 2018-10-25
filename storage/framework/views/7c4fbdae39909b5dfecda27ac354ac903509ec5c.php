@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!-- post方式提交需要csrf保护 -->
-<meta name="csrf-token" content="{{csrf_token()}}">
+<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 <!--[if lt IE 9]>
 <script type="text/javascript" src="lib/html5shiv.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
@@ -28,7 +28,8 @@
 <body>
 <article class="page-container">
 	<form action="/admin/adminslider" method="post" class="form form-horizontal" id="form-admin-add" enctype="multipart/form-data">
-	{{csrf_field()}}
+	<?php echo e(csrf_field()); ?>
+
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
 		<div class="formControls col-xs-8 col-sm-9">
@@ -47,11 +48,11 @@
 			<input type="file" class="input-text" value="" placeholder="" id="phone" name="slider_img">
 		</div>
 	</div>
-	@if(session('error'))
+	<?php if(session('error')): ?>
 	<div class="row cl">
-	  <label class="form-label col-xs-3" style="color:red;">&nbsp;{{session('error')}}</label>
+	  <label class="form-label col-xs-3" style="color:red;">&nbsp;<?php echo e(session('error')); ?></label>
 	</div>
-	@endif
+	<?php endif; ?>
 	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">

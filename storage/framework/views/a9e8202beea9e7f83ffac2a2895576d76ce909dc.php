@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="/shops/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="/shops/static/h-ui.admin/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/shops/css/my.css" />
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 <!--[if IE 6]>
 <script type="text/javascript" src="/shops/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -35,7 +35,7 @@
 <div class="page-container">
 	<div class="text-c">
 		<form action="/admin/admincates" method="get">
-			<input type="text" name="keywords" id="" placeholder="分类名称" style="width:250px" class="input-text" value="{{$request['keywords'] or ''}}">
+			<input type="text" name="keywords" id="" placeholder="分类名称" style="width:250px" class="input-text" value="<?php echo e(isset($request['keywords']) ? $request['keywords'] : ''); ?>">
 			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 		</form>
 		
@@ -45,7 +45,7 @@
 		<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 		<a class="btn btn-primary radius" onclick="system_category_add('添加资讯','/admin/admincates/create',700,500)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加分类</a>
 		</span>
-		<span class="r">共有数据：<strong id="tot">{{$tot}}</strong> 条</span>
+		<span class="r">共有数据：<strong id="tot"><?php echo e($tot); ?></strong> 条</span>
 	</div>
 	<div class="mt-20">
 		<div id="uid">
@@ -62,27 +62,27 @@
 				</tr>
 			</thead>
 			<tbody>
-			@foreach($data as $v)
+			<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<tr class="text-c">
 					<td><input type="checkbox" name="" value=""></td>
-					<td>{{$v->id}}</td>
-					<td class="text-l">{{$v->name}}</td>
-					<td>{{$v->pid}}</td>
-					<td>{{$v->path}}</td>
-					<td>{{$v->level}}</td>
+					<td><?php echo e($v->id); ?></td>
+					<td class="text-l"><?php echo e($v->name); ?></td>
+					<td><?php echo e($v->pid); ?></td>
+					<td><?php echo e($v->path); ?></td>
+					<td><?php echo e($v->level); ?></td>
 
 					
-					<td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('分类编辑','/admin/admincates/{{$v->id}}/edit','1','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-						<a title="删除" href="javascript:;" onclick="system_category_del(this,'{{$v->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					<td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('分类编辑','/admin/admincates/<?php echo e($v->id); ?>/edit','1','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+						<a title="删除" href="javascript:;" onclick="system_category_del(this,'<?php echo e($v->id); ?>')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
-			@endforeach
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</tbody>
 		</table>
 		</div>
 		<div class="dataTables_paginate paging_full_numbers" id="pages">
-		@foreach($pp as $v) 
-		<a href="javascript:void(0)" onclick="page({{$v}})"  id="page{{$v}}">&nbsp;&nbsp;&nbsp;{{$v}}</a>
-		@endforeach
+		<?php $__currentLoopData = $pp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+		<a href="javascript:void(0)" onclick="page(<?php echo e($v); ?>)"  id="page<?php echo e($v); ?>">&nbsp;&nbsp;&nbsp;<?php echo e($v); ?></a>
+		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		</div>
 	</div>
 </div>

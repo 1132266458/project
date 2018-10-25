@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 <!--[if lt IE 9]>
 <script type="text/javascript" src="lib/html5shiv.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
@@ -44,7 +44,7 @@
 		<input type="text" name="" id="" placeholder=" 资讯名称" style="width:250px" class="input-text">
 		<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜资讯</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="r">共有数据：<strong id="tot">{{$tot}}</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="r">共有数据：<strong id="tot"><?php echo e($tot); ?></strong> 条</span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 			<thead>
@@ -58,19 +58,19 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($data as $row)
+				<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<tr class="text-c">
 					<td><input type="checkbox" value="" name=""></td>
-					<td>{{$row->id}}</td>
+					<td><?php echo e($row->id); ?></td>
 					
-					<td>{{$row->title}}</td>
-					<td>{!!$row->descr!!}</td>
+					<td><?php echo e($row->title); ?></td>
+					<td><?php echo $row->descr; ?></td>
 					
 					
 					<td class="td-status"><span class="label label-success radius">已发布</span></td>
-					<td class="f-14 td-manage"><a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onclick="articles_del(this,{{$row->id}})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					<td class="f-14 td-manage"><a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onclick="articles_del(this,<?php echo e($row->id); ?>)" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
-				@endforeach
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</tbody>
 		</table>
 	</div>

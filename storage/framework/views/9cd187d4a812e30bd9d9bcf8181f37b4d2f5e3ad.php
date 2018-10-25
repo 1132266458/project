@@ -8,7 +8,7 @@
 	<meta name="Description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta name="renderer" content="webkit">
-	<title>立即登录</title>
+	<title>找回密码</title>
     <link rel="stylesheet" href="theme/css/base.css">
     <link rel="stylesheet" type="text/css" href="theme/css/login.css">
     <script src="theme/js/jquery-3.1.1.min.js"></script>
@@ -22,42 +22,35 @@
 		</a>
 		<b></b>
 	</div>
-
-	<a href="#" class="q_link fr">
-		<b class="fl"></b>
-		登录页面，改进意见
-	</a>
 </div>
 <div id="content">
   <div class="login-wrap">
   	<div class="w">
   		<div class="login-form">
-  			
+  			<!-- <div class="login-tab login-tab-l">
+  				<a href="javascript:;">扫码登录</a>
+  			</div> -->
   			<div class="login-tab login-tab-r">
-  				<a href="javascript:;">账号登录</a>
+  				<a href="javascript:;">找回密码</a>
   			</div>
   			<div class="login-box" style="visibility: visible; display:block">
   			  <div class="mt tab-h"></div>
   			  <div class="msg-wrap"></div>
   			  <div class="mc">
   			  	<div class="form">
-  			  		<form action="/homedologin" id="formlogin" method="post" >
-                {{csrf_field()}}
+  			  		<form action="/doforget" id="formlogin" method="post" >
+                <?php echo e(csrf_field()); ?>
+
   			  			<div class="item item-fore1 item-error">
   			  				<label for="loginname" class="login-label name-label"></label>
-  			  				<input type="text" name="user_name" id="loginname" class="itxt" tabindex="1" autocomplete="off" placeholder="邮箱/用户名/已验证手机">
+  			  				<input type="text" name="user_email" id="loginname" class="itxt" tabindex="1" autocomplete="off" placeholder="请输入邮箱">
   			  				<span class="clear-btn" style="display:inline;"></span>
   			  			</div>
   			  			<!-- 密码输入框fore2 -->
-  			  			<div id="entry" class="item item-fore2" style="visibility: visible">
+  			  			<!-- <div id="entry" class="item item-fore2" style="visibility: visible">
   			  				<label class="login-label pwd-label" for="nloginpwd"></label>
-  			  				<input type="password" name="user_pwd" id="nloginpwd" name="nloginpwd" class="itxt itxt-error" tabindex="2" autocomplete="off" placeholder="密码">
-  			  				<span class="clear-btn" style="display: inline;"></span>
-  			  				<span class="capslock" style="display: none;">
-  			  					<b></b>
-  			  					大小写锁定已打开
-  			  				</span>
-  			  			</div>
+  			  				<input type="password" class="itxt itxt-error" placeholder="请输入验证码" style="width:150px;">
+  			  			</div> -->
   			  			<!-- 图片验证码开始 fore3-->
                         <!-- <div id="o-authcode" class="item item-vcode item-fore3 hide ">
                         	<input type="text" name="" id="authcode" class="itxt itxt02" name="authcode" tabindex="3">
@@ -65,20 +58,10 @@
                         	<a href="javascript:;" onclick='createCode();'>看不清换一张</a>
                         </div> -->
                         <!-- 自动登录开始fore4 -->
-                        <div class="item item-fore4">
-                        	<div class="safe">
-                        		<span>
-                        		
-                        		</span>
-                        		<span class="forget-pw-safe">
-                        			<a href="/forget">忘记密码</a>
-                        		</span>
-                        	</div>
-                        </div>
                         <!-- 登录按钮开始 -->
                         <div class="item item-fore5">
                         	<div class="login-btn">
-                            <input type="submit" class="btn-img btn-entry" value="登&nbsp;&nbsp;&nbsp;&nbsp;录">
+                            <input type="submit" class="btn-img btn-entry" value="提&nbsp;&nbsp;&nbsp;&nbsp;交">
                         	</div>
                         </div>
   			  		</form>
@@ -92,48 +75,7 @@
   						<p class="err-cont">服务器出错</p>
   						<a href="javascript:void(0)" class="refresh-btn">刷新</a>
   					</div>
-  					<div class="qrcode-main">
-
-  						<div class="qrcode-img" style="">
-  							<img src="theme/login/code.png" alt="">
-  							<div class="qrcode-error-02 hide" id="J-qrcodeerror" style="display: none;">
-  								<a href="#none">
-  									<span class="error-icon"></span>
-  									<div class="txt">
-  									   网络开小差咯
-  									   <span class="ml10">刷新二维码</span>
-  									 </div>
-  								</a>
-  							</div>
-  						</div>
-
-  						<div class="qrcode-help" style="display: none;"></div>
-  					</div>
-
-  					<div class="qrcode-panel">
-  						<ul>
-  							<li class="fore1">
-  								<span>打开</span>
-  								<a href="">
-  									<span class="red">手机歪秀购物 </span>
-  								</a>
-  							</li>
-  							<li>扫一扫登录</li>
-  						</ul>
-  					</div>
   				</div>
-  			</div>
-
-  			<div class="coagent" id="kbCoagent">
-  				<ul>
-  					<li class="extra-r">
-  					   <div class="regist-link">
-  						<a href="/homereg" class="">
-  							<b></b>立即注册
-  						</a>
-  					   </div>
-  					</li>
-  				</ul>
   			</div>
   		</div>
   	</div>

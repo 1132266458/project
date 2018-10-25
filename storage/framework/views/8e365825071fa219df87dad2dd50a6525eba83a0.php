@@ -8,7 +8,7 @@
   <meta name="Description" content="">
   <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
   <meta name="renderer" content="webkit">
-  <title>@yield('title')</title>
+  <title><?php echo $__env->yieldContent('title'); ?></title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
   <link rel="stylesheet" type="text/css" href="/theme/css/base.css">
   <link rel="stylesheet" type="text/css" href="/theme/css/home.css">
@@ -63,13 +63,13 @@
         <div class="yNavIndex">
             <ul class="BHeaderl">
                 <li style="display:none;"><a href="javascript:void(0)" style="float:left;">嘻哈杂货铺</a> <a href="javascript:void(0)" style="float:left;">退出</a> </li>
-                @if(session()->has('user_name'))
-                <li><a href="javascript:void(0)" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
-                @else
+                <?php if(session()->has('user_name')): ?>
+                <li><a href="javascript:void(0)" style="float:left;"><?php echo e(session('user_name')); ?></a> <a href="/homeout" style="float:left;">退出</a> </li>
+                <?php else: ?>
                 <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
                 <li class="headerul">|</li>
                 <li><a href="/homereg">免费注册</a> </li>
-                @endif
+                <?php endif; ?>
                 <li class="headerul">|</li>
                 <li><a href="/homeorder">订单查询</a> </li>
                 <li class="headerul">|</li>
@@ -92,8 +92,8 @@
             </ul>
         </div>
     </div>
-    @section('main')
-    @show
+    <?php $__env->startSection('main'); ?>
+    <?php echo $__env->yieldSection(); ?>
 </header>
 <div class="aui-footer-bot">
     <div class="time-lists aui-footer-pd clearfix">

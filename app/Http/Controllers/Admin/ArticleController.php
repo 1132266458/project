@@ -17,7 +17,8 @@ class ArticleController extends Controller
     {
         //
         $data=DB::table("shop_articles")->paginate(13);
-        return view("Admin.articles.articles-list",['data'=>$data]);
+        $tot=DB::table('shop_articles')->count();
+        return view("Admin.articles.articles-list",['data'=>$data,'tot'=>$tot]);
         //echo "index";
     }
 

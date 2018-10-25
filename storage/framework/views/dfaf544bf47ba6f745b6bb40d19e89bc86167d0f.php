@@ -42,7 +42,8 @@
   			  <div class="mc">
   			  	<div class="form">
   			  		<form action="/homedologin" id="formlogin" method="post" >
-                {{csrf_field()}}
+                <?php echo e(csrf_field()); ?>
+
   			  			<div class="item item-fore1 item-error">
   			  				<label for="loginname" class="login-label name-label"></label>
   			  				<input type="text" name="user_name" id="loginname" class="itxt" tabindex="1" autocomplete="off" placeholder="邮箱/用户名/已验证手机">

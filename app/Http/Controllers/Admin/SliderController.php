@@ -37,7 +37,14 @@ class SliderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   //dd($request->all());
+        if($request->input('slider_title')==null || $request->input('slider_href')==null){
+            return back()->with('error','请认真填写资料');
+        };
+
+        if(!$request->hasFile('slider_img')){
+            return back()->with('error','请认真填写资料');
+        }
         //判断是否具有文件上传
         if($request->hasFile('slider_img')){
         //初始化名字

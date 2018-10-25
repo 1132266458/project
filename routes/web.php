@@ -21,6 +21,8 @@ Route::resource('/admin/adminlogin','Admin\AdminLoginController');
 Route::group(['middleware'=>'adminlogin'],function(){
 	// 首页
 	Route::get('/admin','Admin\IndexController@index');
+	//清除缓存
+	Route::get("/admin/flush","Admin\IndexController@flush");
 	// 管理员资源控制器
 	Route::resource('/admin/adminlist','Admin\AdminController');
 	// 管理员修改

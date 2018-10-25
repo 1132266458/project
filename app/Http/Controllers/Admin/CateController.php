@@ -79,7 +79,11 @@ class CateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        if($request->input('name')==null){
+        return back()->with('error','分类名称不能为空');
+        };
+        
         $data=$request->except(['_token']);
         $pid=$request->input('pid');
         if($pid==0){

@@ -66,13 +66,13 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-              @if(session()->has('user_name'))
-                <li><a href="javascript:void(0)" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
-              @else
+              <?php if(session()->has('user_name')): ?>
+                <li><a href="javascript:void(0)" style="float:left;"><?php echo e(session('user_name')); ?></a> <a href="/homeout" style="float:left;">退出</a> </li>
+              <?php else: ?>
                 <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
                 <li class="headerul">|</li>
                 <li><a href="/homereg">免费注册</a> </li>
-              @endif
+              <?php endif; ?>
                 <li class="headerul">|</li>
                 <li><a href="/homeorder">订单查询</a> </li>
                 <li class="headerul">|</li>
@@ -115,7 +115,7 @@
             </div>
         </div>
         <!-- 购物车 -->
-        <div class="header-cart fr"><a href="/car"><img src="/theme/icon/car.png"></a> <i class="head-amount">{{count(session('shop'))}}</i></div>
+        <div class="header-cart fr"><a href="/car"><img src="/theme/icon/car.png"></a> <i class="head-amount"><?php echo e(count(session('shop'))); ?></i></div>
         <div class="head-mountain"></div>
     </div>
     <div class="yHeader">
@@ -125,22 +125,22 @@
                   全部商品分类
               </h2>
               <ul class="pullDownList">
-                @foreach($cate as $k=>$v)
-                  <li  onclick="open1({{$v->id}})">
-                      <i class="listi{{$k+1}}"></i>
-                      <a href="/types/{{$v->id}}" target="_blank">{{$v->name}}</a> 
+                <?php $__currentLoopData = $cate; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <li  onclick="open1(<?php echo e($v->id); ?>)">
+                      <i class="listi<?php echo e($k+1); ?>"></i>
+                      <a href="/types/<?php echo e($v->id); ?>" target="_blank"><?php echo e($v->name); ?></a> 
                   </li>
-                 <ul id="u{{$v->id}}" style="display:none;">
-                 @foreach($v->dev as $vv)
-                  <li onclick="open2({{$vv->id}})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/types/{{$vv->id}}"  target="_blank">{{$vv->name}}</a></li>
-                    <ul id="uu{{$vv->id}}" style="display:none;">
-                     @foreach($vv->dev as $vvv)
-                      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/types/{{$vvv->id}}"  target="_blank">{{$vvv->name}}</a></li>
-                      @endforeach
+                 <ul id="u<?php echo e($v->id); ?>" style="display:none;">
+                 <?php $__currentLoopData = $v->dev; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <li onclick="open2(<?php echo e($vv->id); ?>)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/types/<?php echo e($vv->id); ?>"  target="_blank"><?php echo e($vv->name); ?></a></li>
+                    <ul id="uu<?php echo e($vv->id); ?>" style="display:none;">
+                     <?php $__currentLoopData = $vv->dev; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vvv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/types/<?php echo e($vvv->id); ?>"  target="_blank"><?php echo e($vvv->name); ?></a></li>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                      </ul>
-                  @endforeach
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                  </ul>
-                 @endforeach
+                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </ul>
             </div>
             
@@ -166,9 +166,9 @@
 <section id="pc-banner">
     <div class="yBanner">
         <div class="banner" id="banner" >
-          @foreach($data as $row)
-            <a href="javascript:;" class="d1" style="background:url(/uploads/slider/{{$row->slider_img}}) center no-repeat;background-color: #f01a38; padding-left:180px;"></a>
-          @endforeach
+          <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <a href="javascript:;" class="d1" style="background:url(/uploads/slider/<?php echo e($row->slider_img); ?>) center no-repeat;background-color: #f01a38; padding-left:180px;"></a>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <div class="d2" id="banner_id">
                 <ul>
                     <li></li>
@@ -203,9 +203,9 @@
         <div class="pc-info-mess  clearfix" style="position: relative;">
             <h2 class="fl" style="margin-right:20px;">商城快讯</h2>
             <div id="MarqueeDiv" class="MarqueeDiv">
-              @foreach($news as $row)
-              <a href="new.html">{{$row->title}}</a>
-              @endforeach
+              <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <a href="new.html"><?php echo e($row->title); ?></a>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
             <a href="/morenew" style="position: absolute;right: 15px;top: 0;"> 更多资讯</a>
         </div>
@@ -316,9 +316,9 @@
         <div class="time-title time-clear"><h2>商城快讯</h2><a href="/morenew" class="fr"> 更多资讯</a> </div>
         <div class="time-border" style="border-left:none;">
             <ul class="news">
-                @foreach($new as $row)
-                <li><a href="javascript:void(0)">{{$row->title}}</a> </li>
-                @endforeach
+                <?php $__currentLoopData = $new; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li><a href="javascript:void(0)"><?php echo e($row->title); ?></a> </li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
             <div class="time-poduse"><img src="/theme/img/pd/pj1.png"></div>
         </div>
@@ -330,21 +330,21 @@
     <div class="time-list time-list-w fl">
         <div class="time-title time-clear"><h2>热卖区</h2><div class="pc-font fl"></div><a class="pc-spin fr" href="javascript:;" id="change" onclick="changepage()">换一换</a> </div>
         <input type="hidden" id="pagesx" value="1">
-        <input type="hidden" id="maxpage" value="{{$maxpage}}">
+        <input type="hidden" id="maxpage" value="<?php echo e($maxpage); ?>">
         <div class="time-border">
             <div class="yScrollList">
                 <div class="yScrollListIn">
                     <div style="display:block;" class="yScrollListInList yScrollListInList1">
                         <ul id="uid">
-                            @foreach($goods as $row)
+                            <?php $__currentLoopData = $goods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <li>
-                                <a href="/homepage/{{$row->goods_id}}">
-                                    <img src="/{{$row->goods_pic}}">
-                                    <p class="head-name pc-pa10">{{$row->goods_describe}}</p>
+                                <a href="/homepage/<?php echo e($row->goods_id); ?>">
+                                    <img src="/<?php echo e($row->goods_pic); ?>">
+                                    <p class="head-name pc-pa10"><?php echo e($row->goods_describe); ?></p>
                                    <!--  <p class="label-default">3.45折</p> -->
                                 </a>
                             </li>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
                 </div>
@@ -362,13 +362,13 @@
             <div class="brand-poa fl">
                 <div class="brand-poa H-over1 clearfix">
                     <ul>
-                        @foreach($goodgoods as $row)
+                        <?php $__currentLoopData = $goodgoods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li>
-                            <div class="brand-imgss"><a href="javascript:void(0)"><img src="/{{$row->goods_pic}}" width="150px"></a></div>
-                            <div class="brand-title"><a href="javascript:void(0)">{{$row->goods_describe}}</a> </div>
-                            <div class="brand-price">{{$row->goods_price}}</div>
+                            <div class="brand-imgss"><a href="javascript:void(0)"><img src="/<?php echo e($row->goods_pic); ?>" width="150px"></a></div>
+                            <div class="brand-title"><a href="javascript:void(0)"><?php echo e($row->goods_describe); ?></a> </div>
+                            <div class="brand-price"><?php echo e($row->goods_price); ?></div>
                         </li>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
 

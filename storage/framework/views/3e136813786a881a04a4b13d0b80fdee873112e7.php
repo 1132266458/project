@@ -8,7 +8,7 @@
 	<meta name="Description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"> 
 	<meta name="renderer" content="webkit">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 	<title>商品详情</title>
     <link rel="shortcut icon" type="image/x-icon" href="/theme/icon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="/theme/css/base.css">
@@ -154,13 +154,13 @@
     <div class="BHeader">
         <div class="yNavIndex">
             <ul class="BHeaderl">
-                @if(session()->has('user_name'))
-                    <li><a href="javascript:void(0)" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
-                  @else
+                <?php if(session()->has('user_name')): ?>
+                    <li><a href="javascript:void(0)" style="float:left;"><?php echo e(session('user_name')); ?></a> <a href="/homeout" style="float:left;">退出</a> </li>
+                  <?php else: ?>
                     <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
                     <li class="headerul">|</li>
                     <li><a href="/homereg">免费注册</a> </li>
-                  @endif
+                  <?php endif; ?>
                 <li class="headerul">|</li>
                 <li><a href="/homeorder">订单查询</a> </li>
                 <li class="headerul">|</li>
@@ -218,32 +218,32 @@
 <section>
     <div class="pc-details" >
         <div class="containers">
-            <div class="pc-nav-item"><a class="pc-title" href="/">首页</a> &gt; <a href="/types/{{$catess->id}}">{{$catess->name}}</a> &gt; <a href="/types/{{$cates->id}}">{{$cates->name}}</a>&gt; <a href="/types/{{$cate->id}}">{{$cate->name}}</a>&gt; <a href="javascript:void(0)">{{$data->goods_name}}</a> </div>
+            <div class="pc-nav-item"><a class="pc-title" href="/">首页</a> &gt; <a href="/types/<?php echo e($catess->id); ?>"><?php echo e($catess->name); ?></a> &gt; <a href="/types/<?php echo e($cates->id); ?>"><?php echo e($cates->name); ?></a>&gt; <a href="/types/<?php echo e($cate->id); ?>"><?php echo e($cate->name); ?></a>&gt; <a href="javascript:void(0)"><?php echo e($data->goods_name); ?></a> </div>
             <div class="pc-details-l">
                 <div class="pc-product clearfix">
                     <div class="pc-product-h">
-                        <div class="pc-product-top"><img src="/{{$data->goods_pic}}" id="big_img" width="418" height="418"></div>
+                        <div class="pc-product-top"><img src="/<?php echo e($data->goods_pic); ?>" id="big_img" width="418" height="418"></div>
                         <div class="pc-product-bop clearfix" id="pro_detail">
                             <ul>
-                              @if(count($pic))
-                              @foreach($pic as $row)
-                                <li><a href="javascript:void(0);" simg="/{{$row->goods_pic}}"><img src="/{{$row->goods_pic}}" width="58" height="58"></a> </li>
-                              @endforeach
-                              @else
-                                <li><a href="javascript:void(0);" class="cur" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" simg="/{{$data->goods_pic}}"><img src="/{{$data->goods_pic}}" width="58" height="58"></a> </li>
-                              @endif
+                              <?php if(count($pic)): ?>
+                              <?php $__currentLoopData = $pic; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><a href="javascript:void(0);" simg="/<?php echo e($row->goods_pic); ?>"><img src="/<?php echo e($row->goods_pic); ?>" width="58" height="58"></a> </li>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                              <?php else: ?>
+                                <li><a href="javascript:void(0);" class="cur" simg="/<?php echo e($data->goods_pic); ?>"><img src="/<?php echo e($data->goods_pic); ?>" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/<?php echo e($data->goods_pic); ?>"><img src="/<?php echo e($data->goods_pic); ?>" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/<?php echo e($data->goods_pic); ?>"><img src="/<?php echo e($data->goods_pic); ?>" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/<?php echo e($data->goods_pic); ?>"><img src="/<?php echo e($data->goods_pic); ?>" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="/<?php echo e($data->goods_pic); ?>"><img src="/<?php echo e($data->goods_pic); ?>" width="58" height="58"></a> </li>
+                              <?php endif; ?>
                             </ul>
                         </div>
                     </div>
                     <div class="pc-product-t">
                         <div class="pc-name-info">
-                            <h1>{{$data->goods_name}}</h1>
-                            <h3>{{$data->goods_describe}}</h3>
-                            <p class="clearfix pc-rate"><strong>￥{{$data->goods_price}}</strong> <span><em>限时抢购</em>抢购将于<b class="reds">18</b>小时<b class="reds">57</b>分<b class="reds">34</b>秒后结束</span></p>
+                            <h1><?php echo e($data->goods_name); ?></h1>
+                            <h3><?php echo e($data->goods_describe); ?></h3>
+                            <p class="clearfix pc-rate"><strong>￥<?php echo e($data->goods_price); ?></strong> <span><em>限时抢购</em>抢购将于<b class="reds">18</b>小时<b class="reds">57</b>分<b class="reds">34</b>秒后结束</span></p>
                             <p>由<a href="javascript:void(0)" class="reds">神游官方旗舰店</a> 负责发货，并提供售后服务。</p>
                         </div>
                         <div class="pc-dashed clearfix">
@@ -268,20 +268,21 @@
                                 <div class="pc-version">颜色分类</div>
                                 <div class="pc-adults">
                                     <ul>
-                                         @if(count($pic))
-                                        @foreach($pic as $row)
-                                        <li><a href="javascript:;" class="cur" title="{{$row->goods_color}}"><img src="/{{$row->goods_pic}}" width="52" height="51"></a> </li>
-                                        @endforeach
-                                        @else
-                                        <li><a href="javascript:;" class="cur" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
-                                        <li><a href="javascript:;" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
-                                        <li><a href="javascript:;" title="我是颜色"><img src="/{{$data->goods_pic}}" width="52" height="51"></a> </li>
-                                        @endif
+                                         <?php if(count($pic)): ?>
+                                        <?php $__currentLoopData = $pic; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><a href="javascript:;" class="cur" title="<?php echo e($row->goods_color); ?>"><img src="/<?php echo e($row->goods_pic); ?>" width="52" height="51"></a> </li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php else: ?>
+                                        <li><a href="javascript:;" class="cur" title="我是颜色"><img src="/<?php echo e($data->goods_pic); ?>" width="52" height="51"></a> </li>
+                                        <li><a href="javascript:;" title="我是颜色"><img src="/<?php echo e($data->goods_pic); ?>" width="52" height="51"></a> </li>
+                                        <li><a href="javascript:;" title="我是颜色"><img src="/<?php echo e($data->goods_pic); ?>" width="52" height="51"></a> </li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                             </div>
                         <form action="/nowpay" method="post">
-                        {{csrf_field()}}
+                        <?php echo e(csrf_field()); ?>
+
                             <div class="pc-telling clearfix">
                                 <div class="pc-version">数量</div>
                                 <div class="pc-adults clearfix">
@@ -291,16 +292,16 @@
                                         <a href="javascript:void(0);" class="amount2"><img src="/theme/icon/pro_down.png" alt=""></a>    
                                     </div>
                                     <div class="fl pc-letter ">件</div>
-                                    <div class="fl pc-stock ">库存<em>{{$data->goods_num}}</em>件</div>
+                                    <div class="fl pc-stock ">库存<em><?php echo e($data->goods_num); ?></em>件</div>
                                 </div>
                             </div>
-                            <div class="pc-number clearfix"><span class="fl">商品编号：{{$data->goods_id}}   </span> <span class="fr">分享 <a href="javascript:;" onclick="foverite({{$data->goods_id}})">收藏</a></span></div>
+                            <div class="pc-number clearfix"><span class="fl">商品编号：<?php echo e($data->goods_id); ?>   </span> <span class="fr">分享 <a href="javascript:;" onclick="foverite(<?php echo e($data->goods_id); ?>)">收藏</a></span></div>
                         </div>
                         <div class="pc-emption">
                             <!-- <a href="javascript:void(0)">立即购买</a> -->
                             <input type="submit" class="sub" value="立即购买">
                             <a href="javascript:;" class="join" id="addcar">加入购物车</a>
-                            <input type="hidden" name="id" value="{{$data->goods_id}}">
+                            <input type="hidden" name="id" value="<?php echo e($data->goods_id); ?>">
                         </form>
                         </div>
                     </div>
@@ -363,15 +364,15 @@
                 </ul>
                 <div class="pc-term clearfix">
                    <div class="H-over1 pc-text-word clearfix">
-                    @if($list)
-                    <div>{!!$list->details!!}</div>
-                    @else
+                    <?php if($list): ?>
+                    <div><?php echo $list->details; ?></div>
+                    <?php else: ?>
                     <div></div>
-                    @endif
+                    <?php endif; ?>
                        <div>
-                          @foreach($pic as $r)
-                           <div><img src="/{{$r->goods_pic}}" width="80%"></div>
-                          @endforeach
+                          <?php $__currentLoopData = $pic; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $r): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                           <div><img src="/<?php echo e($r->goods_pic); ?>" width="80%"></div>
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                        </div>
                    </div>
                    <div class="H-over1" style="display:none">
@@ -401,10 +402,10 @@
             </div>
             <div class="pc-overall">
                 <ul class="brand-tab H-table H-table-shop clearfix " id="H-table" style="margin-left:0;">
-                    <li class="cur"><a href="javascript:void(0);">全部评价（{{count($app)}}）</a></li>
-                    <li><a href="javascript:void(0);">好评<em class="reds">（{{$g}}）</em></a></li>
-                    <li><a href="javascript:void(0);">中评<em class="reds">（{{$z}}）</em></a></li>
-                    <li><a href="javascript:void(0);">差评<em class="reds">（{{$c}}）</em></a></li>
+                    <li class="cur"><a href="javascript:void(0);">全部评价（<?php echo e(count($app)); ?>）</a></li>
+                    <li><a href="javascript:void(0);">好评<em class="reds">（<?php echo e($g); ?>）</em></a></li>
+                    <li><a href="javascript:void(0);">中评<em class="reds">（<?php echo e($z); ?>）</em></a></li>
+                    <li><a href="javascript:void(0);">差评<em class="reds">（<?php echo e($c); ?>）</em></a></li>
                 </ul>
                 <div class="pc-term clearfix">
                     <div class="pc-column">
@@ -415,25 +416,25 @@
                     </div>
                     <div class="H-over  pc-comments clearfix">
                         <ul class="clearfix">
-                          @foreach($app as $vv)
+                          <?php $__currentLoopData = $app; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="javascript:void(0)">回复<em>（90）</em></a> <a href="javascript:void(0)">赞<em>（90）</em></a> </p>
-                                    <p>{{$vv->appraise_coment}}</p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
-                                    @if($vv->appraise_reply!=null)
-                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
-                                    @endif
+                                    <p><?php echo e($vv->appraise_coment); ?></p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_time)); ?></p>
+                                    <?php if($vv->appraise_reply!=null): ?>
+                                    <br><p>商家回复:  <?php echo e($vv->appraise_reply); ?>  </p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_replytime)); ?></p>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="column2">
-                                @if($vv->appraise_leval==0)
+                                <?php if($vv->appraise_leval==0): ?>
                                 <img src="/theme/icon/star.png">
-                                @elseif($vv->appraise_leval==1)
+                                <?php elseif($vv->appraise_leval==1): ?>
                                 <img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png">
-                                @elseif($vv->appraise_leval==2)
+                                <?php elseif($vv->appraise_leval==2): ?>
                                 <img src="/theme/icon/member-x1.png">
-                                @endif
+                                <?php endif; ?>
                                
 
                                 </div>
@@ -443,23 +444,23 @@
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
-                          @endforeach
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             
                         </ul>
                     </div>
                     <div style="display:none" class="H-over pc-comments">
                         <ul class="clearfix">
-                            @foreach($app as $vv)
-                            @if($vv->appraise_leval==0)
+                            <?php $__currentLoopData = $app; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($vv->appraise_leval==0): ?>
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="javascript:void(0)">回复<em>（90）</em></a> <a href="javascript:void(0)">赞<em>（90）</em></a> </p>
-                                    <p>{{$vv->appraise_coment}}</p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
-                                    @if($vv->appraise_reply!=null)
-                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
-                                    @endif
+                                    <p><?php echo e($vv->appraise_coment); ?></p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_time)); ?></p>
+                                    <?php if($vv->appraise_reply!=null): ?>
+                                    <br><p>商家回复:  <?php echo e($vv->appraise_reply); ?>  </p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_replytime)); ?></p>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="column2">
                                 <img src="/theme/icon/star.png">
@@ -470,33 +471,33 @@
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
-                          @endif
-                          @endforeach
+                          <?php endif; ?>
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             
                         </ul>
                     </div>
                     <div style="display:none" class="H-over pc-comments">
                         <ul class="clearfix">
-                            @foreach($app as $vv)
-                            @if($vv->appraise_leval==1)
+                            <?php $__currentLoopData = $app; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($vv->appraise_leval==1): ?>
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="javascript:void(0)">回复<em>（90）</em></a> <a href="javascript:void(0)">赞<em>（90）</em></a> </p>
-                                    <p>{{$vv->appraise_coment}}</p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
-                                    @if($vv->appraise_reply!=null)
-                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
-                                    @endif
+                                    <p><?php echo e($vv->appraise_coment); ?></p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_time)); ?></p>
+                                    <?php if($vv->appraise_reply!=null): ?>
+                                    <br><p>商家回复:  <?php echo e($vv->appraise_reply); ?>  </p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_replytime)); ?></p>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="column2">
-                                @if($vv->appraise_leval==0)
+                                <?php if($vv->appraise_leval==0): ?>
                                 <img src="/theme/icon/star.png">
-                                @elseif($vv->appraise_leval==1)
+                                <?php elseif($vv->appraise_leval==1): ?>
                                 <img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png">
-                                @elseif($vv->appraise_leval==2)
+                                <?php elseif($vv->appraise_leval==2): ?>
                                 <img src="/theme/icon/member-x1.png">
-                                @endif
+                                <?php endif; ?>
                                 </div>
                                 <div class="column3">颜色：云石白</div>
                                 <div class="column4">
@@ -504,33 +505,33 @@
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
-                          @endif
-                          @endforeach
+                          <?php endif; ?>
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                           
                         </ul>
                     </div>
                     <div style="display:none" class="H-over pc-comments">
                         <ul class="clearfix">
-                            @foreach($app as $vv)
-                            @if($vv->appraise_leval==2)
+                            <?php $__currentLoopData = $app; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($vv->appraise_leval==2): ?>
                             <li class="clearfix">
                                 <div class="column1">
                                     <p class="clearfix"><a href="javascript:void(0)">回复<em>（90）</em></a> <a href="javascript:void(0)">赞<em>（90）</em></a> </p>
-                                    <p>{{$vv->appraise_coment}}</p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_time)}}</p>
-                                    @if($vv->appraise_reply!=null)
-                                    <br><p>商家回复:  {{$vv->appraise_reply}}  </p>
-                                    <p class="column5">{{date('Y-m-d h:m:s',$vv->appraise_replytime)}}</p>
-                                    @endif
+                                    <p><?php echo e($vv->appraise_coment); ?></p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_time)); ?></p>
+                                    <?php if($vv->appraise_reply!=null): ?>
+                                    <br><p>商家回复:  <?php echo e($vv->appraise_reply); ?>  </p>
+                                    <p class="column5"><?php echo e(date('Y-m-d h:m:s',$vv->appraise_replytime)); ?></p>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="column2">
-                                @if($vv->appraise_leval==0)
+                                <?php if($vv->appraise_leval==0): ?>
                                 <img src="/theme/icon/star.png">
-                                @elseif($vv->appraise_leval==1)
+                                <?php elseif($vv->appraise_leval==1): ?>
                                 <img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png"><img src="/theme/icon/member-x1.png">
-                                @elseif($vv->appraise_leval==2)
+                                <?php elseif($vv->appraise_leval==2): ?>
                                 <img src="/theme/icon/member-x1.png">
-                                @endif
+                                <?php endif; ?>
                                 </div>
                                 <div class="column3">颜色：云石白</div>
                                 <div class="column4">
@@ -538,8 +539,8 @@
                                     <p>2014-11-23 22:37 购买</p>
                                 </div>
                             </li>
-                          @endif
-                          @endforeach
+                          <?php endif; ?>
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
                 </div>

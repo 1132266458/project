@@ -27,12 +27,32 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         $cate=self::getCatesByPid(0);
-        $data=DB::table('shop_slider')->get();
-        // var_dump($cate);
+
+        //先判断缓存有没有数据，有的话直接调用缓存的数据，没有的先查询数据库的数据在存入缓存中。
+        if (cache('slider')) {
+            $data = cache('slider');
+        }else{
+            $data=DB::table('shop_slider')->get();
+
+            cache(['slider' => $data],1); 
+        }
+        //
+        //$data=DB::table('shop_slider')->get();
+        //将购物车中查询的数据通过file的方式存储在缓存中
+        //cache(['slider' => $data],1); 
+         //$data = cache('slider');
+        //  var_dump($data);
         
         //查询公告数据
         $new=DB::table("shop_articles")->paginate(5);
-        $news=DB::table("shop_articles")->get();
+        //$news=DB::table("shop_articles")->get();
+        if (cache('news')) {
+            $news = cache('news');
+        }else{
+            $news=DB::table('shop_articles')->get();
+
+            cache(['news' => $news],1); 
+        }
         $page=$request->input('page');
         //var_dump($page);
         if(empty($page)){

@@ -20,7 +20,7 @@
   <script type="text/javascript" src="/theme/js/jquery.js"></script>
   <script type="text/javascript" src="/shops/lib/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="/shops/lib/layer/2.4/layer.js"></script>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
  </head> 
  <body> 
   <!-- header begin--> 
@@ -28,13 +28,13 @@
    <div class="BHeader"> 
     <div class="yNavIndex"> 
      <ul class="BHeaderl"> 
-      @if(session()->has('user_name'))
-        <li><a href="/homeout" style="float:left;">{{session('user_name')}}</a> <a href="/homeout" style="float:left;">退出</a> </li>
-      @else
+      <?php if(session()->has('user_name')): ?>
+        <li><a href="/homeout" style="float:left;"><?php echo e(session('user_name')); ?></a> <a href="/homeout" style="float:left;">退出</a> </li>
+      <?php else: ?>
         <li><a href="/homelogin" style="color:#ea4949;">请登录</a> </li>
         <li class="headerul">|</li>
         <li><a href="/homereg">免费注册</a> </li>
-      @endif
+      <?php endif; ?>
       <li class="headerul">|</li> 
       <li><a href="/homeorder">订单查询</a> </li> 
       <li class="headerul">|</li> 
@@ -52,7 +52,7 @@
   <div class="containers">
    <div class="pc-nav-item">
     <a href="javascript:void(0)" style="color:black;">全部分类</a> &gt; 
-    <a href="javascript:void(0)" style="color:black;">{{$name}}</a>
+    <a href="javascript:void(0)" style="color:black;"><?php echo e($name); ?></a>
    </div>
   </div> 
   <div class="containers clearfix"> 
@@ -60,21 +60,21 @@
 
   <div class="list">
     <ul class="yiji">
-    @foreach($type as $one)
-      <li><a href="javascript:void(0)" class="inactive">{{$one->name}}</a>
+    <?php $__currentLoopData = $type; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $one): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <li><a href="javascript:void(0)" class="inactive"><?php echo e($one->name); ?></a>
         <ul style="display: none">
-          @foreach($one->zi as $two)
-          <li><a href="javascript:void(0)" class="inactive active">{{$two->name}}</a>
+          <?php $__currentLoopData = $one->zi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $two): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <li><a href="javascript:void(0)" class="inactive active"><?php echo e($two->name); ?></a>
             <ul>
-              @foreach($two->zi as $three)
-              <li><a href="/types/{{$three->id}}">{{$three->name}}</a></li>
-              @endforeach
+              <?php $__currentLoopData = $two->zi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $three): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <li><a href="/types/<?php echo e($three->id); ?>"><?php echo e($three->name); ?></a></li>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
           </li>
-          @endforeach 
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
         </ul>
       </li>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </ul>
   </div>
   <style type="text/css">
@@ -119,23 +119,23 @@
     </div> 
     <div class="time-border-list pc-search-list clearfix"> 
       <ul class="clearfix" id="uid">
-      @foreach($goods as $good)
-      @if($good->goods_status==0)
-      <li> <a href="/homepage/{{$good->goods_id}}"> <img src="/{{$good->goods_pic}}" width="240px" height="280px" /></a> <p class="head-name"><a href="/homepage/{{$good->goods_id}}" style="font-size:12px;color:black;">{{$good->goods_describe}}</a> </p> <p><span class="price">￥{{$good->goods_price}}</span></p> <p class="head-futi clearfix"><span class="fl">好评度：90% </span> <span class="fr">100人购买</span></p> <p class="clearfix"><span class="label-default fl" style="cursor:pointer;" onclick="buy(this,{{$good->goods_id}})">抢购</span> <a href="javascript:;" class="fr pc-search-c" onclick="foverite({{$good->goods_id}})" style="color:black;">收藏</a> </p> </li> 
-      @endif
-      @endforeach
+      <?php $__currentLoopData = $goods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $good): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <?php if($good->goods_status==0): ?>
+      <li> <a href="/homepage/<?php echo e($good->goods_id); ?>"> <img src="/<?php echo e($good->goods_pic); ?>" width="240px" height="280px" /></a> <p class="head-name"><a href="/homepage/<?php echo e($good->goods_id); ?>" style="font-size:12px;color:black;"><?php echo e($good->goods_describe); ?></a> </p> <p><span class="price">￥<?php echo e($good->goods_price); ?></span></p> <p class="head-futi clearfix"><span class="fl">好评度：90% </span> <span class="fr">100人购买</span></p> <p class="clearfix"><span class="label-default fl" style="cursor:pointer;" onclick="buy(this,<?php echo e($good->goods_id); ?>)">抢购</span> <a href="javascript:;" class="fr pc-search-c" onclick="foverite(<?php echo e($good->goods_id); ?>)" style="color:black;">收藏</a> </p> </li> 
+      <?php endif; ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      </ul> 
      <div class="clearfix"> 
       <div class="fr pc-search-g"> 
        <a class="fl pc-search-f" href="javascript:void(0)" onclick="getData(false)" style="color:black;cursor:pointer;">上一页</a>
-       @foreach($pp as $v) 
-       <a href="javascript:void(0)" class="current" onclick="page({{$v}})" style="color:black" id="page{{$v}}">{{$v}}</a> 
-       @endforeach
+       <?php $__currentLoopData = $pp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+       <a href="javascript:void(0)" class="current" onclick="page(<?php echo e($v); ?>)" style="color:black" id="page<?php echo e($v); ?>"><?php echo e($v); ?></a> 
+       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
        <input type="hidden" id="pagesx" value="1">
-       <input type="hidden" id="maxpage" value="{{$maxpage}}">
+       <input type="hidden" id="maxpage" value="<?php echo e($maxpage); ?>">
        <!-- <span class="pc-search-di">…</span>  -->
        <a title="使用方向键右键也可翻到下一页哦！" class="pc-search-n" href="javascript:;" onclick="getData(true)" style="color:black;">下一页</a> 
-       <span class="pc-search-y"> <em> 共{{$maxpage}}页 </a> </span> 
+       <span class="pc-search-y"> <em> 共<?php echo e($maxpage); ?>页 </a> </span> 
       </div> 
      </div> 
     </div> 
@@ -275,7 +275,7 @@ headers: {
 });
   function page(page){
   $("#pagesx").val(page);
-  $.get("/types/{{$cate_id}}",{page:page,pageajax:1},function(data){
+  $.get("/types/<?php echo e($cate_id); ?>",{page:page,pageajax:1},function(data){
   //alert(data);
   //赋值给id值为 uid的div
   $("#uid").html(data);
@@ -294,7 +294,7 @@ function getData(mask){
       page=maxpage;
     }
     $("#pagesx").val(page);
-  $.get("/types/{{$cate_id}}",{page:page,pageajax:1},function(data){
+  $.get("/types/<?php echo e($cate_id); ?>",{page:page,pageajax:1},function(data){
   //alert(data);
   //赋值给id值为 uid的div
   $("#uid").html(data);
@@ -309,7 +309,7 @@ function getData(mask){
       page=1;
     }
     $("#pagesx").val(page);
-    $.get("/types/{{$cate_id}}",{page:page,pageajax:1},function(data){
+    $.get("/types/<?php echo e($cate_id); ?>",{page:page,pageajax:1},function(data){
     //赋值给id值为 uid的div
     $("#uid").html(data);
     });
@@ -350,7 +350,7 @@ $("#search").click(function(){
     return false;
   }
   //发送ajax将价格的最大值与最小值传递过去
-  $.get("/types/{{$cate_id}}",{min:min,max:max,sajax:1},function(data){
+  $.get("/types/<?php echo e($cate_id); ?>",{min:min,max:max,sajax:1},function(data){
    // alert(data);
     //赋值给id值为 uid的div
     $("#uid").html(data);
@@ -361,14 +361,14 @@ $("#search").click(function(){
 
 //价格按照升序排序
 $("#desc").click(function(){
-  $.get("/types/{{$cate_id}}",{descajax:1},function(data){
+  $.get("/types/<?php echo e($cate_id); ?>",{descajax:1},function(data){
       $("#uid").html(data);
     });
 });
 
 //价格按照降序排序
 $("#asc").click(function(){
-  $.get("/types/{{$cate_id}}",{ascajax:1},function(data){
+  $.get("/types/<?php echo e($cate_id); ?>",{ascajax:1},function(data){
       $("#uid").html(data);
     });
 });

@@ -19,13 +19,14 @@ class LoginController extends Controller
 		$user_name = $request->input('user_name');  
 		$user_pwd = $request->input('user_pwd');
 		$res = DB::table('shop_user')->where('user_name','=',$user_name)->first();
-		if($res->user_state==1){
-			echo "<script>alert('该账号已被禁用!');location='/homelogin';</script>";exit;
-		}
+		
 		if($res){
 			// 检测密码
 			if(Hash::check($user_pwd,$res->user_pwd)){
-				// 存储在session
+				if($res->user_state==1){
+			echo "<script>alert('该账号已被禁用!');location='/homelogin';</script>";exit;
+		}
+				//存储在session
 				session(['user_name'=>$user_name]);
 				session(['user_id'=>$res->user_id]);
 				// $data = $request->session()->all();
