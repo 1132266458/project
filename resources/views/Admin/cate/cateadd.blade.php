@@ -32,7 +32,6 @@
 		<div id="tab-category" class="HuiTab">
 			<div class="tabBar cl">
 				<span>基本设置</span>
-				
 			</div>
 			<div class="tabCon">
 				<div class="row cl">
@@ -44,7 +43,11 @@
 						<select class="select" id="sel_Sub" name="pid" onchange="SetSubID(this);">
 							<option value="0">--请选择--</option>
 						@foreach($data as $k=>$v)
+							@if($v->level==3)
+							<option value="{{$v->id}}" disabled>{{$v->name}}</option>
+							@else
 							<option value="{{$v->id}}">{{$v->name}}</option>
+							@endif
 						@endforeach
 						</select>
 						</span>
@@ -102,7 +105,6 @@ $(function(){
 		
 	});
 });
-
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

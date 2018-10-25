@@ -32,7 +32,7 @@
 		<input type="text" name="" id="" placeholder=" 商品名称" style="width:250px" class="input-text">
 		<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜商品</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="picture_add('添加商品','/admin/admingoods/create')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加商品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="picture_add('添加商品','/admin/admingoods/create')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加商品</a></span> <span class="r">共有数据：<strong id="tot">{{$tot}}</strong> 条</span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-hover table-sort">
 			<thead>
@@ -41,15 +41,16 @@
 					<th width="40">ID</th>
 					<th width="60">商品名称</th>
 					<th width="80">分类</th>
-					<th>封面</th>
+					<th width="90">封面</th>
 					
 					<th width="80">商品数量</th>
 					<th width="80">商品价格</th>
 					<th width="100">商品描述</th>
 					<th width="110">更新时间</th>
-					<th>被收藏数</th>
-					<th>发布状态</th>
-					<th width="100">操作</th>
+					<th width="20">被收藏数</th>
+					<th width="100">发布状态</th>
+					<th width="100">推荐状态</th>
+					<th width="150">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -72,11 +73,21 @@
 			    @else
 			     <td class="td-status"><span class="label label-defaunt radius">未发布</span></td>
 			    @endif
+			    @if($v->goods_ads==0)
+			    <td class="td-ads"><span class="label label-success radius">已推荐</span></td>
+				@else
+				<td class="td-ads"><span class="label label-defaunt radius">非推荐</span></td>
+				@endif
 					<td class="td-manage">
 					@if($v->goods_status==0)
-					<a style="text-decoration:none" onClick="picture_stop(this,{{$v->goods_id}})" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> 
+					<a style="text-decoration:none" onClick="picture_stop(this,{{$v->goods_id}})" href="javascript:;" title="下架" id="status"><i class="Hui-iconfont">&#xe6de;</i></a> 
 					@else
-					<a style="text-decoration:none" onClick="picture_start(this,{{$v->goods_id}})" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe6dc;</i></a>
+					<a style="text-decoration:none" onClick="picture_start(this,{{$v->goods_id}})" href="javascript:;" title="发布" id="status"><i class="Hui-iconfont">&#xe6dc;</i></a>
+					@endif
+					@if($v->goods_ads==0)
+					<a style="text-decoration:none" onClick="ads_stop(this,{{$v->goods_id}})" href="javascript:;" title="取消推荐"><i class="Hui-iconfont">&#xe706;</i></a>
+					@else
+					<a style="text-decoration:none" onClick="ads_start(this,{{$v->goods_id}})" href="javascript:;" title="推荐"><i class="Hui-iconfont">&#xe6c1;</i></a>
 					@endif
 					<a style="text-decoration:none" class="ml-5" onClick="picture_edit('图库编辑','/admin/admingoods/{{$v->goods_id}}/edit')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
 					<a style="text-decoration:none" class="ml-5" onClick="pic_add('添加图库','/admin/picadd/{{$v->goods_id}}')" href="javascript:;" title="添加图库"><i class="Hui-iconfont">&#xe61f;</i></a>
@@ -217,6 +228,48 @@ function picture_start(obj,id){
 	});
 }
 
+/*商品-推荐*/
+function ads_start(obj,id){
+	layer.confirm('确认要推荐吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '/admin/adsstart/'+id,
+			dataType: 'json',
+			success: function(data){
+
+				$(obj).parents("tr").find("#status").after('<a style="text-decoration:none" onClick="ads_stop(this,'+id+')" href="javascript:;" title="取消推荐"><i class="Hui-iconfont">&#xe706;</i></a>');
+				$(obj).parents("tr").find(".td-ads").html('<span class="label label-success radius">已推荐</span>');
+				$(obj).remove();
+				layer.msg('已推荐!',{icon: 6,time:1000});
+			},
+			error:function(data) {
+				layer.msg('权限不足,发布失败!',{icon: 6,time:1000});
+			},
+		});
+
+	});
+}
+
+/*商品-取消推荐*/
+function ads_stop(obj,id){
+
+	layer.confirm('确认要取消推荐吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '/admin/adsstop/'+id,
+			dataType: 'json',
+			success: function(data){
+				$(obj).parents("tr").find("#status").after('<a style="text-decoration:none" onClick="ads_start(this,'+id+')" href="javascript:;" title="推荐"><i class="Hui-iconfont">&#xe6c1;</i></a>');
+				$(obj).parents("tr").find(".td-ads").html('<span class="label label-defaunt radius">非推荐</span>');
+				$(obj).remove();
+				layer.msg('已取消推荐!',{icon: 5,time:1000});
+		},
+			error:function(data) {
+				layer.msg('权限不足,下架失败!',{icon: 5,time:1000});
+			},
+		});
+	});
+}
 /*商品-申请上线*/
 function picture_shenqing(obj,id){
 	$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');
@@ -244,6 +297,9 @@ function picture_del(obj,id){
 			success: function(data){
 				$(obj).parents("tr").remove();
 				layer.msg('已删除!',{icon:1,time:1000});
+				//将获取的文本值转换为数量
+		        tot=Number($("#tot").html());
+		        $("#tot").html(--tot);  
 			},
 			error:function(data) {
 				layer.msg('删除失败!',{icon:2,time:1000});

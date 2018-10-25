@@ -24,7 +24,8 @@ class GoodsController extends Controller
             $s=DB::table('shop_fovorite')->where('goods_id','=',$v->goods_id)->get();
             $data[$k]->num=count($s);
         }
-        return view('admin.goods.list',['data'=>$data,'type'=>$type]);
+        $tot=DB::table('shop_goods')->count();
+        return view('admin.goods.list',['data'=>$data,'type'=>$type,'tot'=>$tot]);
     }
 
      // 禁用
@@ -46,7 +47,25 @@ class GoodsController extends Controller
         }
     }
 
+    // 推荐
+    public function adsstart($id){
+        $data=DB::table('shop_goods')->where('goods_id','=',$id)->update(['goods_ads'=>0]);
+        if($data){
+            echo 1;
+        }else{
+            echo 0;
+        }
+    }
 
+    // 取消推荐
+    public function adsstop($id){
+        $data=DB::table('shop_goods')->where('goods_id','=',$id)->update(['goods_ads'=>1]);
+        if($data){
+            echo 1;
+        }else{
+            echo 0;
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

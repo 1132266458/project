@@ -19,17 +19,41 @@ class CateController extends Controller
      */
     public function index(Request $request)
     {
+        //获取总共有多少个分类
+        $tot=DB::table('shop_cates')->count();
+
+        //处理分页
+        $page=$request->input('page');
+        //判断$page为空
+        if(empty($page)){
+        $page=1;
+        }
+        $rev=10;
+        //偏移量
+        $offset=($page-1)*$rev;
+        $tot=DB::table("shop_cates")->count();
+        $maxpage=ceil($tot/$rev);
+        $pp=array();
+        //for循环遍历页数
+        for($i=1;$i<=$maxpage;$i++){
+            $pp[$i]=$i;
+        }
         $key=$request->input('keywords');
         // echo '<pre>';
         // var_dump($key);
-        $data=DB::table('shop_cates')->select(DB::raw('*,concat(path,",",id) as paths'))->where('name','like','%'.$key.'%')->orderBy('paths')->get();
+        $data=DB::table('shop_cates')->select(DB::raw('*,concat(path,",",id) as paths'))->where('name','like','%'.$key.'%')->orderBy('paths')->offset($offset)->limit(10)->get();
         foreach($data as $k=>$v){
             $arr=explode(',',$v->path);
             $len=count($arr)-1;
             $data[$k]->name=str_repeat('--',$len).$v->name;
         };
-
-        return view('admin.cate.cate',['data'=>$data]);
+        //dd($data);
+        if($request->ajax()){
+            // echo $page;exit;
+            //加载一个独立的模板界面
+            return view("admin.cate.catepage",['data'=>$data]);
+            }
+        return view('admin.cate.cate',['data'=>$data,'tot'=>$tot,'pp'=>$pp]);
     }
 
     /**
@@ -182,13 +206,18 @@ class CateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        // echo $id;
+    {   
+        //获取当前分类下是否具有子类信息 子类个数
+        $res=DB::table("shop_cates")->where('pid','=',$id)->count();
+        if($res>0){
+            return 0;
+        }
+
         $s=DB::table('shop_cates')->where('id','=',$id)->delete();
         if($s){
             echo 1;
         }else{
-            echo 0;
+            echo 2;
         }
     }
 }

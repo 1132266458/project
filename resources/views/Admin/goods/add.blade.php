@@ -71,7 +71,11 @@
 				<select name="type_id" class="select">
 						<option value="0">--请选择--</option>
 						@foreach($data as $k=>$v)
+                            @if($v->level==3)
 							<option value="{{$v->id}}">{{$v->name}}</option>
+                            @else
+                            <option value="{{$v->id}}" disabled>{{$v->name}}</option>
+                            @endif
 						@endforeach
 				</select>
 				</span>

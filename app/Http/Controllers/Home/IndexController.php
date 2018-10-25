@@ -24,13 +24,37 @@ class IndexController extends Controller
         return $data;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $cate=self::getCatesByPid(0);
         $data=DB::table('shop_slider')->get();
         // var_dump($cate);
         
-        return view('home.index',['cate'=>$cate,'data'=>$data]);
+        //查询公告数据
+        $new=DB::table("shop_articles")->paginate(5);
+        $news=DB::table("shop_articles")->get();
+        $page=$request->input('page');
+        //var_dump($page);
+        if(empty($page)){
+        $page=1;
+        } 
+        //查询卖场推荐的数据也就是数据库goods_ads为0的数据
+        $tot=DB::table("shop_goods")->where("goods_ads",'=',0)->count();
+        $rev=6;
+        $maxpage=ceil($tot/$rev);
+        $offset=($page-1)*$rev;
+        $sql="select * from shop_goods where goods_ads=0 limit $offset,$rev";
+        //执行sql
+        $goods=DB::select($sql);
+        //var_dump($goods);
+        if($request->ajax()){
+            // echo $page;exit;
+            //加载一个独立的模板界面
+            return view("home.indexpage",['goods'=>$goods]);
+            }
+        $goodgoods=DB::table("shop_goods")->paginate(8);
+        return view('home.index',['cate'=>$cate,'data'=>$data,'new'=>$new,'news'=>$news,'maxpage'=>$maxpage,'goods'=>$goods,'goodgoods'=>$goodgoods]);
+        //'ads'=>$ads
     }
 
     /**

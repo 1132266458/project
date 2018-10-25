@@ -62,6 +62,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::post('/admin/goodsstop/{id}','Admin\GoodsController@stop');
 	// 商品上架控制器
 	Route::post('/admin/goodsstart/{id}','Admin\GoodsController@start');
+	// 商品推荐控制器
+	Route::post('/admin/adsstart/{id}','Admin\GoodsController@adsstart');
+	// 商品取消推荐控制器
+	Route::post('/admin/adsstop/{id}','Admin\GoodsController@adsstop');
 
 	// 商品图片资源控制器
 	Route::resource('/admin/adminpics','Admin\PicController');
@@ -201,6 +205,8 @@ Route::get('/editemail','Home\SafetyController@editemail');
 Route::post('/doemail','Home\SafetyController@doemail');
 // 收藏资源控制器
 Route::resource('/homecollection','Home\CollectionController');
+// 商城更多快讯
+Route::get('/morenew','Home\NewController@index');
 // 个人模块资源控制器
 Route::resource('/homeuser','Home\UserController');
 

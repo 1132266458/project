@@ -116,12 +116,51 @@ class TypesController extends Controller
     	$types=DB::table('shop_cates')->get();
     	//递归处理数据
     	$typeall=$this->checkTypeData($types);
-    	//判断当前请求是否为Ajax请求
+        $pageajax=$request->input('pageajax');
+    	//判断当前请求是否为分页Ajax请求
+        if($pageajax){
 			if($request->ajax()){
 			// echo $page;exit;
 			//加载一个独立的模板界面
 			return view("Home.type.typespage",['goods'=>$goods]);
 			}
+        }
+        //处理价格搜索的功能
+        $min=$request->input('min');
+        $max=$request->input('max');
+        $sajax=$request->input('sajax');
+        $search=DB::table("shop_goods")->whereBetween('goods_price', [$min,$max])->get();
+        //判断这个ajax是不是通过价格搜索传递过来的ajax
+        if($sajax){
+            if($request->ajax()){
+            // echo $page;exit;
+            //加载一个独立的模板界面
+            return view("Home.type.typesearch",['search'=>$search]);
+            }
+        }
+
+        //处理价格升序
+        $descajax=$request->input('descajax');
+        $desc=DB::table("shop_goods")->orderBy('goods_price', 'desc')->get();
+        if($descajax){
+            if($request->ajax()){
+            // echo $page;exit;
+            //加载一个独立的模板界面
+            return view("Home.type.typedesc",['desc'=>$desc]);
+            }
+        }
+
+        //处理价格降序
+        $ascajax=$request->input('ascajax');
+        $asc=DB::table("shop_goods")->orderBy('goods_price', 'asc')->get();
+        if($ascajax){
+            if($request->ajax()){
+            // echo $page;exit;
+            //加载一个独立的模板界面
+            return view("Home.type.typeasc",['asc'=>$asc]);
+            }
+        }
+        //var_dump($asc);
         //dd($maxpage);
 	    //引入分类的页面,并且把分类id，商品信息，分类名，分类数据
 	    return view("Home.type.types",['goods'=>$goods,'name'=>$type->name,'type'=>$typeall,'pp'=>$pp,'cate_id'=>$id,'maxpage'=>$maxpage]);

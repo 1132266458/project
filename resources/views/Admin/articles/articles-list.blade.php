@@ -51,12 +51,9 @@
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
 					<th width="80">ID</th>
-					<th>标题</th>
-					<th width="80">描述</th>
+					<th width="100">标题</th>
+					<th width="100">描述</th>
 					<th width="80">状态</th>
-					
-					  
-					
 					<th width="120">操作</th>
 				</tr>
 			</thead>
