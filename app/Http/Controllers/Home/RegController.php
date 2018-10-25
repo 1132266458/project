@@ -80,4 +80,15 @@ class RegController extends Controller
         }
 
     }
+    // 邮箱验证
+    public function checkemail(Request $request){
+         // var_dump($request->all());
+        $userEmail = $request->input('userEmail');
+        // var_dump($username);
+        if(DB::table('shop_user')->where('user_email','=',$userEmail)->first()){
+            echo 0;
+        }else{
+            echo 1;
+        }
+    }
 }

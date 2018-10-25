@@ -62,17 +62,24 @@ class AppraiseController extends Controller
 
     // 回复评论
     public function reply(Request $request){
-        // dd($request->all());
-        $id=$request->input('appraise_id');
-        $data=$request->except(['_token','appraise_id']);
-        $s=DB::table('shop_appraise')->where('appraise_id','=',$id)->update($data);
-        if($s){
-            echo '<script>alert("回复成功");var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);</script>';
+        
+        $appraise_reply = $request->input("appraise_reply");
+        if(empty($appraise_reply)){
+            echo '<script>alert("不能为空!");var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);</script>';
         }else{
-            echo '<script>alert("回复失败");var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);</script>';
+            $id=$request->input('appraise_id');
+            $data=$request->except(['_token','appraise_id']);
+            $s=DB::table('shop_appraise')->where('appraise_id','=',$id)->update($data);
+            if($s){
+                echo '<script>alert("回复成功");var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);</script>';
+            }else{
+                echo '<script>alert("回复失败");var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);</script>';
+            }
         }
+        
     }
 
     // 查看回复

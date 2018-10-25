@@ -1,0 +1,1 @@
+<a href="http://chao123.com/editemail/?id=<?php echo e($id); ?>&token=<?php echo e($token); ?>">修改邮箱</a>

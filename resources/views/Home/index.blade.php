@@ -115,7 +115,7 @@
             </div>
         </div>
         <!-- 购物车 -->
-        <div class="header-cart fr"><a href="/car"><img src="/theme/icon/car.png"></a> <i class="head-amount">{{count(session('shop'))}}</i></div>
+        <div class="header-cart fr"><a href="/car"><img src="/theme/icon/car.png"></a> <i class="head-amount">{{session()->has('shop')?count(session('shop')):'0'}}</i></div>
         <div class="head-mountain"></div>
     </div>
     <div class="yHeader">

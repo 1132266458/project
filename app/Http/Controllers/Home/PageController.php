@@ -70,7 +70,7 @@ class PageController extends Controller
                 $c+=1;
             }
         }
-        return view('Home.page.page',['data'=>$data,'pic'=>$pic,'cate'=>$cate,'cates'=>$cates,'catess'=>$catess,'app'=>$app,'g'=>$g,'z'=>$z,'c'=>$c,'list'=>$list]);
+            return view('Home.page.page',['data'=>$data,'pic'=>$pic,'cate'=>$cate,'cates'=>$cates,'catess'=>$catess,'app'=>$app,'g'=>$g,'z'=>$z,'c'=>$c,'list'=>$list]);
     }
 
     /**

@@ -14,8 +14,8 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {   
-        // $data = $request->session()->all();
-        // var_dump($data);exit;
+        $data = session('shopss');
+        // var_dump($data);
         // 判断是否登录,登录后跳转到订单界面
         if($request->session()->has('user_name')){
             $data = session('shop');

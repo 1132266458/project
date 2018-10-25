@@ -217,6 +217,19 @@
         if(!reg.test(txtEmail)) {
             setInfo(infoId, '请输入正确邮箱地址');
             return false;
+        }else if(reg.test(txtEmail)){
+            // 获取文本框
+            var obj = $('#email');
+            var userEmail = obj.val();
+            // alert(userName);
+            $.get('/homeregCheckEmail',{userEmail:userEmail},function(data){
+                if(data == 0){
+                    setInfo(infoId,'邮箱已存在');
+                    window.e = false;
+                }else{
+                    window.e = true;
+                }
+            })
         }
         return true;
     }
@@ -238,7 +251,7 @@
     
     //校验所有表单元素的内容
     function checkAll() {
-        if(checkUsername('username','usernameInfo')&checkPassword('pass', 'passwordInfo')&checkPasswordAgain('pass', 'passwordAgain', 'passwordAgainInfo')&checkEmail('email', 'emailInfo')&checkTel('tel', 'telInfo') && window.a && window.b && window.c) {
+        if(checkUsername('username','usernameInfo')&checkPassword('pass', 'passwordInfo')&checkPasswordAgain('pass', 'passwordAgain', 'passwordAgainInfo')&checkEmail('email', 'emailInfo')&checkTel('tel', 'telInfo') && window.a && window.b && window.c && window.e) {
             return true;
         }
             return false;

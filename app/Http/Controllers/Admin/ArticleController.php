@@ -18,7 +18,7 @@ class ArticleController extends Controller
         //
         $data=DB::table("shop_articles")->paginate(13);
         $tot=DB::table('shop_articles')->count();
-        return view("Admin.articles.articles-list",['data'=>$data,'tot'=>$tot]);
+        return view("Admin.articles.articles-list",['data'=>$data]);
         //echo "index";
     }
 
@@ -42,17 +42,26 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {   
-   
-        // var_dump($request->all());
-        $data=$request->except("_token");
-        $data['addtime']=date('Y-m-d H:i:s',time());
-        // dd($data);
-        if(DB::table("shop_articles")->insert($data)){
-           return redirect("/adminarticles")->with('success','添加成功');
-         }else{
-           return redirect("/adminarticles")->with('error','添加失败');
-        }
+        
+        // var_dump($request->all());exit;
+        if(empty($request->input('title')) || empty($request->input('title'))){
+            echo "<script>alert('标题,内容不能为空!');
+            var index = parent.layer.getFrameIndex(window.name);
+            window.parent.location.reload();
+            parent.layer.close(index);
+           </script>";
+        }else{
+             $data=$request->except("_token");
+            $data['addtime']=date('Y-m-d H:i:s',time());
 
+            // dd($data);
+            if(DB::table("shop_articles")->insert($data)){
+               return redirect("/adminarticles")->with('success','添加成功');
+             }else{
+               return redirect("/adminarticles")->with('error','添加失败');
+            }
+        }
+        
      
     }
 

@@ -143,6 +143,8 @@ Route::post('/homeregCheck','Home\RegController@check');
 Route::get('/homeregCheckName','Home\RegController@checkname');
 // 手机注册验证
 Route::get('/homeregPhone','Home\RegController@checkphone');
+// 邮箱验证
+Route::get('/homeregCheckEmail','Home\RegController@checkemail');
 //手机校验码对比
 Route::get('/homeregCode','Home\RegController@checkcode');
 

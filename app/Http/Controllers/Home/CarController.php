@@ -11,7 +11,8 @@ class CarController extends Controller
     //购物车页
     public function index(){
     	$shop=session("shop");
-    	
+    	// var_dump($shop);
+        // dd(session('shop'));
     	return view("Home.car.car",['shop'=>$shop]);
     }
 
@@ -32,7 +33,8 @@ class CarController extends Controller
     			}
     		}
     	}
-
+        $list = DB::table("shop_goods")->where("goods_id","=",$_GET['id'])->first();
+        $list->statue = 0;
     	//如果传递过来的数据不是第一次添加，则让其存入session
     	if(!$a){
     	//将传递过来的数据以数组的形式存入到session
@@ -41,7 +43,7 @@ class CarController extends Controller
     		"id"=>$_GET['id'],
     		"num"=>$_GET['num'],
     		//在存入商品id时顺便将商品信息查询出来
-    		"goodsinfo"=>DB::table("shop_goods")->where("goods_id","=",$_GET['id'])->first(),
+    		"goodsinfo"=> $list,
     		);
     	}
 
@@ -157,4 +159,5 @@ class CarController extends Controller
       // 返回
       echo 1;
     }
+
 }
