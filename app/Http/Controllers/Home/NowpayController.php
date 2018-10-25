@@ -12,6 +12,8 @@ class NowpayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+
     // 立即购买
     public function index()
     {
@@ -102,9 +104,11 @@ class NowpayController extends Controller
         $info['order_messeges'] = $_POST['order_messeges'];
         // 根据地址id查询收货人详情
         $address = DB::table('shop_address')->where('address_id','=',$info['address_id'])->first();
+
         $id=DB::table('shop_order')->insertGetId($info);
         // var_dump($list);exit;
         if($id){
+            DB::table('shop_deliver')->insert(json_decode(json_encode($address),true));
             $order_info['num']=$_POST['num'];
             $order_info['goods_id']=$_POST['goods_id'];
             $order_info['order_id'] = $id;

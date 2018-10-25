@@ -212,6 +212,7 @@ class GoodsController extends Controller
     {
         $d=DB::table('shop_goods')->where('goods_id','=',$id)->first();
         $s=DB::table('shop_goods')->where('goods_id','=',$id)->delete();
+        DB::table('shop_appraise')->where('goods_id','=',$id)->delete();
         if($s){
             unlink($d->goods_pic); 
              echo 1;

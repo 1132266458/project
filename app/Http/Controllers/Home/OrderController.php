@@ -27,7 +27,7 @@ class OrderController extends Controller
            // 已收货订单数
            $dddd=DB::table('shop_order')->where('order_state','=',4)->where('user_id','=',session('user_id'))->count();
             //每页显示的数据条数
-            $rev=5;
+            $rev=10;
              //获取数据最大页
             $maxpage=ceil($tot/$rev);
             //获取参数page
@@ -39,12 +39,14 @@ class OrderController extends Controller
             //获取偏移量
             $offset=($page-1)*$rev;
 
-            $data=DB::table('shop_order')->where('user_id','=',session('user_id'))->offset($offset)->limit($rev)->get();
+            $data=DB::table('shop_order')->where('user_id','=',session('user_id'))->orderBy('order_addtime','desc')->offset($offset)->limit($rev)->get();
 
             foreach($data as $k=>$v){
                 // 订单信息表
                 $info=DB::table('order_info')->where('order_id','=',$v->order_id)->get();
-                $address=DB::table('shop_address')->where('address_id','=',$v->address_id)->first(); 
+                
+                $address=DB::table('shop_deliver')->where('address_id','=',$v->address_id)->first();
+                
                 // var_dump($address);
                 $data[$k]->name=$address->name;
                 // var_dump($info[$k]);
@@ -102,7 +104,8 @@ class OrderController extends Controller
     {
         // echo $id;
         $data=DB::table('shop_order')->where('order_id','=',$id)->first();
-        $address=DB::table('shop_address')->where('address_id','=',$data->address_id)->first();
+        $address=DB::table('shop_deliver')->where('address_id','=',$data->address_id)->first();
+        
         $info=DB::table('order_info')->where('order_id','=',$data->order_id)->get();
         $in=[];
         

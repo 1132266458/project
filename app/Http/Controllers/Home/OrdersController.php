@@ -107,9 +107,10 @@ class OrdersController extends Controller
         $info['order_messeges'] = $_POST['order_messeges'];
         // 根据地址id查询收货人详情
         $address = DB::table('shop_address')->where('address_id','=',$info['address_id'])->first();
-        
+         
         // var_dump($list);exit;
         if(DB::table('shop_order')->insert($info)){
+            DB::table('shop_deliver')->insert(json_decode(json_encode($address),true));
             // echo "<script>alert('提交订单成功!');</script>";
             $dd = DB::table('shop_order')->where('order_sn','=',$info['order_sn'])->first();
             // var_dump($dd);exit;

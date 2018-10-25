@@ -21,7 +21,8 @@ class ReturnController extends Controller
         foreach($data as $k=>$v){
             // 订单信息表
             $info=DB::table('order_info')->where('order_id','=',$v->order_id)->get();
-            $address=DB::table('shop_address')->where('address_id','=',$v->address_id)->first(); 
+            $address=DB::table('shop_deliver')->where('address_id','=',$v->address_id)->first();
+              
             // var_dump($address);
             $data[$k]->name=$address->name;
             // var_dump($info[$k]);
@@ -38,7 +39,8 @@ class ReturnController extends Controller
             $i=DB::table('order_info')->where('id','=',$vv->info_id)->first();
             $g=DB::table('shop_goods')->where('goods_id','=',$i->goods_id)->first();
             $o=DB::table('shop_order')->where('order_id','=',$i->order_id)->first();
-            $a=DB::table('shop_address')->where('address_id','=',$o->address_id)->first();
+            $a=DB::table('shop_deliver')->where('address_id','=',$o->address_id)->first();
+            
             $re[$kk]->dev=['order_sn'=>$o->order_sn,'goods_name'=>$g->goods_name,'goods_pic'=>$g->goods_pic,'goods_price'=>$g->goods_price,'goods_addtime'=>$o->order_addtime,'num'=>$i->num,'name'=>$a->name,'order_addtime'=>$o->order_addtime];
         }
         $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
@@ -78,7 +80,8 @@ class ReturnController extends Controller
         // 接受订单id
         // echo $id;
         $data=DB::table('shop_order')->where('order_id','=',$id)->first();
-        $address=DB::table('shop_address')->where('address_id','=',$data->address_id)->first();
+        $address=DB::table('shop_deliver')->where('address_id','=',$data->address_id)->first();
+         
         $info=DB::table('order_info')->where('order_id','=',$data->order_id)->get();
         $in=[];
         // $tot="";
@@ -87,7 +90,6 @@ class ReturnController extends Controller
             $in[]=['goods_name'=>$goods->goods_name,'goods_price'=>$goods->goods_price,'goods_id'=>$goods->goods_id,'num'=>$v->num,'goods_pic'=>$goods->goods_pic,'id'=>$v->id]; 
             // $tot+=$v->num*$goods->goods_price;
         }
-
 
         $i=DB::table('shop_userinfo')->where('user_id','=',session('user_id'))->first();
         // data是订单信息 in是商品详情 address是收货信息 i个人信息

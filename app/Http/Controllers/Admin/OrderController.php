@@ -61,7 +61,9 @@ class OrderController extends Controller
         $info=DB::table('order_info')->where('order_id','=',$id)->get();
         $go=[];
         $order=DB::table('shop_order')->where('order_id','=',$id)->first();
-        $address=DB::table('shop_address')->where('address_id','=',$order->address_id)->first();
+        
+        $address=DB::table('shop_deliver')->where('address_id','=',$order->address_id)->first();
+          
         foreach($info as $k=>$v){
             // var_dump($v->goods_id);
             $goods=DB::table('shop_goods')->where('goods_id','=',$v->goods_id)->first();
